@@ -1,17 +1,96 @@
 = scar
 
-Description goes here.
+Warning:  This project is not endorsed by Sun or Oracle.
+          Sun has released their API under CC 3.0 see LICENSE.
+
+Sun's cloud API reference (scar) project.
+
+To generate the API reference documents:
+
+ * yard (v0.5)
+ * rake (thor?)
+
+To develop the API Reference:
+
+ * yard
+ * cucumber
+ * rspec
+ * machinist? factory_girl? (with forgery?)
+ * pickle (only if we come to use factory_girl or machinist - ? useful for describing 1-n associations)
+ * webrat? (no javascript testing, simulated browser - faster)
+ * FakeWeb
+ * watir? Culerity? (javascript testing, actual browser - slower)
+ * watircuke? watircraft? firewatir? (helper libraries, generate boiler plate code)
+ * markup validity
+ * spork (test server)
+
+http://itsignals.cascadia.com.au/?p=30 (Testing with the help of machinist, forgery, cucumber, webrat and rspec)
+
+cucumber
+http://stackoverflow.com/questions/1541940/testing-pagination-features-with-cucumber
+http://asciicasts.com/episodes/159-more-on-cucumber
+http://asciicasts.com/episodes/186-pickle-with-cucumber
+http://lcd.weblog.glam.ac.uk/2009/2/16/cucumber-tutorial-ruby-on-rails
+http://caiustheory.com/adding-xhtml-output-validation-to-cucumber-stories
+http://tenderlovemaking.com/2009/06/12/easy-markup-validation/
+http://www.slideshare.net/drnic/integration-testing-with-cucumber-how-to-test-anything-j-a-o-o-2009
+
+webrat (+cucumber)
+http://asciicasts.com/episodes/156-webrat
+http://wiki.github.com/brynary/webrat
+http://www.glennfu.com/2008/03/31/easy-plaintext-stories-in-ruby-on-rails-using-webrat/
+http://harrylove.org/2009/01/19/the-building-of-jetrecord-episode-4-cucumbers-and-webrats
+http://en.oreilly.com/rails2009/public/schedule/detail/8554 (Webrat: Rails Acceptance Testing Evolved)
+
+webrat+mechanize
+http://github.com/benlovell/webrat-mech/tree/master
+
+server:
+http://dynamicorange.com/2009/02/18/ruby-mock-web-server/
+http://blog.ericwhite.ca/articles/2009/03/serving-static-content-with-ruby-thinrack/
+
+Web framework:
+asyn_sinatra:
+  -http://devver.net/blog/2009/12/making-rackreloader-work-with-sinatra/
+cramp: http://github.com/lifo/cramp
+  - rack-mount: http://github.com/josh/rack-mount
+  - tilt (Generic interface to multiple Ruby template engines): http://github.com/rtomayko/tilt
+  - Example:http://github.com/akitaonrails/cramp_chat_demo
+
+
+== User setup
+
+TODO Describe a user setup and how they might access the docs and the SCAR-API.
+
+== Developer setup
+Essential: http://github.com/benlovell/webrat-mech
+
+Fork [scar](http://github.com/hedgehog/scar) project on github
+    git clone git://github.com/<you>/scar.git /usr/src/scar
+    pushd scar
+    git branch --track <topic_branch> origin
+    rake check_dependencies:development
+Install any indicated gems
+    rake scar:html:publish
+    rake scar:verify
+Make your changes to the stories, specs and code
+Rerun the last two rake tasks.
+If the complete without error, commit your changes.
+When done push to your github fork.
+     git push <topic_branch> origin
+     popd
+Issue a pull <topic_branch> request on github.
 
 == Note on Patches/Pull Requests
  
 * Fork the project.
 * Make your feature addition or bug fix.
-* Add tests for it. This is important so I don't break it in a
+* Add stories and specifications for it. This is important so I don't break it in a
   future version unintentionally.
-* Commit, do not mess with rakefile, version, or history.
+* Commit, do not mess with the rakefile, version, or history files.
   (if you want to have your own version, that is fine but
-   bump version in a commit by itself I can ignore when I pull)
-* Send me a pull request. Bonus points for topic branches.
+   bump version in a commit by itself, anyone else  can ignore when they pull)
+* Send me a pull request. Bonus points for pul requests from topic branches.
 
 == Copyright
 

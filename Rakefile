@@ -10,9 +10,20 @@ begin
     gem.email = "hedgehogshiatus@gmail.com"
     gem.homepage = "http://github.com/hedgehog/scar"
     gem.authors = ["Hedgehog"]
-    gem.add_development_dependency "rspec"
-    gem.add_development_dependency "yard"
-    gem.add_development_dependency "cucumber"
+    gem.add_dependency 'yard',  '~> 0.5.2'
+#    gem.add_dependency 'addressable', '~> 2.1'
+    gem.add_development_dependency 'extlib', '~> 0.9.14'
+#    gem.add_development_dependency 'addressable'
+    gem.add_development_dependency 'sinatra', '~> 0.9.4'
+    gem.add_development_dependency 'rack', '~> 1.1'
+    gem.add_development_dependency 'rack-test', '~> 0.5.3'
+    gem.add_development_dependency 'fakeweb', '~> 1.2.8'
+    gem.add_development_dependency 'rspec', '~> 1.2.9'
+    gem.add_development_dependency 'yard-rspec', '~> 0.1'
+    gem.add_development_dependency 'cucumber',  '~> 0.6.2'
+    gem.add_development_dependency 'webrat',  '~> 0.6.0'
+    gem.add_development_dependency 'mechanize', '~> 0.9.3'
+    gem.add_development_dependency 'nokogiri', '~> 1.4.1'
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new

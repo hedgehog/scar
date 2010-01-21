@@ -26,6 +26,8 @@ module NavigationHelpers
       @url="#{@url_root}/spec_common"
     when /Common Behaviors/
       @url="#{@url_root}/CommonBehaviors"
+    when /Resources/
+      "#{@url_root}/spec_resources"
     when /Resource Models/
       "#{@url_root}/CloudAPISpecificationResourceModels"
     when /Requests to Backup Resources/

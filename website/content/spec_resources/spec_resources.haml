@@ -1,0 +1,1768 @@
+%h1
+  Resource Models
+#toc.toc
+  #toctitle.toc-title
+    %span
+      Contents
+  #toccontents.toc-contents
+    %ul
+      %li
+        1
+        %a{ :href => "#Cloud_[application/vnd.com.sun.cloud.Cloud+json]" }
+          Cloud [application/vnd.com.sun.cloud.Cloud+json]
+      %li
+        2
+        %a{ :href => "#Location_[application/vnd.com.sun.cloud.Location+json]" }
+          Location [application/vnd.com.sun.cloud.Location+json]
+      %li
+        3
+        %a{ :href => "#Virtual_Data_Center_(VDC)_[application/vnd.com.sun.cloud.VDC+json]" }
+          Virtual Data Center (VDC) [application/vnd.com.sun.cloud.VDC+json]
+      %li
+        4
+        %a{ :href => "#Request_Status_[application/vnd.com.sun.cloud.Status+json]" }
+          Request Status [application/vnd.com.sun.cloud.Status+json]
+      %li
+        5
+        %a{ :href => "#Public_Address_[application/vnd.com.sun.cloud.PublicAddress+json]" }
+          Public Address [application/vnd.com.sun.cloud.PublicAddress+json]
+      %li
+        6
+        %a{ :href => "#Cluster_[application/vnd.com.sun.cloud.Cluster+json]" }
+          Cluster [application/vnd.com.sun.cloud.Cluster+json]
+      %li
+        7
+        %a{ :href => "#Volume_[application/vnd.com.sun.cloud.Volume+json]" }
+          Volume [application/vnd.com.sun.cloud.Volume+json]
+      %li
+        8
+        %a{ :href => "#Snapshot_[application/vnd.com.sun.cloud.Snapshot+json]" }
+          Snapshot [application/vnd.com.sun.cloud.Snapshot+json]
+      %li
+        9
+        %a{ :href => "#Virtual_Machine_(VM)_[application/vnd.com.sun.cloud.VM+json]" }
+          Virtual Machine (VM) [application/vnd.com.sun.cloud.VM+json]
+      %li
+        10
+        %a{ :href => "#Backup_[application/vnd.com.sun.cloud.Backup+json]" }
+          Backup [application/vnd.com.sun.cloud.Backup+json]
+      %li
+        11
+        %a{ :href => "#Virtual_Network_(VNet)_[application/vnd.com.sun.cloud.VNet+json]" }
+          Virtual Network (VNet) [application/vnd.com.sun.cloud.VNet+json]
+      %li
+        12
+        %a{ :href => "#Interface_[application/vnd.com.sun.cloud.Interface+json]" }
+          Interface [application/vnd.com.sun.cloud.Interface+json]
+      %li
+        13
+        %a{ :href => "#Virtual_Machine_Template_(VMTemplate)_[application/vnd.com.sun.cloud.VMTemplate+json]" }
+          Virtual Machine Template (VMTemplate) [application/vnd.com.sun.cloud.VMTemplate+json]
+%p
+  %br
+%p
+  This section specifies the representations of the resources which this API operates on.  The representations are made up of
+  %b
+    fields
+  , each with a name and value, encoded using a JSON dictionary.  The values may be numeric or string literals, lists, or dictionaries, each of which are represented in the obvious way in JSON.
+%p
+  These representations typically nest.  For example, the representation of a VDC will include representations of the Clusters which inhabit it, which in turn include representations of the VMs within each cluster.  Two points follow from this:
+%ul
+  %li
+    Retrieving the representation of a VDC gives a comprehensive snapshot of the current state of everything in it using a single GET request.  The size of these representations seems, in practice, not excessive.
+  %li
+    Many of the models specify that the representation includes a
+    %b
+      uri
+    field whose value is the URI of the resource being represented.  This is present to support URI discovery in nested representations.
+%p
+  Each type of cloud resource has its own Internet Media Type.  The media type
+  %b
+    SHALL
+  conform to the pattern
+  %i
+    application/vnd.com.sun.cloud.Xxxxxxxx+json
+  , and the specific media type for each resource model is included in square brackets in the corresponding section header.
+%p
+  In the resource model descriptions, fields annotated with
+  %b
+    [POST]
+  may be included in a POST request, which is normally used to create new resources.  Likewise, fields annotated with
+  %b
+    [PUT]
+  may be included in a PUT request, which is normally used to update properties of existing resources.  Fields not so annotated
+  %b
+    SHOULD NOT
+  be included in the request body of PUT and POST requests, and will be ignored by the server if they are included.
+%h1
+  %a{ :name => "Cloud_[application/vnd.com.sun.cloud.Cloud+json]" }
+  Cloud [application/vnd.com.sun.cloud.Cloud+json]
+%p
+  A
+  %i
+    Cloud
+  represents a user's view of all accessible resources in the cloud.
+%p
+  A &quot;Cloud&quot; resource model contains the following fields:
+%div{ :style => "overflow-x: auto;" }
+  %div{ :style => "margin: 0px 2px 0px 2px;" }
+    %table{ "-" => "", :border => "1", :width => "100%" }
+      %tr
+        %th
+          Field Name
+        %th
+          Type
+        %th
+          Occurs
+        %th
+          Description
+      %tr
+        %td
+          uri
+        %td
+          URI
+        %td
+          1
+        %td
+          A GET against this URI refreshes the client representation of the resources accessible to this user.
+      %tr
+        %td
+          locations
+        %td
+          Location[]
+        %td
+          0..1
+        %td
+          The set of locations for VDC deployment that are supported by this service provider.
+      %tr
+        %td
+          vdcs
+        %td
+          VDC[]
+        %td
+          0..1
+        %td
+          Virtual data center(s) accessible to this user.  Only the
+          %i
+            name
+          and
+          %i
+            uri
+          fields
+          %b
+            MUST
+          be populated by the server.
+      %tr
+        %td
+          specification_version
+        %td
+          String[]
+        %td
+          1
+        %td
+          Which version(s) of this specification this server implementation supports.
+      %tr
+        %td
+          implementation_version
+        %td
+          String
+        %td
+          1
+        %td
+          Version of the server implementation.
+%h1
+  %a{ :name => "Location_[application/vnd.com.sun.cloud.Location+json]" }
+  Location [application/vnd.com.sun.cloud.Location+json]
+%p
+  A
+  %i
+    Location
+  represents a particular geographic or other physical location.  VDCs are provisioned within a particular location such that the various included elements may have high bandwidth and secure connectivity.
+%p
+  A &quot;Location&quot; resource model contains the following fields:
+%div{ :style => "overflow-x: auto;" }
+  %div{ :style => "margin: 0px 2px 0px 2px;" }
+    %table{ "-" => "", :border => "1", :width => "100%" }
+      %tr
+        %th
+          Field Name
+        %th
+          Type
+        %th
+          Occurs
+        %th
+          Description
+      %tr
+        %td
+          name
+        %td
+          String
+        %td
+          1
+        %td
+          Logical name for this location.
+      %tr
+        %td
+          uri
+        %td
+          URI
+        %td
+          1
+        %td
+          A GET against this URI refreshes the client representation of this
+          %i
+            Location
+          resource.
+      %tr
+        %td
+          description
+        %td
+          String
+        %td
+          0..1
+        %td
+          Human friendly description of this
+          %i
+            Location
+          \. [POST][PUT]
+%h1
+  %a{ :name => "Virtual_Data_Center_(VDC)_[application/vnd.com.sun.cloud.VDC+json]" }
+  Virtual Data Center (VDC) [application/vnd.com.sun.cloud.VDC+json]
+%p
+  A
+  %i
+    VDC
+  represents a user's view of available resources in a single virtual data center.  It also provides URIs for acquiring related resource representations, as well as URIs for creating new resources of various types.
+%p
+  A &quot;VDC&quot; resource model contains the following fields:
+%div{ :style => "overflow-x: auto;" }
+  %div{ :style => "margin: 0px 2px 0px 2px;" }
+    %table{ "-" => "", :border => "1", :width => "100%" }
+      %tr
+        %th
+          Field Name
+        %th
+          Type
+        %th
+          Occurs
+        %th
+          Description
+      %tr
+        %td
+          name
+        %td
+          String
+        %td
+          1
+        %td
+          Logical name of this virtual data center. [POST][PUT]
+      %tr
+        %td
+          uri
+        %td
+          URI
+        %td
+          1
+        %td
+          A GET against this URI refreshes the client representation of this virtual data center.
+      %tr
+        %td
+          description
+        %td
+          String
+        %td
+          0..1
+        %td
+          Human friendly description of this
+          %i
+            VDC
+          \. [POST][PUT]
+      %tr
+        %td
+          location
+        %td
+          URI
+        %td
+          0..1
+        %td
+          URI of the
+          %i
+            Location
+          within which resources for this
+          %i
+            VDC
+          are physically deployed. [POST]
+      %tr
+        %td
+          addresses
+        %td
+          PublicAddress[]
+        %td
+          1
+        %td
+          The static public IP addresses which are allocated for use in this VDC.  PublicAddress resources that are currently attached will have a URI value in the &quot;vm&quot; field describing to which VM that address is currently attached.
+      %tr
+        %td
+          cluster
+        %td
+          Cluster
+        %td
+          1
+        %td
+          The root cluster associated with this VDC.
+      %tr
+        %td
+          tags
+        %td
+          [ ]
+        %td
+          0..1
+        %td
+          Arbitrary values assigned by the user.  These values have no semantic impact on the operation of the cloud. [POST][PUT]
+      %tr
+        %td
+          volumes
+        %td
+          Volume[]
+        %td
+          1
+        %td
+          The WebDAV volumes (in the storage service) owned by this user.
+      %tr
+        %td
+          vm_templates
+        %td
+          URI
+        %td
+          1
+        %td
+          A GET request against this URI returns an array of available templates (type=
+          %i
+            application/vnd.com.sun.cloud.VMTemplates+json).
+%h1
+  %a{ :name => "Request_Status_[application/vnd.com.sun.cloud.Status+json]" }
+  Request Status [application/vnd.com.sun.cloud.Status+json]
+%p
+  A
+  %i
+    status
+  represents a report on the progress of a request for a change in the state of the cloud.  Such requests receive an HTTP status code of &quot;202 Accepted&quot;, with the response body being a Status representation.
+%p
+  This is designed to be used by applications to poll the server to track the progress of a request; thus, server implementations SHOULD anticipate this activity and make such polling reasonably lightweight.
+%p
+  A
+  %i
+    status
+  resource model contains the following fields:
+%div{ :style => "overflow-x: auto;" }
+  %div{ :style => "margin: 0px 2px 0px 2px;" }
+    %table{ "-" => "", :border => "1", :width => "100%" }
+      %tr
+        %th
+          Field Name
+        %th
+          Type
+        %th
+          Occurs
+        %th
+          Description
+      %tr
+        %td
+          op
+        %td
+          String
+        %td
+          1
+        %td
+          Identifies the nature of the request whose status this represents. The possible values are described in the specifications of the individual requests.
+      %tr
+        %td
+          progress
+        %td
+          Integer in the range 0-100, inclusive
+        %td
+          1
+        %td
+          Represents the progress towards completion of the request.  A value of 100 indicates that the request has completed.  There is no requirement that implementations be able to predict the latency of requests; it should not be surprising if, during the lifetime of a request, the progress value remains at 0 until it changes to 100 upon request completion.
+      %tr
+        %td
+          target_uri
+        %td
+          URI
+        %td
+          1
+        %td
+          Identifies the resource upon which the request is acting.  Specific semantics depend on the details of the request, and are described fully in the specifications of the individual requests.
+      %tr
+        %td
+          status_uri
+        %td
+          URI
+        %td
+          1
+        %td
+          Identifies this status resource and may be used to retrieve an up-to-date status report.
+      %tr
+        %td
+          status
+        %td
+          Integer
+        %td
+          1
+        %td
+          HTTP status code describing the result of the completed operation. Typical values would be 200, 201, and various error codes.  This value is only meaningful if the value of the &quot;progress&quot; field is 100.
+      %tr
+        %td
+          message
+        %td
+          String
+        %td
+          1
+        %td
+          Brief message describing the completed operation (if successful) or an error message (if not successful).  This value is only meaningful if the value of the &quot;progress&quot; field is 100.
+%h1
+  %a{ :name => "Public_Address_[application/vnd.com.sun.cloud.PublicAddress+json]" }
+  Public Address [application/vnd.com.sun.cloud.PublicAddress+json]
+%p
+  A
+  %i
+    public address
+  represents a static, publicly accessible Internet Protocol (IP) address, which can be attached to a particular
+  %i
+    VM
+  via an
+  %i
+    interface
+  \.  The fact that this address is static means it is suitable for registration with the Domain Name Service (DNS) environment for your application domain.  Typically, the
+  %i
+    VM
+  that a public address is attached to will be a firewall appliance, but this is not required by the Cloud API itself.
+%p
+  A
+  %i
+    public address
+  resource model contains the following fields:
+%div{ :style => "overflow-x: auto;" }
+  %div{ :style => "margin: 0px 2px 0px 2px;" }
+    %table{ "-" => "", :border => "1", :width => "100%" }
+      %tr
+        %th
+          Field Name
+        %th
+          Type
+        %th
+          Occurs
+        %th
+          Description
+      %tr
+        %td
+          name
+        %td
+          String
+        %td
+          1
+        %td
+          Logical name of this Public Address (unique within owning VDC).  [POST][PUT]
+      %tr
+        %td
+          uri
+        %td
+          URI
+        %td
+          1
+        %td
+          URI by which this public address may be addressed as a standalone resource.
+      %tr
+        %td
+          description
+        %td
+          String
+        %td
+          0..1
+        %td
+          Human friendly description of this
+          %i
+            Public Address
+          \. [POST][PUT]
+      %tr
+        %td
+          vdc
+        %td
+          URI
+        %td
+          1
+        %td
+          URI of the
+          %i
+            VDC
+          this
+          %i
+            PublicAddress
+          belongs to.
+      %tr
+        %td
+          dns
+        %td
+          String[]
+        %td
+          1
+        %td
+          List of DNS server IP addresses to be used for connecting out through this Internet connection.  [POST][PUT]
+      %tr
+        %td
+          domain_names
+        %td
+          String[]
+        %td
+          0..1
+        %td
+          Optional list of domain names associated with this public IP address (informational only).  [POST][PUT]
+      %tr
+        %td
+          gateway
+        %td
+          String
+        %td
+          1
+        %td
+          Gateway for this Internet connection.
+      %tr
+        %td
+          ip_address
+        %td
+          String
+        %td
+          1
+        %td
+          Physical IP address represented by this
+          %i
+            public address
+          instance.
+      %tr
+        %td
+          netmask
+        %td
+          String
+        %td
+          1
+        %td
+          Netmask for this Internet connection.
+      %tr
+        %td
+          tags
+        %td
+          [ ]
+        %td
+          0..1
+        %td
+          Arbitrary values assigned by the user.  These values have no semantic impact on the operation of the cloud.  [POST][PUT]
+      %tr
+        %td
+          vm
+        %td
+          URI
+        %td
+          0..1
+        %td
+          URI of the VM to which this address is attached, if any.
+%h1
+  %a{ :name => "Cluster_[application/vnd.com.sun.cloud.Cluster+json]" }
+  Cluster [application/vnd.com.sun.cloud.Cluster+json]
+%p
+  A
+  %i
+    cluster
+  represents a grouping of
+  %i
+    VM
+  and
+  %i
+    VNet
+  resources, segregated for purposes of grouping by common functionality, shared access control, or other purposes.  Each VDC contains, by definition, one root
+  %i
+    cluster
+  , which may in turn contain other clusters; the effect is that of a filesystem-like hierarchy of clusters.
+%p
+  A
+  %i
+    cluster
+  resource model contains the following fields:
+%div{ :style => "overflow-x: auto;" }
+  %div{ :style => "margin: 0px 2px 0px 2px;" }
+    %table{ "-" => "", :border => "1", :width => "100%" }
+      %tr
+        %th
+          Field Name
+        %th
+          Type
+        %th
+          Occurs
+        %th
+          Description
+      %tr
+        %td
+          name
+        %td
+          String
+        %td
+          1
+        %td
+          Logical name of this cluster, unique within the owning VDC.  [POST][PUT]
+      %tr
+        %td
+          uri
+        %td
+          URI
+        %td
+          1
+        %td
+          URI by which this
+          %i
+            cluster
+          may be addressed as a standalone resource.
+      %tr
+        %td
+          description
+        %td
+          String
+        %td
+          0..1
+        %td
+          Human friendly description of this
+          %i
+            Cluster
+          \. [POST][PUT]
+      %tr
+        %td
+          vdc
+        %td
+          URI
+        %td
+          1
+        %td
+          URI of the
+          %i
+            VDC
+          this
+          %i
+            Cluster
+          belongs to.
+      %tr
+        %td
+          parent
+        %td
+          URI
+        %td
+          0..1
+        %td
+          URI of the parent
+          %i
+            Cluster
+          for this
+          %i
+            Cluster
+          (if this is not the root cluster of a
+          %i
+            VDC
+          ).
+      %tr
+        %td
+          from_cluster
+        %td
+          URI
+        %td
+          0..1
+        %td
+          On a
+          %i
+            Create Cluster
+          request type, the URI of an existing cluster to initialize default values from.  [POST]
+      %tr
+        %td
+          tags
+        %td
+          [ ]
+        %td
+          0..1
+        %td
+          Arbitrary values assigned by the user.  These values have no semantic impact on the operation of the cloud.  [POST][PUT]
+      %tr
+        %td
+          vnets
+        %td
+          VNet[]
+        %td
+          0..1
+        %td
+          The collection of virtual private networks associated with this Cluster.
+      %tr
+        %td
+          vms
+        %td
+          VM[]
+        %td
+          0..1
+        %td
+          The collection of virtual machines associated with this cluster.
+      %tr
+        %td
+          controllers
+        %td
+          {}
+        %td
+          0..1
+        %td
+          Hash of URIs which may be used to request state changes in the cluster via POST requests (see next table), keyed by the type of state change being requested.
+      %tr
+        %td
+          clusters
+        %td
+          Cluster[]
+        %td
+          0..1
+        %td
+          Collection of Clusters which are logically contained in this cluster.
+%p
+  Some of the &quot;control&quot; URIs may or may not be accessible based on the state of the cluster, and may not appear in representations of it when not usable. For convenience, these are grouped into the &quot;controllers&quot; list field, in which zero or more of the following URIs (keyed by the change type) will be included in a representation provided by the server.
+%div{ :style => "overflow-x: auto;" }
+  %div{ :style => "margin: 0px 2px 0px 2px;" }
+    %table{ "-" => "", :border => "1", :width => "100%" }
+      %tr
+        %th
+          Change Type
+        %th
+          Operation Requested
+      %tr
+        %td
+          start
+        %td
+          Start up all the VMs in this cluster, in ascending order based on the
+          %i
+            boot_order
+          value of each VM.
+      %tr
+        %td
+          stop
+        %td
+          Shut down all the VMs this cluster, in descending order based on the
+          %i
+            boot_order
+          value of each VM.
+%h1
+  %a{ :name => "Volume_[application/vnd.com.sun.cloud.Volume+json]" }
+  Volume [application/vnd.com.sun.cloud.Volume+json]
+%p
+  A
+  %i
+    Volume
+  represents a remote WebDAV volume that may be accessed by the same credentials used to access this information.  Such volumes are global to the calling user, and are therefore enumerated in the containing
+  %i
+    VDC
+  \.
+%p
+  A
+  %i
+    Volume
+  resource model contains the following fields:
+%div{ :style => "overflow-x: auto;" }
+  %div{ :style => "margin: 0px 2px 0px 2px;" }
+    %table{ "-" => "", :border => "1", :width => "100%" }
+      %tr
+        %th
+          Field Name
+        %th
+          Type
+        %th
+          Occurs
+        %th
+          Description
+      %tr
+        %td
+          name
+        %td
+          String
+        %td
+          1
+        %td
+          Logical name of this volume (unique within the owning VDC).  [POST][PUT]
+      %tr
+        %td
+          uri
+        %td
+          URI
+        %td
+          1
+        %td
+          GET, PUT, and DELETE operations may be used to retrieve, update, or delete this volume.
+      %tr
+        %td
+          description
+        %td
+          String
+        %td
+          0..1
+        %td
+          Human friendly description of this
+          %i
+            Volume
+          \. [POST][PUT]
+      %tr
+        %td
+          vdc
+        %td
+          URI
+        %td
+          1
+        %td
+          URI of the
+          %i
+            VDC
+          this
+          %i
+            Volume
+          belongs to.
+      %tr
+        %td
+          webdav
+        %td
+          URI
+        %td
+          1
+        %td
+          The URI for use in any WebDAV operations.
+      %tr
+        %td
+          created
+        %td
+          Timestamp
+        %td
+          1
+        %td
+          Date and time when this volume was created.
+      %tr
+        %td
+          snapshots
+        %td
+          Snapshot[]
+        %td
+          0..1
+        %td
+          Collection of snapshots associated with this volume.
+      %tr
+        %td
+          tags
+        %td
+          [ ]
+        %td
+          0..1
+        %td
+          Arbitrary values assigned by the user.  These values have no semantic impact on the operation of the cloud.  [POST][PUT]
+%h1
+  %a{ :name => "Snapshot_[application/vnd.com.sun.cloud.Snapshot+json]" }
+  Snapshot [application/vnd.com.sun.cloud.Snapshot+json]
+%p
+  A
+  %i
+    Snapshot
+  represents a point-in-time representation of the contents of a
+  %i
+    Volume
+  \.
+%p
+  A
+  %i
+    Snapshot
+  resource model contains the following fields:
+%div{ :style => "overflow-x: auto;" }
+  %div{ :style => "margin: 0px 2px 0px 2px;" }
+    %table{ "-" => "", :border => "1", :width => "100%" }
+      %tr
+        %th
+          Field Name
+        %th
+          Type
+        %th
+          Occurs
+        %th
+          Description
+      %tr
+        %td
+          name
+        %td
+          String
+        %td
+          1
+        %td
+          Logical name of this snapshot, unique within the owning
+          %i
+            Volume
+          \.  [POST]
+      %tr
+        %td
+          uri
+        %td
+          URI
+        %td
+          1
+        %td
+          GET, PUT, and DELETE operations may be used to retrieve, update, or delete this snapshot.
+      %tr
+        %td
+          description
+        %td
+          String
+        %td
+          0..1
+        %td
+          Human friendly description of this
+          %i
+            Snapshot
+          \. [POST][PUT]
+      %tr
+        %td
+          volume
+        %td
+          URI
+        %td
+          1
+        %td
+          URI of the
+          %i
+            Volume
+          this
+          %i
+            Snapshot
+          belongs to.
+      %tr
+        %td
+          created
+        %td
+          Timestamp
+        %td
+          1
+        %td
+          Date and time when this snapshot was created.
+      %tr
+        %td
+          clone
+        %td
+          URI
+        %td
+          0..1
+        %td
+          A POST to this URI is a request to clone this snapshot into a new volume with a name included in the request body.
+      %tr
+        %td
+          rollback
+        %td
+          URI
+        %td
+          0..1
+        %td
+          A POST to ths URI is a request to revert the owning volume to the contents as of when this snapshot was created.
+%h1
+  %a{ :name => "Virtual_Machine_(VM)_[application/vnd.com.sun.cloud.VM+json]" }
+  Virtual Machine (VM) [application/vnd.com.sun.cloud.VM+json]
+%p
+  A
+  %i
+    VM
+  represents a virtual computer that is associated with a cluster.
+%p
+  A
+  %i
+    VM
+  data model contains the following fields:
+%div{ :style => "overflow-x: auto;" }
+  %div{ :style => "margin: 0px 2px 0px 2px;" }
+    %table{ "-" => "", :border => "1", :width => "100%" }
+      %tr
+        %th
+          Field Name
+        %th
+          Type
+        %th
+          Occurs
+        %th
+          Description
+      %tr
+        %td
+          name
+        %td
+          String
+        %td
+          1
+        %td
+          Logical name of this VM, unique within the owning Cluster.  [POST][PUT]
+      %tr
+        %td
+          uri
+        %td
+          URI
+        %td
+          1
+        %td
+          GET, PUT, and DELETE may be used to retrieve representations of the VM, to update it, and to delete it, respectively.
+      %tr
+        %td
+          description
+        %td
+          String
+        %td
+          0..1
+        %td
+          Human friendly description of this
+          %i
+            VM
+          \. [POST][PUT]
+      %tr
+        %td
+          cluster
+        %td
+          URI
+        %td
+          1
+        %td
+          URI of the
+          %i
+            Cluster
+          this
+          %i
+            VM
+          belongs to.
+      %tr
+        %td
+          run_status
+        %td
+          String
+        %td
+          0..1
+        %td
+          Current running status of this virtual machine (read only).  Valid values for this field are &quot;STOPPED&quot;, &quot;STARTING&quot;, &quot;STARTED&quot;, &quot;SLEEPING&quot;, &quot;ASLEEP&quot;, &quot;WAKING&quot;, and &quot;STOPPING&quot;.  Initial run_status of a newly created VM is &quot;STOPPED&quot;.
+      %tr
+        %td
+          updated
+        %td
+          Boolean
+        %td
+          1
+        %td
+          A value of true means that a change has been made to the VM resource, which will not take effect until the VM has been rebooted.
+      %tr
+        %td
+          last_boot
+        %td
+          Timestamp
+        %td
+          1
+        %td
+          Date when this VM was most recently booted.
+      %tr
+        %td
+          from_template
+        %td
+          String
+        %td
+          0..1
+        %td
+          On a
+          %i
+            Create VM
+          request type, the URI of an existing
+          %i
+            VM template
+          to initialize default values from.  [POST]
+      %tr
+        %td
+          from_vm
+        %td
+          String
+        %td
+          0..1
+        %td
+          On a
+          %i
+            Create VM
+          request type, the URI of an existing
+          %i
+            VM
+          to initialize default values from.  [POST]
+      %tr
+        %td
+          hostname
+        %td
+          String
+        %td
+          0..1
+        %td
+          Fully qualified (?) host name of this virtual machine.
+      %tr
+        %td
+          os
+        %td
+          String
+        %td
+          0..1
+        %td
+          Operating system running on the VM.  FIXME - enumerate the legal values.  [POST]
+      %tr
+        %td
+          cpu
+        %td
+          Integer
+        %td
+          0..1
+        %td
+          CPU speed in Mhz.  [POST]
+      %tr
+        %td
+          memory
+        %td
+          Integer
+        %td
+          0..1
+        %td
+          Main memory size in MB.  [POST]
+      %tr
+        %td
+          boot_disk
+        %td
+          Integer
+        %td
+          0..1
+        %td
+          Boot disk space to allocate in GB.  [POST]
+      %tr
+        %td
+          data_disk
+        %td
+          Integer
+        %td
+          0..1
+        %td
+          Data disk space to allocate in GB.  [POST]
+      %tr
+        %td
+          temp_disk
+        %td
+          Integer
+        %td
+          0..1
+        %td
+          Temporary disk space to allocate in GB.  [POST]
+      %tr
+        %td
+          boot_order
+        %td
+          Integer
+        %td
+          0..1
+        %td
+          Sort ordering value for
+          %i
+            start cluster
+          and
+          %i
+            stop cluster
+          operations.  When a cluster is started, VMs with the same
+          %i
+            boot_order
+          value will be started in an undefined sequence, but the service will ensure that all VMs with a particular
+          %i
+            boot_order
+          value will have been started before starting VMs with a higher
+          %i
+            boot_order
+          value.  The sequence is reversed for a
+          %i
+            stop cluster
+          operation.  VMs with no
+          %i
+            boot_order
+          value will be assumed to have a
+          %i
+            boot_order
+          of the maximum integer value, so they will be started last and stopped first.  [POST][PUT]
+      %tr
+        %td
+          params
+        %td
+          { }
+        %td
+          0..1
+        %td
+          Configuration parameters for this VM, keyed by parameter name.  The list of system defined configuration parameters is TBD, but one of them will be &quot;user_params&quot;, whose value is a hash of arbitrary user defined configuration parameters.  [POST][PUT]
+      %tr
+        %td
+          tags
+        %td
+          [ ]
+        %td
+          0..1
+        %td
+          Arbitrary values assigned by the user.  These values have no semantic impact on the operation of the cloud.  [POST][PUT]
+      %tr
+        %td
+          back_up
+        %td
+          URI
+        %td
+          1
+        %td
+          A POST of a Backup representation to this URI requests creation of a new Backup.
+      %tr
+        %td
+          attach
+        %td
+          URI
+        %td
+          1
+        %td
+          A POST of a PublicAddress representation to this URI requests connection to a Public Address.  Or, a POST of a VNet representation to this URI requests connection to a VNet.
+      %tr
+        %td
+          detach
+        %td
+          URI
+        %td
+          1
+        %td
+          A POST of a PublicAddress representation to this URI requests disconnection from a Public Address.  Or, a POST of a VNet representation to this URI reequests disconnection from a VNet.
+      %tr
+        %td
+          backups
+        %td
+          Backup[]
+        %td
+          0..1
+        %td
+          Backup snapshots from this virtual machine.
+      %tr
+        %td
+          interfaces
+        %td
+          Interface[]
+        %td
+          1
+        %td
+          Network interfaces associated with this virtual machine.  These are created automatically when VNets or Public Addresses are associated with VM.[POST]
+      %tr
+        %td
+          controllers
+        %td
+          {}
+        %td
+          0..1
+        %td
+          Hash of URIs which may be used to request state changes in the VM via POST requests (see next table), keyed by the type of state change being requested.
+%p
+  Some of the &quot;control&quot; URIs, such as those identified in the &quot;attach&quot; and &quot;detach&quot; fields, are in principle always accessible and thus appear as first-class values in the representation of a VM.  Others may or may not be accessible based on the state of the VM, and may not appear in representations of it when not accessible. For convenience, these are grouped into the &quot;controllers&quot; list field, in which zero or more of the following URIs (keyed by the change type) will be included in a representation provided by the server.
+%div{ :style => "overflow-x: auto;" }
+  %div{ :style => "margin: 0px 2px 0px 2px;" }
+    %table{ "-" => "", :border => "1", :width => "100%" }
+      %tr
+        %th
+          Change Type
+        %th
+          Operation Requested
+        %th
+          Initial State
+        %th
+          Intermediate State
+        %th
+          Final State
+      %tr
+        %td
+          start
+        %td
+          Start up a VM.
+        %td
+          STOPPED
+        %td
+          STARTING
+        %td
+          STARTED
+      %tr
+        %td
+          stop
+        %td
+          Shut down a running VM.
+        %td
+          STARTED
+        %td
+          STOPPING
+        %td
+          STOPPED
+      %tr
+        %td
+          reboot
+        %td
+          Reboot a running VM.
+        %td
+          STARTED
+        %td
+          STOPPING -&gt; STOPPED -&gt; STARTING
+        %td
+          STARTED
+      %tr
+        %td
+          hibernate
+        %td
+          Put a running VM to sleep.
+        %td
+          STARTED
+        %td
+          SLEEPING
+        %td
+          ASLEEP
+      %tr
+        %td
+          resume
+        %td
+          Wake up a hibernated VM.
+        %td
+          ASLEEP
+        %td
+          WAKING
+        %td
+          STARTED
+%h1
+  %a{ :name => "Backup_[application/vnd.com.sun.cloud.Backup+json]" }
+  Backup [application/vnd.com.sun.cloud.Backup+json]
+%p
+  A
+  %i
+    backup
+  represents a snapshot that was taken of a specific virtual machine.
+%p
+  A
+  %i
+    backup
+  resource model contains the following fields:
+%div{ :style => "overflow-x: auto;" }
+  %div{ :style => "margin: 0px 2px 0px 2px;" }
+    %table{ "-" => "", :border => "1", :width => "100%" }
+      %tr
+        %th
+          Field Name
+        %th
+          Type
+        %th
+          Occurs
+        %th
+          Description
+      %tr
+        %td
+          name
+        %td
+          String
+        %td
+          1
+        %td
+          Logical name of this backup, unique within owning VM. [POST][PUT]
+      %tr
+        %td
+          uri
+        %td
+          URI
+        %td
+          1
+        %td
+          GET, PUT, and DELETE may be used to retrieve representations of the Backup, to update it, and to delete it, respectively.
+      %tr
+        %td
+          description
+        %td
+          String
+        %td
+          0..1
+        %td
+          Human friendly description of this
+          %i
+            Backup
+          \. [POST][PUT]
+      %tr
+        %td
+          type
+        %td
+          String
+        %td
+          0..1
+        %td
+          Type of this backup (service provider default if not specified). [POST]
+      %tr
+        %td
+          created
+        %td
+          DateTime
+        %td
+          1
+        %td
+          Timestamp when this backup was created.
+      %tr
+        %td
+          restore
+        %td
+          URI
+        %td
+          1
+        %td
+          URI that will accept a POST to restore the state of the associated VM to this Backup.
+      %tr
+        %td
+          vm
+        %td
+          URI
+        %td
+          1
+        %td
+          URI of the VM that this Backup was captured for.
+      %tr
+        %td
+          tags
+        %td
+          [ ]
+        %td
+          0..1
+        %td
+          Arbitrary values assigned by the user.  These values have no semantic impact on the operation of the cloud.  [POST][PUT]
+%h1
+  %a{ :name => "Virtual_Network_(VNet)_[application/vnd.com.sun.cloud.VNet+json]" }
+  Virtual Network (VNet) [application/vnd.com.sun.cloud.VNet+json]
+%p
+  A
+  %i
+    VNet
+  represents a virtual private network to which an
+  %i
+    interface
+  associated with a
+  %i
+    VM
+  may be attached.  VNets may connect VMs within a
+  %i
+    Cluster
+  , or they may connect VMs from different clusters together to provide a private communications path.
+%p
+  A
+  %i
+    VNet
+  is logically contained within a cluster, but this relationship only exists for administrative purposes and does not affect the operations available on it.
+%p
+  A
+  %i
+    VNet
+  resource model contains the following fields:
+%div{ :style => "overflow-x: auto;" }
+  %div{ :style => "margin: 0px 2px 0px 2px;" }
+    %table{ "-" => "", :border => "1", :width => "100%" }
+      %tr
+        %th
+          Field Name
+        %th
+          Type
+        %th
+          Occurs
+        %th
+          Description
+      %tr
+        %td
+          name
+        %td
+          String
+        %td
+          1
+        %td
+          Logical name of this
+          %i
+            VNet
+          , unique within the owning
+          %i
+            Cluster
+          \. [POST][PUT]
+      %tr
+        %td
+          uri
+        %td
+          URI
+        %td
+          1
+        %td
+          URI that may be used to access this VNet as a standalone resource.
+      %tr
+        %td
+          description
+        %td
+          String
+        %td
+          0..1
+        %td
+          Human friendly description of this 'VNet
+          %i
+            \. [POST][PUT]
+      %tr
+        %td
+          cluster
+        %td
+          URI
+        %td
+          1
+        %td
+          URI of the
+          %i
+            Cluster
+          this
+          %i
+            VNet
+          belongs to.
+      %tr
+        %td
+          netmask
+        %td
+          String
+        %td
+          1
+        %td
+          Default network mask for interfaces connected to this VNet.
+      %tr
+        %td
+          tags
+        %td
+          [ ]
+        %td
+          0..1
+        %td
+          Arbitrary values assigned by the user.  These values have no semantic impact on the operation of the cloud. [POST][PUT]
+%h1
+  %a{ :name => "Interface_[application/vnd.com.sun.cloud.Interface+json]" }
+  Interface [application/vnd.com.sun.cloud.Interface+json]
+%p
+  An
+  %i
+    interface
+  represents a network interface card (nic), associated with a specific VM, that documents an IP connection (from this VM) either to a
+  %i
+    VNet
+  (virtual private network) or to a
+  %i
+    public address
+  (a static public IP address accessible from the Internet).  For the latter scenario, the VM will typically implement firewall and/or load balancing functionality, but this is not required by the API.
+%p
+  %i
+    Interface
+  instances are created, modified, and removed as a side effect of other operations.  Therefore, they do not possess a URI of their own, and support no operations against themselves directly.
+%p
+  A
+  %i
+    interface
+  resource model contains the following fields:
+%div{ :style => "overflow-x: auto;" }
+  %div{ :style => "margin: 0px 2px 0px 2px;" }
+    %table{ "-" => "", :border => "1", :width => "100%" }
+      %tr
+        %th
+          Field Name
+        %th
+          Type
+        %th
+          Occurs
+        %th
+          Description
+      %tr
+        %td
+          vnet
+        %td
+          URI
+        %td
+          0..1
+        %td
+          The URI of the
+          %i
+            VNet
+          instance, if this interface is attached to one.  At most one of
+          %i
+            vnet
+          or
+          %i
+            public address
+          must be defined.
+      %tr
+        %td
+          public_address
+        %td
+          URI
+        %td
+          0..1
+        %td
+          The URI of the
+          %i
+            public address
+          instance, if this interface is attached to one.  At most one of
+          %i
+            vnet
+          or
+          %i
+            public address
+          must be defined.
+      %tr
+        %td
+          nic
+        %td
+          String
+        %td
+          1
+        %td
+          Name of the network interface connector as seen by the host operating system.
+      %tr
+        %td
+          mac_address
+          %i
+        %td
+          String
+        %td
+          1
+        %td
+          MAC address of this network interface.
+      %tr
+        %td
+          ip_address
+          %i
+        %td
+          String
+        %td
+          1
+        %td
+          IP address of this network interface.  If the interface is connected to a Public Address, will be a duplicate of its ip_address field.
+%h1
+  %a{ :name => "Virtual_Machine_Template_(VMTemplate)_[application/vnd.com.sun.cloud.VMTemplate+json]" }
+  Virtual Machine Template (VMTemplate) [application/vnd.com.sun.cloud.VMTemplate+json]
+%p
+  A
+  %i
+    VMTemplate
+  represents a preconfigured virtual machine image that may be &quot;cloned&quot; in a Create Virtual Machine request, by specifying the URI of a particular template as the value of the
+  %i
+    from_template
+  field.
+%p
+  A
+  %i
+    VMTemplate
+  data model contains the following fields:
+%div{ :style => "overflow-x: auto;" }
+  %div{ :style => "margin: 0px 2px 0px 2px;" }
+    %table{ "-" => "", :border => "1", :width => "100%" }
+      %tr
+        %th
+          Field Name
+        %th
+          Type
+        %th
+          Occurs
+        %th
+          Description
+      %tr
+        %td
+          name
+        %td
+          String
+        %td
+          1
+        %td
+          Logical name of this VMTemplate.
+      %tr
+        %td
+          uri
+        %td
+          URI
+        %td
+          1
+        %td
+          URI to reference this template in a Create Virtual Machine request.
+      %tr
+        %td
+          description
+        %td
+          String
+        %td
+          0..1
+        %td
+          Human friendly description of this virtual machine template.
+      %tr
+        %td
+          os
+        %td
+          String
+        %td
+          0..1
+        %td
+          Operating system running on the VM.  FIXME - enumerate the legal values.
+      %tr
+        %td
+          cpu
+        %td
+          Integer
+        %td
+          0..1
+        %td
+          CPU speed in Mhz.
+      %tr
+        %td
+          memory
+        %td
+          Integer
+        %td
+          0..1
+        %td
+          Main memory size in MB.
+      %tr
+        %td
+          boot_disk
+        %td
+          Integer
+        %td
+          0..1
+        %td
+          Boot disk space to allocate in GB.
+      %tr
+        %td
+          data_disk
+        %td
+          Integer
+        %td
+          0..1
+        %td
+          Data disk space to allocate in GB.
+      %tr
+        %td
+          temp_disk
+        %td
+          Integer
+        %td
+          0..1
+        %td
+          Temporary disk space to allocate in GB.
+      %tr
+        %td
+          params
+        %td
+          { }
+        %td
+          0..1
+        %td
+          Configuration parameters for this VM, keyed by parameter name.  The list of system defined configuration parameters is TBD, but one of them will be &quot;user_params&quot;, whose value is a hash of arbitrary user defined configuration parameters.
+      %tr
+        %td
+          tags
+        %td
+          [ ]
+        %td
+          0..1
+        %td
+          Arbitrary values assigned by the user.  These values have no semantic impact on the operation of the cloud.
+%p
+  Copyright &copy; Sun Microsystems, 2009.  This work is licensed under
+  %a.external{ :href => "http://creativecommons.org/licenses/by/3.0/" }
+    Creative Commons Attribution 3.0 Unported License
+.clear
+/

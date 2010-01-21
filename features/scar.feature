@@ -20,15 +20,15 @@ Feature: Sun Cloud API Reference
   | link_text                             | page_name                  |
   | Spec Home                             | Spec Home                  |
   | Common Behavior                       | Common Behavior            |
-  | Resource Models                       | Resource Models            |
-  | Requests to Backup Resources          | requests/Backup            |
-  | Requests to Cloud Resources           | requests/Cloud             |
-  | Requests to Cluster Resources         | requests/Cluster           |
-  | Requests to Public Address Resources  | requests/PublicAddress     |
-  | Requests to Snapshot Resources        | requests/Snapshot          |
-  | Requests to VDC Resources             | requests/VirtualDataCenter |
-  | Requests to VM Resources              | requests/VirtualMachine    |
-  | Requests to VNet Resources            | requests/VirtualNet        |
-  | Requests to Volume Resources          | requests/Volume            |
-  | Command Line Client                   | ./CommandLineInterface     |
+  | Resources                             | Resources                  |
+#  | Requests to Backup Resources          | requests/Backup            |
+#  | Requests to Cloud Resources           | requests/Cloud             |
+#  | Requests to Cluster Resources         | requests/Cluster           |
+#  | Requests to Public Address Resources  | requests/PublicAddress     |
+#  | Requests to Snapshot Resources        | requests/Snapshot          |
+#  | Requests to VDC Resources             | requests/VirtualDataCenter |
+#  | Requests to VM Resources              | requests/VirtualMachine    |
+#  | Requests to VNet Resources            | requests/VirtualNet        |
+#  | Requests to Volume Resources          | requests/Volume            |
+#  | Command Line Client                   | ./CommandLineInterface     |
 

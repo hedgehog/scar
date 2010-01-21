@@ -65,7 +65,7 @@ end
 
 Webrat.configure do |config|
   config.mode = :mechanize
-  config.open_error_files = false # Set to true if you want error pages to pop up in the browser
+  config.open_error_files = true # Set to true if you want error pages to pop up in the browser
 end
 
 class MechanizeWorld < Webrat::MechanizeAdapter

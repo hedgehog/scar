@@ -71,6 +71,7 @@ end
 class MechanizeWorld < Webrat::MechanizeAdapter
   include Webrat::Matchers
   include Webrat::Methods
+  include Spec::Matchers
 #  session = Webrat::MechanizeSession.new
 #  session.extend(Webrat::Matchers)
 #  session.extend(Webrat::HaveTagMatcher)
@@ -78,18 +79,6 @@ class MechanizeWorld < Webrat::MechanizeAdapter
   #Webrat::Methods.delegate_to_session :response_code, :response_body
 #  session
 end
-
-module Matchers
-  def contain(expected)
-    simple_matcher("contain #{expected.inspect}") do |given, matcher|
-      matcher.failure_message = "expected #{given.inspect} to contain #{expected.inspect}"
-      matcher.negative_failure_message = "expected #{given.inspect} not to contain #{expected.inspect}"
-      given.index expected
-    end
-  end
-end
-
-World(Matchers)
 
 World(CommonHelpers)
 

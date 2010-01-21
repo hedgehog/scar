@@ -3,3 +3,9 @@
 coverage
 rdoc
 pkg
+website/tmp
+website/output
+nbproject
+webrat.log
+mech.log
+tmp

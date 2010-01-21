@@ -254,8 +254,8 @@ end
 
 Then /^(?:|I )should be on (.+)$/ do |page_name|
   current_path = URI.parse(current_url).select(:path, :query).compact.join('?')
-  if defined?(Spec::Rails::Matchers)
-    current_path.should == path_to(page_name)
+  if defined?(Spec::Matchers) || defined?(Spec::Rails::Matchers)
+    current_path.should contain(URI.parse(path_to(page_name)).path)
   else
     assert_equal path_to(page_name), current_path
   end

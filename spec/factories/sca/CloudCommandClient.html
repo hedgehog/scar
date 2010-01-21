@@ -1,0 +1,650 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>The APIs for the Sun Cloud: Wiki: CloudCommandClient &mdash; Project Kenai</title>
+    <link href="http://asset-2.kenai.com/stylesheets/base_packaged.css?20091211.aae2446" media="screen" rel="stylesheet" type="text/css" />    <!--[if IE 7]>
+    <link href="http://asset-3.kenai.com/stylesheets/ie7_packaged.css?20091211.aae2446" media="screen" rel="stylesheet" type="text/css" />    <![endif]-->
+    <!--[if IE 6]>
+    <link href="http://asset-0.kenai.com/stylesheets/iex60.css?20091211.aae2446" media="screen" rel="stylesheet" type="text/css" />    <![endif]-->
+    <link href="http://asset-1.kenai.com/stylesheets/print_packaged.css?20091211.aae2446" media="print" rel="stylesheet" type="text/css" />
+    <script src="http://asset-3.kenai.com/javascripts/head_packaged.js?20091211.aae2446" type="text/javascript"></script>
+    <script type="text/javascript">
+//<![CDATA[
+var page={"token":"0bdd151bc3547b5693dd074eaa89020603663c35"};
+//]]>
+</script>
+    <script type="text/javascript" charset="utf-8">
+      function debug(m){}
+    </script>
+      <link rel="alternate" type="application/atom+xml" title="The APIs for the Sun Cloud Wiki Updates (Atom)" href="http://kenai.com/projects/suncloudapis/pages.atom" />
+  <link rel="alternate" type="application/atom+xml" title="The APIs for the Sun Cloud CloudCommandClient Page Updates (Atom)" href="http://kenai.com/projects/suncloudapis/pages/CloudCommandClient/revisions.atom" />
+  <link href="http://asset-3.kenai.com/stylesheets/wiki_packaged.css?20091211.aae2446" media="screen" rel="stylesheet" type="text/css" />
+  <link href="http://asset-1.kenai.com/stylesheets/syntax/shCore.css?20091211.aae2446" media="screen" rel="stylesheet" type="text/css" />
+<link href="http://asset-0.kenai.com/stylesheets/syntax/shThemeDefault.css?20091211.aae2446" media="screen" rel="stylesheet" type="text/css" />
+
+
+  </head>
+  <body id="bg">
+    <div align="center">
+      <div id="container">
+        <div id="headCurves"></div>
+        <div id="masthead">
+          <div class="topLeft"></div><div class="topRight"></div>
+          <div class="contentmast">
+            <div id="logo" onclick="document.location='/?clear=1'"></div>
+            <div class="controls">
+                <div class="links">
+          
+        <a href="/people/login?original_uri=%2Fprojects%2Fsuncloudapis%2Fpages%2FCloudCommandClient" rel="nofollow">Login</a>
+    <span class="separator">|</span> <a href="/people/signup">Join Now</a>
+  <span class="separator">|</span>
+    <a href="/projects/help/pages/Wikis" target="_blank">Help</a>
+  </div>
+<form><input type="text" id="live-search" value="Jump to..." autocomplete="off" /></form>
+
+            </div>
+          </div>
+          <div class="bottomLeft"></div><div class="bottomRight"></div>
+        </div>
+        <div id="breadcrumbs"><a href="/">kenai.com</a><span>></span>
+  <a href="/projects">projects</a>
+  <span>&gt;</span><a href="/projects/suncloudapis">suncloudapis</a>
+  <span>&gt;</span><a href="/projects/suncloudapis/pages/Home">wiki</a>
+  
+    <span>></span><a href="/projects/suncloudapis/pages/CloudCommandClient" class="current">CloudCommandClient</a>
+  
+</div>
+        <div id="main">
+          <div id="printSideColumn">
+            <div id="sideColumn" style="display:block">
+              <div id="hAccordion" class="hAccordion home">
+                <a href="/forums" id="hTab_0" title="Forums"></a>
+                <a href="/people" id="hTab_1" title="People"></a>
+                <a href="/projects" id="hTab_2" title="Projects"></a>
+                <a href="/mypage" id="hTab_3" title="My Page"></a>
+                <a href="/" id="hTab_4" title="Home"></a>
+              </div>
+              <div id="nav2">
+                  <div class="vAccordion">
+
+    <button class="tab" id="sidebar_project_features"><div class="title">Project Features</div><div class="expCol">-</div></button>
+    <div class="bucket" style="">
+  <ul>
+          
+      <li><strong>
+        
+          Wiki        
+      </strong></li>
+            <li><a href="/projects/suncloudapis/pages/Home">&raquo; Wiki</a></li>
+                
+      <li><strong>
+        
+          <a href="/projects/suncloudapis/forums">Message Forum</a>
+        
+      </strong></li>
+            <li><a href="/projects/suncloudapis/forums/forum">&raquo; General Discussion</a></li>
+                
+      <li><strong>
+        
+          Downloads        
+      </strong></li>
+            <li><a href="/projects/suncloudapis/downloads">&raquo; Downloads</a></li>
+                
+      <li><strong>
+        
+          <a href="/projects/suncloudapis/lists">Mailing List</a>
+        
+      </strong></li>
+            <li><a href="/projects/suncloudapis/lists/extended-discussion/archive">&raquo; Extended Discussion</a></li>
+            </ul>
+</div>
+</div>
+      <div class="vAccordion">
+    <button class="tab" id="sidebar_wiki_controls"><div class="title">Wiki Controls</div><div class="expCol">-</div></button>
+    <div class="bucket" style="">
+
+  
+  
+    <ul>
+      <li>&raquo; Show Page</li>
+      <li><a href="/projects/suncloudapis/pages/CloudCommandClient/edit">&raquo; Edit Page</a></li>
+      <li><a href="/projects/suncloudapis/pages/CloudCommandClient/text">&raquo; Show Page as Text</a></li>
+      <li><a href="/projects/suncloudapis/pages/CloudCommandClient/revisions">&raquo; Show Page Revision History</a></li>
+    </ul>
+  
+
+  <!-- Jump to page -->
+  <div class="vAccLabel" align="left"><label for="jumpToPage" class="vAccTextLabel">Jump&nbsp;to&nbsp;Page:</label></div>
+  <div class="vAccForm" align="left">
+    <select class="vAccPullDown" name="jumpToPage" style="width:150px;" onchange="window.location='/projects/suncloudapis/pages'+'/' +this.value">
+      <option value="CLIExample1">CLIExample1</option>
+<option value="CloudAPIBackupRequests">CloudAPIBackupRequests</option>
+<option value="CloudAPICloudRequests">CloudAPICloudRequests</option>
+<option value="CloudAPIClusterRequests">CloudAPIClusterRequests</option>
+<option value="CloudAPIPublicAddressRequests">CloudAPIPublicAddressRequests</option>
+<option value="CloudAPISnapshotRequests">CloudAPISnapshotRequests</option>
+<option value="CloudAPISpecificationResourceModels">CloudAPISpecificationResourceModels</option>
+<option value="CloudAPIVDCRequests">CloudAPIVDCRequests</option>
+<option value="CloudAPIVMRequests">CloudAPIVMRequests</option>
+<option value="CloudAPIVNetRequests">CloudAPIVNetRequests</option>
+<option value="CloudAPIVolumeRequests">CloudAPIVolumeRequests</option>
+<option value="CloudCommandClient" selected="selected">CloudCommandClient</option>
+<option value="CommonBehaviors">CommonBehaviors</option>
+<option value="HelloCloud">HelloCloud</option>
+<option value="Home">Home</option>
+    </select>
+  </div>
+  <div class="clear"></div>
+  <ul>
+    <li><a href="/projects/suncloudapis/pages">&raquo; List all Pages</a></li>
+    <li><a href="/projects/suncloudapis/wiki_images">&raquo; Manage Images</a></li>
+  </ul>
+  <div class="clear"></div>
+  <!--Create new page -->
+  <form id="wiki_page_create" action="" method="GET">
+    <div class="vAccLabel" align="left"><label for="newPage" class="vAccTextLabel">Create&nbsp;New&nbsp;Page:</label></div>
+    <div class="vAccForm" align="left">
+      <div class="vAccError" id="wiki_page_create_errors"></div>
+      <input id="wiki_page_create_path" type="hidden" value="/projects/suncloudapis/pages/_id_/edit" />
+      <input id="wiki_page_create_id" type="text" maxlength="128" name="id" class="vAccTextField" />
+      <button id="wiki_page_create_submit" title="go" class="vAccGoButton" type="submit"> </button>
+    </div>
+    <div class="clear"></div>
+  </form>
+</div>
+</div>
+    <div class="vAccordion">
+    <button class="tab" id="sidebar_project_about"><div class="title">About this Project</div><div class="expCol">-</div></button>
+    <div class="bucket" style="">
+  <div style="text-align:left; margin:5px;">
+    <a href="/projects/suncloudapis">The APIs for the Sun Cloud</a> was started in 
+    February 2009, is owned by 
+    <a href="/people/2756-russcastronovo"><span class="person -kenai-russcastronovo">russcastronovo</span></a>,
+    and has <a href="/projects/suncloudapis/members">218 members</a>.
+  </div>
+ 
+  <ul>
+    
+      
+         <li><a href="/projects/suncloudapis/watch">&raquo; Bookmark This Project</a></li>
+      
+        
+  </ul>
+</div></div>
+
+              </div>
+            </div>
+            
+      <div id='sideColumnShow' class='side_nav' title='hide side navigation'></div>
+    
+          </div>
+          <div id="pageContent" class="content">
+            <!--BEGIN CONTENT AREA-->
+            
+            
+
+
+
+
+
+
+<!--BEGIN CONTENT AREA-->
+<div class="contentPadding">
+    <div class="wikiMainHeader">
+    <div class="twoColumns">
+      <div class="column">
+        <span>Last updated <span class='pretty-date' title='2009-03-12 06:24:14 UTC'>March 12, 2009 06:24</span>, by</span>&nbsp;<a href="/people/139-Tim-Bray">Tim Bray</a>
+      </div>
+      <div class="column" align="right" style="float:right;width:10em;margin-right:50px;">
+        <span>    <a href="#" class="contextMenuAnchor" id="social-bookmarks__">&raquo;&nbsp;Share this </a><div style="display:none" id="social-bookmarks___content">
+    <div style="padding:3px;width:100px;">
+      <a href="http://del.icio.us/post?url=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FCloudCommandClient&title=The APIs for the Sun Cloud: Wiki: CloudCommandClient &amp;mdash; Project Kenai" class="socialBookMarkItem" title="del.icio.us"><img alt="del.icio.us" src="http://asset-1.kenai.com/images/social_bookmarking/delicious.png?20091211.aae2446" /></a> <a href="http://reddit.com/submit?url=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FCloudCommandClient&title=The APIs for the Sun Cloud: Wiki: CloudCommandClient &amp;mdash; Project Kenai" class="socialBookMarkItem" title="Reddit"><img alt="Reddit" src="http://asset-0.kenai.com/images/social_bookmarking/reddit.png?20091211.aae2446" /></a> <a href="http://digg.com/submit?url=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FCloudCommandClient&title=The APIs for the Sun Cloud: Wiki: CloudCommandClient &amp;mdash; Project Kenai&phase=2" class="socialBookMarkItem" title="Digg"><img alt="Digg" src="http://asset-3.kenai.com/images/social_bookmarking/digg.png?20091211.aae2446" /></a> <a href="http://www.newsvine.com/_tools/seed&save?u=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FCloudCommandClient&h=The APIs for the Sun Cloud: Wiki: CloudCommandClient &amp;mdash; Project Kenai" class="socialBookMarkItem" title="NewsVine"><img alt="NewsVine" src="http://asset-0.kenai.com/images/social_bookmarking/newsvine.png?20091211.aae2446" /></a> <a href="http://www.blinklist.com/index.php?url=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FCloudCommandClient&Title=The APIs for the Sun Cloud: Wiki: CloudCommandClient &amp;mdash; Project Kenai&Action=Blink/addblink.php" class="socialBookMarkItem" title="BlinkList"><img alt="BlinkList" src="http://asset-0.kenai.com/images/social_bookmarking/blinklist.png?20091211.aae2446" /></a> <a href="http://blogmarks.net/my/new.php?url=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FCloudCommandClient&title=The APIs for the Sun Cloud: Wiki: CloudCommandClient &amp;mdash; Project Kenai&mini=1&simple=1" class="socialBookMarkItem" title="Blogmarks"><img alt="Blogmarks" src="http://asset-1.kenai.com/images/social_bookmarking/blogmarks.png?20091211.aae2446" /></a> <a href="http://co.mments.com/track?url=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FCloudCommandClient&title=The APIs for the Sun Cloud: Wiki: CloudCommandClient &amp;mdash; Project Kenai" class="socialBookMarkItem" title="co.mments"><img alt="co.mments" src="http://asset-2.kenai.com/images/social_bookmarking/comments.png?20091211.aae2446" /></a> <a href="http://www.furl.net/storeIt.jsp?t=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FCloudCommandClient&u=The APIs for the Sun Cloud: Wiki: CloudCommandClient &amp;mdash; Project Kenai" class="socialBookMarkItem" title="Furl"><img alt="Furl" src="http://asset-1.kenai.com/images/social_bookmarking/furl.png?20091211.aae2446" /></a> <a href="http://ma.gnolia.com/beta/bookmarklet/add?url=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FCloudCommandClient&title=The APIs for the Sun Cloud: Wiki: CloudCommandClient &amp;mdash; Project Kenai" class="socialBookMarkItem" title="Ma.gnolia"><img alt="Ma.gnolia" src="http://asset-1.kenai.com/images/social_bookmarking/magnolia.png?20091211.aae2446" /></a> <a href="http://www.netvouz.com/action/submitBookmark?url=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FCloudCommandClient&title=The APIs for the Sun Cloud: Wiki: CloudCommandClient &amp;mdash; Project Kenai" class="socialBookMarkItem" title="Netvouz"><img alt="Netvouz" src="http://asset-2.kenai.com/images/social_bookmarking/netvouz.png?20091211.aae2446" /></a> <a href="http://www.simpy.com/simpy/LinkAdd.do?href=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FCloudCommandClient&title=The APIs for the Sun Cloud: Wiki: CloudCommandClient &amp;mdash; Project Kenai" class="socialBookMarkItem" title="Simpy"><img alt="Simpy" src="http://asset-1.kenai.com/images/social_bookmarking/simpy.png?20091211.aae2446" /></a> <a href="http://bookmarks.yahoo.com/myresults/bookmarklet?u=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FCloudCommandClient" class="socialBookMarkItem" title="YahooMyWeb"><img alt="YahooMyWeb" src="http://asset-1.kenai.com/images/social_bookmarking/yahoomyweb.png?20091211.aae2446" /></a>
+    </div>
+  </div>&nbsp;&nbsp;&nbsp;</span>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+      <div class="wikiMainBody"><p><h1>Cloud API - Command Line Client</h1>
+
+</p><p>This page documents a command line client that can be used to perform all of the operations on a server implementing the Cloud API Specification.
+
+</p><pre> Command Line Client for the Sun Cloud Computing API
+ 
+ This script lets you perform operations against the cloud computing service in a
+ &quot;command line interface&quot; (CLI) style, suitable for inclusion in shell scripts.
+ The general form of a command is:
+ 
+   cloud_command (env_options) (context_options) (command) (command_options)
+ 
+ with the following available options in each category (default values in []):
+ 
+ 
+  ENVIRONMENT OPTIONS (specify server and user credentials):
+ 
+    These options establish your the &quot;well known&quot; URI of the cloud service
+    instance you will be communicating with, as well as your authentication
+    credentials.  To avoid the need to include these values on every request
+    in a script, this tool will look for a configuration file in either a
+    default location ($HOME/.cloud.sun.com.json), or in a location specified
+    by the &quot;--config&quot; option.  The content of this file is treated as a JSON
+    resource, and any value present for fields named &quot;uri&quot;, &quot;name&quot;, and
+    &quot;password&quot; defines a default value that is used if a corresponding option
+    is *not* included in the command line.  If you *do* specify these options,
+    you are overriding the default values.
+ 
+    The following environment options may be specified (--config must be first
+    if present, others may be in any order):
+ 
+    --config xxxxxxxxx                  Pathname to a JSON configuration
+                                        file potentially containing settings
+                                        for &quot;uri&quot;, &quot;username&quot;, and &quot;password&quot;
+                                        fields that establish defaults.
+                                        [$HOME/.cloud.sun.com.json if it exists].
+ 
+    --uri xxxxxxx                       URI of the service instance
+                                        (default from config).
+ 
+    --username xxxxxxxx                 Your username (default from config).
+ 
+    --password xxxxxxxx                 Your password (default from config).
+ 
+ 
+  CONTEXT OPTIONS (select the target of the command execution):
+ 
+    These options (if present) must follow the environment options (but in
+    any order within the group).  If none are specified, commands will be
+    directed to the overall space.  In all cases, the &quot;xxxxxxxx&quot; represents
+    the &quot;name&quot; field of the resource to be selected.
+ 
+    --vdc xxxxxxxx                      VDC to receive commands, or parent of
+                                        the public address, cluster, VNet,
+                                        or volume that will receive the command
+                                        [First VDC returned by the &quot;get cloud&quot;
+                                        request].
+ 
+    --address xxxxxxxx                  Public Address within the selected VDC
+                                        to receive commands (--vdc allowed,
+                                        --cluster/--vnet/--volume not allowed).
+ 
+    --cluster xxxxxxxx                  Cluster within the selected VDC
+                                        to receive commands.
+ 
+    --vnet xxxxxxxx                     VNet within the selected VNet to
+                                        receive commands (--vdc allowed,
+                                        --address/--cluster/--volume not
+                                        allowed).
+ 
+    --volume xxxxxxxx                   Volume within the selected VDC
+                                        to receive commands (--vdc allowed,
+                                        --address/--cluster/--vnet not allowed).
+ 
+    --vm xxxxxxxx                       VM within the selected cluster
+                                        to receive commands (--vdc allowed,
+                                        --cluster required).
+ 
+ 
+  COMMANDS TO A VIRTUAL DATA CENTER (VDC):
+ 
+    These options must follow the context options (if any), when you have
+    specified either no context options at all (to select the default VDC),
+    or specified only a --vdc option.  Each command may have required or
+    optional sub-options (listed below the command but indented) that *must*
+    follow the command option in the command line, but *may* be specified
+    in any order:
+ 
+    --get                               Write a JSON view of the VDC to stdout.
+ 
+    --update                            Update following fields on this address,
+                                        completely replacing any previous value:
+      --name xxxxxxxx                   Logical name of this VDC.
+      --tags xxxxxxxx                   Comma-delimited list of tags to be
+                                        associated with this VDC.
+ 
+    --delete                            Delete this VDC and any related
+                                        resources.  (RESERVED FOR FUTURE USE).
+ 
+    --create-address                    Create a new Public Address based on:
+      --name xxxxxxxx                   (Required) Logical name of the new
+                                        public address.
+      --domain-names xxxxxxxx           Comma delimited list of domain names
+                                        associated with this address
+                                        (informational only).
+      --dns xxxxxxxx                    Comma-delimited list of IP addresses
+                                        for DNS servers to be used for outboud
+                                        DNS lookups via this address.
+      --tags xxxxxxxx                   Comma-delimited list of tags to be
+                                        associated with the new address.
+ 
+    --create-cluster                    Create a new Cluster based on:
+      --name xxxxxxxx                   (Required) Logical name of the new
+                                        cluster.
+      --tags xxxxxxxx                   Comma-delimited list of tags to be
+                                        associated with the new cluster.
+      --from-cluster xxxxxxxx           Get default values for the new cluster
+                                        from the existing cluster with this
+                                        name.
+ 
+    --create-vnet                       Create a new Virtual Network (VNet)
+                                        based on:
+      --name xxxxxxxx                   (Required) Logical name of the new
+                                        virtual network.
+      --tags xxxxxxxx                   Comma-delimited list of tags to be
+                                        associated with the new VNet.
+ 
+    --create-volume                     Create a WebDAV volume on the
+                                        storage service based on:
+      --name xxxxxxxx                   (Required) Logical name of the new
+                                        storage volume.
+      --tags xxxxxxxx                   Comma-delimited list of tags to be
+                                         associated with the new volume.
+ 
+ 
+    COMMANDS TO A PUBLIC ADDRESS:
+ 
+    These options must follow the context options (if any), when you have
+    (optionally) specifed a --vdc option, and have specified an --address
+    option.  Each command may have required or optional sub-options (listed
+    below the command but indented) that *must* follow the command option
+    in the command line, but *may* be specified in any order:
+ 
+    --get                               Write a JSON view of this public
+                                        address to stdout.
+ 
+    --update                            Update following fields on this address,
+                                        completely replacing any previous value:
+      --name xxxxxxxx                   Logical name of this address.
+      --domain-names xxxxxxxx           Comma delimited list of domain names
+                                        associated with this address
+                                        (informational only).
+      --dns xxxxxxxx                    Comma-delimited list of IP addresses
+                                        for DNS servers to be used for outboud
+                                        DNS lookups via this address.
+      --tags xxxxxxxx                   Comma-delimited list of tags to be
+                                        associated with this address.
+ 
+    --delete                            Delete this public address and
+                                        any related resources.
+ 
+ 
+    COMMANDS TO A CLUSTER:
+ 
+    These options must follow the context options (if any), when you have
+    (optionally) specifed a --vdc option, and have specified a --cluster
+    option.  Each command may have required or optional sub-options (listed
+    below the command but indented) that *must* follow the command option
+    in the command line, but *may* be specified in any order:
+ 
+    --get                               Write a JSON view of this cluster
+                                        to stdout.
+ 
+    --update                            Update following fields on this cluster,
+                                        completely replacing any previous value:
+      --name xxxxxxxx                   Logical name of this cluster.
+      --tags xxxxxxxx                   Comma-delimited list of tags to be
+                                        associated with this cluster.
+ 
+    --delete                            Delete this cluster and
+                                        any related resources.
+ 
+    --create-vm                         Create a new VM in this cluster,
+                                        based on:
+      --name xxxxxxxx                   (Required) Name of the new VM.
+      --from-template xxxxxxxx          Clone configuration defaults from this
+                                        template.
+      --from-vm xxxxxxxx                Clone configuration defaults from this
+                                        existing VM.
+      --description xxxxxxxx            Human friendly description of this VM.
+      --type xxxxxxxx                   CPU type of the VM.
+      --os xxxxxxxx                     Operating system of the VM.
+      --cpu xxxxxxxx                    CPU speed (Mhz) of the VM.
+      --memory xxxxxxxx                 Main memory size (GB) of the VM.
+      --boot-disk xxxxxxxx              Boot disk space (GB) for this VM.
+      --data-disk xxxxxxxx              Data disk space (GB) for this VM.
+      --temp-disk xxxxxxxx              Temporary disk space (GB) for this VM.
+      --params xxxxxxxx                 Comma-delimited name=value pairs
+                                        representing configuration parameters
+                                        used to initialize this VM.
+      --tags xxxxxxxx                   Comma-delimited list of tags to be
+                                        associated with this VM.
+ 
+    --deploy                            Cause undeployed VMs to be deployed.
+      --note xxxxxxxxxxxxxxxxx          Note for logging to an audit trail.
+ 
+    --start                             Cause deployed VMs to be started.
+      --note xxxxxxxxxxxxxxxxx          Note for logging to an audit trail.
+ 
+    --stop                              Cause started VMs to be stopped.
+      --note xxxxxxxxxxxxxxxxx          Note for logging to an audit trail.
+ 
+    --undeploy                          Cause deployed (i.e. stopped) VMs
+                                        to be undeployed.
+      --note xxxxxxxxxxxxxxxxx          Note for logging to an audit trail.
+ 
+ 
+    COMMANDS TO A VIRTUAL NETWORK (VNet):
+ 
+    These options must follow the context options (if any), when you have
+    (optionally) specifed a --vdc option, and have specified a --vnet
+    option.  Each command may have required or optional sub-options (listed
+    below the command but indented) that *must* follow the command option
+    in the command line, but *may* be specified in any order:
+ 
+    --get                               Write a JSON view of this VNet
+                                        to stdout.
+ 
+    --update                            Update following fields on this VNet,
+                                        completely replacing any previous value:
+      --name xxxxxxxx                   Logical name of this VNet.
+      --tags xxxxxxxx                   Comma-delimited list of tags to be
+                                        associated with this VNet.
+ 
+    --delete                            Delete this VNet and
+                                        any related resources.
+ 
+ 
+    COMMANDS TO A VOLUME:
+ 
+    These options must follow the context options (if any), when you have
+    (optionally) specifed a --vdc option, and have specified a --volume
+    option.  Each command may have required or optional sub-options (listed
+    below the command but indented) that *must* follow the command option
+    in the command line, but *may* be specified in any order:
+ 
+    --get                               Write a JSON view of this volume
+                                        to stdout.
+ 
+    --update                            Update following fields on this volume,
+                                        completely replacing any previous value:
+      --name xxxxxxxx                   Logical name of this volume.
+      --tags xxxxxxxx                   Comma-delimited list of tags to be
+                                        associated with this volume.
+ 
+    --delete                            Delete this volume and
+                                        any related resources.
+ 
+    --create-snapshot                   Create a snapshot of this volume,
+                                        based on:
+      --name xxxxxxxx                   (Required) Logical name of the
+                                        new snapshot
+  
+    COMMANDS TO A VIRTUAL MACHINE (VM):
+ 
+    These options must follow the context options (if any), when you have
+    (optionally) specifed a --vdc option, and have specified a --cluster
+    option and a --vm option.  Each command may have required or optional
+    sub-options (listed below the command but indented) that *must* follow
+    the command option in the command line, but *may* be specified in any order:
+ 
+    --get                               Write a JSON view of this VM
+                                        to stdout.
+ 
+    --update                            Update following fields on this cluster,
+                                        completely replacing any previous value:
+      --name xxxxxxxx                   Logical name of this VM.
+      --description xxxxxxxx            Human friendly description of this VM.
+      --params xxxxxxxx                 Comma-delimited name=value pairs
+                                        representing configuration parameters
+                                        used to initialize this VM.
+      --tags xxxxxxxx                   Comma-delimited list of tags to be
+                                        associated with this VM.
+ 
+    --delete                            Delete this VM and
+                                        any related resources.
+ 
+    --attach                            Attach this VM to a Public Address
+                                        or VNet
+      --address xxxxxxxx                Logical name of the Public Address
+                                        to attach to (one of --address or --vnet
+                                        is requried).
+      --vnet xxxxxxxx                   Logical name of the VNet to attach to
+                                        (one of --address or --vnet is required).
+                                        Address to attach to (o
+      --note xxxxxxxx                   Note for logging to an audit trail.
+ 
+    --detach                            Detach this VM from a Public Address
+                                        or VNet
+      --address xxxxxxxx                Logical name of the Public Address
+                                        to attach to (one of --address or --vnet
+                                        is requried).
+      --vnet xxxxxxxx                   Logical name of the VNet to attach to
+                                        (one of --address or --vnet is required).
+                                        Address to attach to (o
+      --note xxxxxxxx                   Note for logging to an audit trail.
+ 
+    --deploy                            Deploy this undeployed VM.
+      --note xxxxxxxxxxxxxxxxx          Note for logging to an audit trail.
+ 
+    --start                             Start this deployed VM.
+      --note xxxxxxxxxxxxxxxxx          Note for logging to an audit trail.
+ 
+    --stop                              Stop this started VM.
+      --note xxxxxxxxxxxxxxxxx          Note for logging to an audit trail.
+ 
+    --undeploy                          Undeploy this stopped VM.
+      --note xxxxxxxxxxxxxxxxx          Note for logging to an audit trail.
+ 
+    --reboot                            Reboot this started VM.
+      --note xxxxxxxxxxxxxxxxx          Note for logging to an audit trail.
+ 
+    --hibernate                         Hibernate this started VM.
+      --note xxxxxxxxxxxxxxxxx          Note for logging to an audit trail.
+ 
+    --resume                            Resume this asleep VM.
+      --note xxxxxxxxxxxxxxxxx          Note for logging to an audit trail.
+ 
+</pre></div>
+    <div class="clear"></div>
+  </div>
+
+            <!--END CONTENT AREA-->
+          </div>
+        </div>
+        <div id="footer" style="position:relative">
+          <a href="/">Home</a> <span class="separator">|</span>
+          <a href="/mypage">My Page</a> <span class="separator">|</span>
+          <a href="/projects">Projects</a> <span class="separator">|</span>
+          <a href="/people">People</a> <span class="separator">|</span>
+          <a href="mailto:kenai-admin@sun.com">Contact Us</a> <span class="separator">|</span>
+                      <a href="/people/signup">Join Now</a> <span class="separator">|</span>
+                    <a href="/projects/help/pages/Home" target="_blank">Documentation</a>
+        </div>
+        <div id="footerCurves"></div>
+
+        <div style="padding-left:75px;">
+          <ul class="hList">
+             <li><a href="http://www.sun.com" title="Sun Microsystems"><img alt="" class="reflect" src="http://asset-3.kenai.com/images/sun.png?20091211.aae2446" /></a></li>
+             <li><a href="http://www.opensolaris.org" title="OpenSolaris"><img alt="" class="reflect" src="http://asset-3.kenai.com/images/opensolaris.png?20091211.aae2446" /></a></li>
+             <li><a href="http://www.mysql.org" title="MySQL"><img alt="Mysql" class="reflect" src="http://asset-3.kenai.com/images/mysql.png?20091211.aae2446" /></a></li>
+             <li><a href="https://glassfish.dev.java.net" title="GlassFish"><img alt="Glassfish" class="reflect" src="http://asset-1.kenai.com/images/glassfish.png?20091211.aae2446" /></a></li>
+             <li><a href="http://www.jruby.org" title="JRuby"><img alt="Jruby" class="reflect" src="http://asset-0.kenai.com/images/jruby.png?20091211.aae2446" /></a></li>
+             <li><a href="http://www.rubyonrails.org" title="Rails"><img alt="Rails" class="reflect" src="http://asset-3.kenai.com/images/rails.png?20091211.aae2446" /></a></li>
+             <li><a href="http://www.netbeans.org" title="Netbeans"><img alt="Nblogo" class="reflect" src="http://asset-3.kenai.com/images/nblogo.png?20091211.aae2446" /></a></li>
+          </ul>
+        </div>
+
+        <small class="finePrint">
+          <a href="/terms_of_use" class="largeOverlayLink" title="Terms of Use">Terms of Use</a>;
+          <a href="http://www.sun.com/privacy/index.html">Privacy Policy</a>;
+          Copyright &copy;2008-2010 (<a href="/projects/help/pages/ReleaseNotes">revision 20091211.aae2446</a>)
+        </small>
+      </div>
+    </div>
+        <!-- popups that are anchored to specific elements -->
+    <div class="popupMenuShadow" id="contextMenuShadow"></div>
+    <div class="popupMenuContainer" id="contextMenu">
+      <div class="popupMenu inline">	
+        <div class="upArrow"></div>
+        <div class="header"></div>
+        <div class="contextMenuBody" id="contextMenuBody">&nbsp;</div>
+      </div>
+    </div> 
+    
+    <!-- large content loaded via ajax. Faded but not modal. -->
+    <div class="jqmWindow" id="jqm_large_overlay">
+      <div class="jqmHeader">
+        <div class="jqmTitle">&nbsp;</div>
+        <img class="jqmClose" src="/images/close.gif" />
+      </div>
+      <div class="jqmTarget">
+        <img src="/images/activity.gif" alt="loading" />
+      </div>
+      <div class="jqmFooter">
+      	<div class="jqmClose functionButtonContainer"><button class="functionButton" title="Done"> Done </button></div>
+      </div>
+    </div>
+    
+    <!-- confirmation dialogs with buttons. Faded and modal. -->
+    <div class="jqmWindow" id="jqm_dialog">
+      <div class="jqmHeader">
+        <div class="jqmTitle">Please Confirm</div>
+        <img class="jqmClose" src="/images/close.gif" />
+      </div>
+      <div class="jqmTarget">&nbsp;</div>
+      <div class="jqmFooter">
+      	<div class="jqmClose functionButtonContainer"><button class="functionButton" id="jq_no_button" title="No" onclick="Modal.no()"> No </button></div>
+      	<div class="jqmClose functionButtonContainer"><button class="functionButton" id="jq_yes_button" title="Yes" onclick="Modal.yes();"> Yes </button></div>
+      </div>
+    </div>    
+    <div id="jq-ui-autocomplete-parent"></div>
+
+     <script src="http://asset-2.kenai.com/javascripts/s_code_remote_packaged.js?20091211.aae2446" type="text/javascript"></script>
+    
+  </body>
+  <script src="http://asset-2.kenai.com/javascripts/body_packaged.js?20091211.aae2446" type="text/javascript"></script>
+
+    <script src="http://asset-2.kenai.com/javascripts/syntax/scripts/shCore.js?20091211.aae2446" type="text/javascript"></script>
+<script src="http://asset-3.kenai.com/javascripts/syntax/scripts/shLegacy.js?20091211.aae2446" type="text/javascript"></script>
+<script src="http://asset-3.kenai.com/javascripts/syntax/scripts/shBrushAS3.js?20091211.aae2446" type="text/javascript"></script>
+<script src="http://asset-2.kenai.com/javascripts/syntax/scripts/shBrushBash.js?20091211.aae2446" type="text/javascript"></script>
+<script src="http://asset-0.kenai.com/javascripts/syntax/scripts/shBrushCpp.js?20091211.aae2446" type="text/javascript"></script>
+<script src="http://asset-0.kenai.com/javascripts/syntax/scripts/shBrushCSharp.js?20091211.aae2446" type="text/javascript"></script>
+<script src="http://asset-2.kenai.com/javascripts/syntax/scripts/shBrushCss.js?20091211.aae2446" type="text/javascript"></script>
+<script src="http://asset-2.kenai.com/javascripts/syntax/scripts/shBrushDelphi.js?20091211.aae2446" type="text/javascript"></script>
+<script src="http://asset-1.kenai.com/javascripts/syntax/scripts/shBrushDiff.js?20091211.aae2446" type="text/javascript"></script>
+<script src="http://asset-3.kenai.com/javascripts/syntax/scripts/shBrushGroovy.js?20091211.aae2446" type="text/javascript"></script>
+<script src="http://asset-1.kenai.com/javascripts/syntax/scripts/shBrushJava.js?20091211.aae2446" type="text/javascript"></script>
+<script src="http://asset-0.kenai.com/javascripts/syntax/scripts/shBrushJavaFX.js?20091211.aae2446" type="text/javascript"></script>
+<script src="http://asset-0.kenai.com/javascripts/syntax/scripts/shBrushJScript.js?20091211.aae2446" type="text/javascript"></script>
+<script src="http://asset-3.kenai.com/javascripts/syntax/scripts/shBrushPerl.js?20091211.aae2446" type="text/javascript"></script>
+<script src="http://asset-1.kenai.com/javascripts/syntax/scripts/shBrushPhp.js?20091211.aae2446" type="text/javascript"></script>
+<script src="http://asset-1.kenai.com/javascripts/syntax/scripts/shBrushPlain.js?20091211.aae2446" type="text/javascript"></script>
+<script src="http://asset-0.kenai.com/javascripts/syntax/scripts/shBrushPowerShell.js?20091211.aae2446" type="text/javascript"></script>
+<script src="http://asset-2.kenai.com/javascripts/syntax/scripts/shBrushPython.js?20091211.aae2446" type="text/javascript"></script>
+<script src="http://asset-3.kenai.com/javascripts/syntax/scripts/shBrushRuby.js?20091211.aae2446" type="text/javascript"></script>
+<script src="http://asset-1.kenai.com/javascripts/syntax/scripts/shBrushScala.js?20091211.aae2446" type="text/javascript"></script>
+<script src="http://asset-1.kenai.com/javascripts/syntax/scripts/shBrushSql.js?20091211.aae2446" type="text/javascript"></script>
+<script src="http://asset-0.kenai.com/javascripts/syntax/scripts/shBrushVb.js?20091211.aae2446" type="text/javascript"></script>
+<script src="http://asset-2.kenai.com/javascripts/syntax/scripts/shBrushXml.js?20091211.aae2446" type="text/javascript"></script>
+
+  <script language="JavaScript">
+      $(document).ready(function(){
+          initWikiPageToc();
+          initWikiPagePreformattedBlocks();
+          initWikiPageSyntaxHighlight();
+          initWikiAccordionPageCreate();
+      });
+  </script>
+
+</html>

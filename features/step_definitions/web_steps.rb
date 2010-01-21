@@ -13,13 +13,11 @@ require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "pat
 
 Given /^(?:|I )am on (.+)$/ do |page_name|
   pn = path_to(page_name)
-  puts pn
   visit pn
 end
 
 When /^(?:|I )go to (.+)$/ do |page_name|
   pn = path_to(page_name)
-  puts pn
   visit pn
 end
 

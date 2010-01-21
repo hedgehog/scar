@@ -144,7 +144,7 @@ When /^(?:|I )attach the file "([^\"]*)" to "([^\"]*)"$/ do |path, field|
 end
 
 Then /^(?:|I )should see "([^\"]*)"$/ do |text|
-  if defined?(Spec::Rails::Matchers)
+  if defined?(Spec::Matchers) || defined?(Spec::Rails::Matchers)
     response.should contain(text)
   else
     assert_contain text
@@ -153,7 +153,7 @@ end
 
 Then /^(?:|I )should see "([^\"]*)" within "([^\"]*)"$/ do |text, selector|
   within(selector) do |content|
-    if defined?(Spec::Rails::Matchers)
+    if defined?(Spec::Matchers) || defined?(Spec::Rails::Matchers)
       content.should contain(text)
     else
       assert content.include?(text)
@@ -163,7 +163,7 @@ end
 
 Then /^(?:|I )should see \/([^\/]*)\/$/ do |regexp|
   regexp = Regexp.new(regexp)
-  if defined?(Spec::Rails::Matchers)
+  if defined?(Spec::Matchers) || defined?(Spec::Rails::Matchers)
     response.should contain(regexp)
   else
     assert_contain regexp
@@ -173,7 +173,7 @@ end
 Then /^(?:|I )should see \/([^\/]*)\/ within "([^\"]*)"$/ do |regexp, selector|
   within(selector) do |content|
     regexp = Regexp.new(regexp)
-    if defined?(Spec::Rails::Matchers)
+    if defined?(Spec::Matchers) || defined?(Spec::Rails::Matchers)
       content.should contain(regexp)
     else
       assert content =~ regexp
@@ -182,7 +182,7 @@ Then /^(?:|I )should see \/([^\/]*)\/ within "([^\"]*)"$/ do |regexp, selector|
 end
 
 Then /^(?:|I )should not see "([^\"]*)"$/ do |text|
-  if defined?(Spec::Rails::Matchers)
+  if defined?(Spec::Matchers) || defined?(Spec::Rails::Matchers)
     response.should_not contain(text)
   else
     assert_not_contain text
@@ -191,7 +191,7 @@ end
 
 Then /^(?:|I )should not see "([^\"]*)" within "([^\"]*)"$/ do |text, selector|
   within(selector) do |content|
-    if defined?(Spec::Rails::Matchers)
+    if defined?(Spec::Matchers) || defined?(Spec::Rails::Matchers)
         content.should_not contain(text)
     else
         assert !content.include?(text)
@@ -201,8 +201,9 @@ end
 
 Then /^(?:|I )should not see \/([^\/]*)\/$/ do |regexp|
   regexp = Regexp.new(regexp)
-  if defined?(Spec::Rails::Matchers)
-    response.should_not contain(regexp)
+  if defined?(Spec::Matchers) || defined?(Spec::Rails::Matchers)
+    resp = response || response_body
+    resp.should_not contain(regexp)
   else
     assert_not_contain regexp
   end
@@ -211,7 +212,7 @@ end
 Then /^(?:|I )should not see \/([^\/]*)\/ within "([^\"]*)"$/ do |regexp, selector|
   within(selector) do |content|
     regexp = Regexp.new(regexp)
-    if defined?(Spec::Rails::Matchers)
+    if defined?(Spec::Matchers) || defined?(Spec::Rails::Matchers)
       content.should_not contain(regexp)
     else
       assert content !~ regexp
@@ -220,7 +221,7 @@ Then /^(?:|I )should not see \/([^\/]*)\/ within "([^\"]*)"$/ do |regexp, select
 end
 
 Then /^the "([^\"]*)" field should contain "([^\"]*)"$/ do |field, value|
-  if defined?(Spec::Rails::Matchers)
+  if defined?(Spec::Matchers) || defined?(Spec::Rails::Matchers)
     field_labeled(field).value.should =~ /#{value}/
   else
     assert_match(/#{value}/, field_labeled(field).value)
@@ -228,7 +229,7 @@ Then /^the "([^\"]*)" field should contain "([^\"]*)"$/ do |field, value|
 end
 
 Then /^the "([^\"]*)" field should not contain "([^\"]*)"$/ do |field, value|
-  if defined?(Spec::Rails::Matchers)
+  if defined?(Spec::Matchers) || defined?(Spec::Rails::Matchers)
     field_labeled(field).value.should_not =~ /#{value}/
   else
     assert_no_match(/#{value}/, field_labeled(field).value)
@@ -236,7 +237,7 @@ Then /^the "([^\"]*)" field should not contain "([^\"]*)"$/ do |field, value|
 end
 
 Then /^the "([^\"]*)" checkbox should be checked$/ do |label|
-  if defined?(Spec::Rails::Matchers)
+  if defined?(Spec::Matchers) || defined?(Spec::Rails::Matchers)
     field_labeled(label).should be_checked
   else
     assert field_labeled(label).checked?
@@ -244,7 +245,7 @@ Then /^the "([^\"]*)" checkbox should be checked$/ do |label|
 end
 
 Then /^the "([^\"]*)" checkbox should not be checked$/ do |label|
-  if defined?(Spec::Rails::Matchers)
+  if defined?(Spec::Matchers) || defined?(Spec::Rails::Matchers)
     field_labeled(label).should_not be_checked
   else
     assert !field_labeled(label).checked?

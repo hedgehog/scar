@@ -13,6 +13,13 @@ module NavigationHelpers
     when /Sun's Cloud API Home page/
       @url_root = "http://kenai.com/projects/suncloudapis/pages"
       @url="#{@url_root}/Home"
+    when /nanoc's localhost Home page/
+      @url_root = "http://localhost:3000"
+      @url="#{@url_root}/index.html"
+    when /\//
+      @url="#{@url_root}/"
+    when /Spec Home/
+      @url="#{@url_root}/spec_home/"
     when /Home/
       @url="#{@url_root}/Home"
     when /Common Behaviors/

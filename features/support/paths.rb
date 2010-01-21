@@ -22,6 +22,8 @@ module NavigationHelpers
       @url="#{@url_root}/spec_home/"
     when /Home/
       @url="#{@url_root}/Home"
+    when /Common Behavior/
+      @url="#{@url_root}/spec_common"
     when /Common Behaviors/
       @url="#{@url_root}/CommonBehaviors"
     when /Resource Models/

@@ -19,7 +19,7 @@ Feature: Sun Cloud API Reference
   Examples:
   | link_text                             | page_name                  |
   | Spec Home                             | Spec Home                  |
-  | Common Behaviors                      | Common Behaviors           |
+  | Common Behavior                       | Common Behavior            |
   | Resource Models                       | Resource Models            |
   | Requests to Backup Resources          | requests/Backup            |
   | Requests to Cloud Resources           | requests/Cloud             |

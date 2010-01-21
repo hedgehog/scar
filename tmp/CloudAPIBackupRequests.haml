@@ -1,0 +1,715 @@
+!!!
+%html{ :xmlns => "http://www.w3.org/1999/xhtml" }
+  %head
+    %meta{ :content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type" }
+    %title
+      The APIs for the Sun Cloud: Wiki: CloudAPIBackupRequests &mdash; Project Kenai
+    %link{ :href => "http://asset-2.kenai.com/stylesheets/base_packaged.css?20091211.aae2446", :rel => "stylesheet", :media => "screen", :type => "text/css" }
+    /
+      [if IE 7]>
+      <link href="http://asset-3.kenai.com/stylesheets/ie7_packaged.css?20091211.aae2446" media="screen" rel="stylesheet" type="text/css" />    <![endif]
+    /
+      [if IE 6]>
+      <link href="http://asset-0.kenai.com/stylesheets/iex60.css?20091211.aae2446" media="screen" rel="stylesheet" type="text/css" />    <![endif]
+    %link{ :href => "http://asset-1.kenai.com/stylesheets/print_packaged.css?20091211.aae2446", :rel => "stylesheet", :media => "print", :type => "text/css" }
+    %script{ :src => "http://asset-3.kenai.com/javascripts/head_packaged.js?20091211.aae2446", :type => "text/javascript" }
+    %script{ :type => "text/javascript" }
+      \//
+      :cdata
+        var page={"token":"c0f12dbaaf88f2e23c35bebc1636f0090cff8f66"};
+        \//
+    %script{ :type => "text/javascript", :charset => "utf-8" }
+      function debug(m){}
+    %link{ :href => "http://kenai.com/projects/suncloudapis/pages.atom", :title => "The APIs for the Sun Cloud Wiki Updates (Atom)", :rel => "alternate", :type => "application/atom+xml" }
+    %link{ :href => "http://kenai.com/projects/suncloudapis/pages/CloudAPIBackupRequests/revisions.atom", :title => "The APIs for the Sun Cloud CloudAPIBackupRequests Page Updates (Atom)", :rel => "alternate", :type => "application/atom+xml" }
+    %link{ :href => "http://asset-3.kenai.com/stylesheets/wiki_packaged.css?20091211.aae2446", :rel => "stylesheet", :media => "screen", :type => "text/css" }
+    %link{ :href => "http://asset-1.kenai.com/stylesheets/syntax/shCore.css?20091211.aae2446", :rel => "stylesheet", :media => "screen", :type => "text/css" }
+    %link{ :href => "http://asset-0.kenai.com/stylesheets/syntax/shThemeDefault.css?20091211.aae2446", :rel => "stylesheet", :media => "screen", :type => "text/css" }
+  %body#bg
+    %div{ :align => "center" }
+      #container
+        #headCurves
+        #masthead
+          .topLeft
+          .topRight
+          .contentmast
+            #logo{ :onclick => "document.location='/?clear=1'" }
+            .controls
+              .links
+                %a{ :href => "/people/login?original_uri=%2Fprojects%2Fsuncloudapis%2Fpages%2FCloudAPIBackupRequests", :rel => "nofollow" }
+                  Login
+                %span.separator
+                  |
+                %a{ :href => "/people/signup" }
+                  Join Now
+                %span.separator
+                  |
+                %a{ :href => "/projects/help/pages/Wikis", :target => "_blank" }
+                  Help
+              %form
+                %input#live-search{ :type => "text", :value => "Jump to...", :autocomplete => "off" }
+          .bottomLeft
+          .bottomRight
+        #breadcrumbs
+          %a{ :href => "/" }
+            kenai.com
+          %span
+            >
+          %a{ :href => "/projects" }
+            projects
+          %span
+            \&gt;
+          %a{ :href => "/projects/suncloudapis" }
+            suncloudapis
+          %span
+            \&gt;
+          %a{ :href => "/projects/suncloudapis/pages/Home" }
+            wiki
+          %span
+            >
+          %a.current{ :href => "/projects/suncloudapis/pages/CloudAPIBackupRequests" }
+            CloudAPIBackupRequests
+        #main
+          #printSideColumn
+            #sideColumn{ :style => "display:block" }
+              #hAccordion.hAccordion.home
+                %a#hTab_0{ :href => "/forums", :title => "Forums" }
+                %a#hTab_1{ :href => "/people", :title => "People" }
+                %a#hTab_2{ :href => "/projects", :title => "Projects" }
+                %a#hTab_3{ :href => "/mypage", :title => "My Page" }
+                %a#hTab_4{ :href => "/", :title => "Home" }
+              #nav2
+                .vAccordion
+                  %button#sidebar_project_features.tab
+                    .title
+                      Project Features
+                    .expCol
+                      \-
+                  .bucket{ :style => "" }
+                    %ul
+                      %li
+                        %strong
+                          Wiki
+                      %li
+                        %a{ :href => "/projects/suncloudapis/pages/Home" }
+                          \&raquo; Wiki
+                      %li
+                        %strong
+                          %a{ :href => "/projects/suncloudapis/forums" }
+                            Message Forum
+                      %li
+                        %a{ :href => "/projects/suncloudapis/forums/forum" }
+                          \&raquo; General Discussion
+                      %li
+                        %strong
+                          Downloads
+                      %li
+                        %a{ :href => "/projects/suncloudapis/downloads" }
+                          \&raquo; Downloads
+                      %li
+                        %strong
+                          %a{ :href => "/projects/suncloudapis/lists" }
+                            Mailing List
+                      %li
+                        %a{ :href => "/projects/suncloudapis/lists/extended-discussion/archive" }
+                          \&raquo; Extended Discussion
+                .vAccordion
+                  %button#sidebar_wiki_controls.tab
+                    .title
+                      Wiki Controls
+                    .expCol
+                      \-
+                  .bucket{ :style => "" }
+                    %ul
+                      %li
+                        \&raquo; Show Page
+                      %li
+                        %a{ :href => "/projects/suncloudapis/pages/CloudAPIBackupRequests/edit" }
+                          \&raquo; Edit Page
+                      %li
+                        %a{ :href => "/projects/suncloudapis/pages/CloudAPIBackupRequests/text" }
+                          \&raquo; Show Page as Text
+                      %li
+                        %a{ :href => "/projects/suncloudapis/pages/CloudAPIBackupRequests/revisions" }
+                          \&raquo; Show Page Revision History
+                    /
+                      Jump to page
+                    .vAccLabel{ :align => "left" }
+                      %label.vAccTextLabel{ :for => "jumpToPage" }
+                        Jump&nbsp;to&nbsp;Page:
+                    .vAccForm{ :align => "left" }
+                      %select.vAccPullDown{ :name => "jumpToPage", :onchange => "window.location='/projects/suncloudapis/pages'+'/' +this.value", :style => "width:150px;" }
+                        %option{ :value => "CLIExample1" }
+                          CLIExample1
+                        %option{ :selected => "selected", :value => "CloudAPIBackupRequests" }
+                          CloudAPIBackupRequests
+                        %option{ :value => "CloudAPICloudRequests" }
+                          CloudAPICloudRequests
+                        %option{ :value => "CloudAPIClusterRequests" }
+                          CloudAPIClusterRequests
+                        %option{ :value => "CloudAPIPublicAddressRequests" }
+                          CloudAPIPublicAddressRequests
+                        %option{ :value => "CloudAPISnapshotRequests" }
+                          CloudAPISnapshotRequests
+                        %option{ :value => "CloudAPISpecificationResourceModels" }
+                          CloudAPISpecificationResourceModels
+                        %option{ :value => "CloudAPIVDCRequests" }
+                          CloudAPIVDCRequests
+                        %option{ :value => "CloudAPIVMRequests" }
+                          CloudAPIVMRequests
+                        %option{ :value => "CloudAPIVNetRequests" }
+                          CloudAPIVNetRequests
+                        %option{ :value => "CloudAPIVolumeRequests" }
+                          CloudAPIVolumeRequests
+                        %option{ :value => "CloudCommandClient" }
+                          CloudCommandClient
+                        %option{ :value => "CommonBehaviors" }
+                          CommonBehaviors
+                        %option{ :value => "HelloCloud" }
+                          HelloCloud
+                        %option{ :value => "Home" }
+                          Home
+                    .clear
+                    %ul
+                      %li
+                        %a{ :href => "/projects/suncloudapis/pages" }
+                          \&raquo; List all Pages
+                      %li
+                        %a{ :href => "/projects/suncloudapis/wiki_images" }
+                          \&raquo; Manage Images
+                    .clear
+                    /
+                      Create new page
+                    %form#wiki_page_create{ :method => "GET", :action => "" }
+                      .vAccLabel{ :align => "left" }
+                        %label.vAccTextLabel{ :for => "newPage" }
+                          Create&nbsp;New&nbsp;Page:
+                      .vAccForm{ :align => "left" }
+                        #wiki_page_create_errors.vAccError
+                        %input#wiki_page_create_path{ :type => "hidden", :value => "/projects/suncloudapis/pages/_id_/edit" }
+                        %input#wiki_page_create_id.vAccTextField{ :name => "id", :maxlength => "128", :type => "text" }
+                        %button#wiki_page_create_submit.vAccGoButton{ :title => "go", :type => "submit" }
+                      .clear
+                .vAccordion
+                  %button#sidebar_project_about.tab
+                    .title
+                      About this Project
+                    .expCol
+                      \-
+                  .bucket{ :style => "" }
+                    %div{ :style => "text-align:left; margin:5px;" }
+                      %a{ :href => "/projects/suncloudapis" }
+                        The APIs for the Sun Cloud
+                      was started in
+                      February 2009, is owned by
+                      %a{ :href => "/people/2756-russcastronovo" }
+                        %span.person.-kenai-russcastronovo
+                          russcastronovo
+                      ,
+                      and has
+                      %a{ :href => "/projects/suncloudapis/members" }
+                        218 members
+                      \.
+                    %ul
+                      %li
+                        %a{ :href => "/projects/suncloudapis/watch" }
+                          \&raquo; Bookmark This Project
+            #sideColumnShow.side_nav{ :title => "hide side navigation" }
+          #pageContent.content
+            /
+              BEGIN CONTENT AREA
+            /
+              BEGIN CONTENT AREA
+            .contentPadding
+              .wikiMainHeader
+                .twoColumns
+                  .column
+                    %span
+                      Last updated
+                      %span.pretty-date{ :title => "2009-09-24 20:51:24 UTC" }
+                        September 24, 2009 20:51
+                      , by
+                    \&nbsp;
+                    %a{ :href => "/people/11-Craig-McClanahan" }
+                      Craig McClanahan
+                  .column{ :align => "right", :style => "float:right;width:10em;margin-right:50px;" }
+                    %span
+                      %a#social-bookmarks__.contextMenuAnchor{ :href => "#" }
+                        \&raquo;&nbsp;Share this
+                    #social-bookmarks___content{ :style => "display:none" }
+                      %div{ :style => "padding:3px;width:100px;" }
+                        %a.socialBookMarkItem{ :href => "http://del.icio.us/post?url=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FCloudAPIBackupRequests&title=The APIs for the Sun Cloud: Wiki: CloudAPIBackupRequests &amp;mdash; Project Kenai", :title => "del.icio.us" }
+                          %img{ :src => "http://asset-1.kenai.com/images/social_bookmarking/delicious.png?20091211.aae2446", :alt => "del.icio.us" }
+                        %a.socialBookMarkItem{ :href => "http://reddit.com/submit?url=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FCloudAPIBackupRequests&title=The APIs for the Sun Cloud: Wiki: CloudAPIBackupRequests &amp;mdash; Project Kenai", :title => "Reddit" }
+                          %img{ :src => "http://asset-0.kenai.com/images/social_bookmarking/reddit.png?20091211.aae2446", :alt => "Reddit" }
+                        %a.socialBookMarkItem{ :href => "http://digg.com/submit?url=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FCloudAPIBackupRequests&title=The APIs for the Sun Cloud: Wiki: CloudAPIBackupRequests &amp;mdash; Project Kenai&phase=2", :title => "Digg" }
+                          %img{ :src => "http://asset-3.kenai.com/images/social_bookmarking/digg.png?20091211.aae2446", :alt => "Digg" }
+                        %a.socialBookMarkItem{ :href => "http://www.newsvine.com/_tools/seed&save?u=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FCloudAPIBackupRequests&h=The APIs for the Sun Cloud: Wiki: CloudAPIBackupRequests &amp;mdash; Project Kenai", :title => "NewsVine" }
+                          %img{ :src => "http://asset-0.kenai.com/images/social_bookmarking/newsvine.png?20091211.aae2446", :alt => "NewsVine" }
+                        %a.socialBookMarkItem{ :href => "http://www.blinklist.com/index.php?url=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FCloudAPIBackupRequests&Title=The APIs for the Sun Cloud: Wiki: CloudAPIBackupRequests &amp;mdash; Project Kenai&Action=Blink/addblink.php", :title => "BlinkList" }
+                          %img{ :src => "http://asset-0.kenai.com/images/social_bookmarking/blinklist.png?20091211.aae2446", :alt => "BlinkList" }
+                        %a.socialBookMarkItem{ :href => "http://blogmarks.net/my/new.php?url=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FCloudAPIBackupRequests&title=The APIs for the Sun Cloud: Wiki: CloudAPIBackupRequests &amp;mdash; Project Kenai&mini=1&simple=1", :title => "Blogmarks" }
+                          %img{ :src => "http://asset-1.kenai.com/images/social_bookmarking/blogmarks.png?20091211.aae2446", :alt => "Blogmarks" }
+                        %a.socialBookMarkItem{ :href => "http://co.mments.com/track?url=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FCloudAPIBackupRequests&title=The APIs for the Sun Cloud: Wiki: CloudAPIBackupRequests &amp;mdash; Project Kenai", :title => "co.mments" }
+                          %img{ :src => "http://asset-2.kenai.com/images/social_bookmarking/comments.png?20091211.aae2446", :alt => "co.mments" }
+                        %a.socialBookMarkItem{ :href => "http://www.furl.net/storeIt.jsp?t=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FCloudAPIBackupRequests&u=The APIs for the Sun Cloud: Wiki: CloudAPIBackupRequests &amp;mdash; Project Kenai", :title => "Furl" }
+                          %img{ :src => "http://asset-1.kenai.com/images/social_bookmarking/furl.png?20091211.aae2446", :alt => "Furl" }
+                        %a.socialBookMarkItem{ :href => "http://ma.gnolia.com/beta/bookmarklet/add?url=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FCloudAPIBackupRequests&title=The APIs for the Sun Cloud: Wiki: CloudAPIBackupRequests &amp;mdash; Project Kenai", :title => "Ma.gnolia" }
+                          %img{ :src => "http://asset-1.kenai.com/images/social_bookmarking/magnolia.png?20091211.aae2446", :alt => "Ma.gnolia" }
+                        %a.socialBookMarkItem{ :href => "http://www.netvouz.com/action/submitBookmark?url=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FCloudAPIBackupRequests&title=The APIs for the Sun Cloud: Wiki: CloudAPIBackupRequests &amp;mdash; Project Kenai", :title => "Netvouz" }
+                          %img{ :src => "http://asset-2.kenai.com/images/social_bookmarking/netvouz.png?20091211.aae2446", :alt => "Netvouz" }
+                        %a.socialBookMarkItem{ :href => "http://www.simpy.com/simpy/LinkAdd.do?href=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FCloudAPIBackupRequests&title=The APIs for the Sun Cloud: Wiki: CloudAPIBackupRequests &amp;mdash; Project Kenai", :title => "Simpy" }
+                          %img{ :src => "http://asset-1.kenai.com/images/social_bookmarking/simpy.png?20091211.aae2446", :alt => "Simpy" }
+                        %a.socialBookMarkItem{ :href => "http://bookmarks.yahoo.com/myresults/bookmarklet?u=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FCloudAPIBackupRequests", :title => "YahooMyWeb" }
+                          %img{ :src => "http://asset-1.kenai.com/images/social_bookmarking/yahoomyweb.png?20091211.aae2446", :alt => "YahooMyWeb" }
+                    \&nbsp;&nbsp;&nbsp;
+                .clear
+              .wikiMainBody
+                %p
+                %h1
+                  Cloud API Specification - Requests to Backup Resources
+                %p
+                  The requests documented in this section are directed to
+                  %i
+                    Backup
+                  resources, which represent backup snapshots of virtual machines.
+                #toc.toc
+                  #toctitle.toc-title
+                    %span
+                      Contents
+                  #toccontents.toc-contents
+                    %ul
+                      %li
+                        1
+                        %a{ :href => "#Get_Backup" }
+                          Get Backup
+                      %li
+                        2
+                        %a{ :href => "#Update_Backup_Properties" }
+                          Update Backup Properties
+                      %li
+                        3
+                        %a{ :href => "#Delete_Backup" }
+                          Delete Backup
+                      %li
+                        4
+                        %a{ :href => "#Restore_VM_From_Backup" }
+                          Restore VM From Backup
+                %p
+                  %br
+                %h1
+                  %a{ :name => "Get_Backup" }
+                  Get Backup
+                %p
+                  Retrieve information about a specific Backup of a specific VM.
+                %p
+                  %b
+                    Synopsis:
+                  GET {URI of Backup}
+                %p
+                  %b
+                    Request Headers:
+                  Accept, Authorization, X-Cloud-Client-Specification-Version.
+                %p
+                  %b
+                    Request Message Body:
+                  N/A.
+                %p
+                  %b
+                    Response Headers:
+                  Content-Length, Content-Type.
+                %p
+                  %b
+                    Response Message Body:
+                  VM.
+                %p
+                  %b
+                    Response Status:
+                  200, 400, 401, 403, 404.
+                %p
+                  %b
+                    Example Request:
+                  Retrieve information about a VM instance &quot;web01&quot;.
+                %pre
+                  GET /vms/33333/backups/456
+                  Host: example.com
+                  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+                  Accept: application/vnd.com.sun.cloud.Backup+json
+                  X-Cloud-Client-Specification-Version: 0.1
+                %p
+                  %b
+                    Example Response:
+                %pre
+                  HTTP/1.1 200 OK
+                  Content-Type: application/vnd.com.sun.cloud.Backup+json
+                  Content-Length: nnn
+                  
+                  {
+                  \&quot;name&quot; : &quot;web01_YYYYMMDD&quot;,
+                  \&quot;uri&quot; : &quot;
+                  %a.external{ :href => "http://example.com/vms/33333/backups/456" }
+                    http://example.com/vms/33333/backups/456
+                  \&quot;,
+                  \&quot;restore&quot; : &quot;
+                  %a.external{ :href => "http://example.com/vms/33333/backups/456/restore" }
+                    http://example.com/vms/33333/backups/456/restore
+                  \&quot;,
+                  \...
+                  }
+                %h1
+                  %a{ :name => "Update_Backup_Properties" }
+                  Update Backup Properties
+                %p
+                  Update an existing backup definition.
+                %p
+                  %b
+                    Synopsis:
+                  PUT { URI of Backup }
+                %p
+                  %b
+                    Request Headers:
+                  Accept, Authorization, Content-Length, Content-Type, X-Cloud-Client-Specification-Version.
+                %p
+                  %b
+                    Request Parameters:
+                  N/A.
+                %p
+                  %b
+                    Request Message Body:
+                  Backup.
+                %p
+                  %b
+                    Response Headers:
+                  Content-Length, Content-Type.
+                %p
+                  %b
+                    Response Message Body:
+                  Status for use in tracking update progress.
+                %p
+                  %b
+                    Response Status:
+                  202, 400, 401, 403, 404.
+                %p
+                  %b
+                    Status &quot;op&quot; Value:
+                  \&quot;update-Backup&quot;.
+                %p
+                  %b
+                    Status &quot;target_uri&quot; identifies:
+                  The Backup receiving the PUT.
+                %p
+                  %b
+                    Example Request:
+                  Update an existing Backup by modifying the associated tags.
+                %pre
+                  PUT /vms/33333/backups/456
+                  Host: example.com
+                  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+                  Accept: application/vnd.com.sun.cloud.Backup+json
+                  Content-Length: nnn
+                  Content-Type: application/vnd.com.sun.Backup.VM+json
+                  X-Cloud-Client-Specification-Version: 0.1
+                  
+                  {
+                  \&quot;tags&quot; : [ &quot;foo&quot;, &quot;bar&quot; ]
+                  }
+                %p
+                  %b
+                    Example Response:
+                %pre
+                  HTTP/1.1 202 Accepted
+                  Content-Type: application/vnd.com.sun.cloud.Status+json
+                  Content-Length: nnn
+                  
+                  {
+                  \&quot;op&quot;: &quot;update-Backup&quot;,
+                  \&quot;progress&quot;: 100,
+                  \&quot;target_uri&quot;: &quot;/vms/33333/backups/456&quot;,
+                  \&quot;status_uri&quot;: &quot;/statuses?op=update-backup&amp;seq=912874502&quot;,
+                  \&quot;status&quot; : 200
+                  }
+                %h1
+                  %a{ :name => "Delete_Backup" }
+                  Delete Backup
+                %p
+                  Delete an existing virtual machine snapshot backup.
+                %p
+                  %b
+                    Synopsis:
+                  DELETE { URI of Backup }
+                %p
+                  %b
+                    Request Headers:
+                  Authorization, X-Compute-Client-Specification-Version.
+                %p
+                  %b
+                    Request Parameters:
+                  N/A.
+                %p
+                  %b
+                    Request Message Body:
+                  N/A.
+                %p
+                  %b
+                    Response Headers:
+                  Content-Length, Content-Type.
+                %p
+                  %b
+                    Response Message Body:
+                  Status for use in tracking deletion progress.
+                %p
+                  %b
+                    Response Status:
+                  202, 400, 401, 403, 404.
+                %p
+                  %b
+                    Status &quot;op&quot; Value:
+                  \&quot;delete-Backup&quot;.
+                %p
+                  %b
+                    Status &quot;target_uri&quot; identifies:
+                  The Backup being deleted.
+                %p
+                  %b
+                    Example Request:
+                  Delete an existing Backup resource.
+                %pre
+                  DELETE /vms/333333/backups/456
+                  Host: example.com
+                  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+                  X-Compute-Client-Specification-Version: 0.1
+                %p
+                  %b
+                    Example Response:
+                %pre
+                  HTTP/1.1 202 Accepted
+                  Content-Type: application/vnd.com.sun.cloud.Status+json
+                  Content-Length: nnn
+                  
+                  {
+                  \&quot;op&quot;: &quot;delete-Backup&quot;,
+                  \&quot;progress&quot;: 0,
+                  \&quot;target_uri&quot;: &quot;/vms/333333/backups/456&quot;,
+                  \&quot;status_uri&quot;: &quot;/statuses?op=delete-Backup&amp;backup=456&quot;
+                  }
+                %h1
+                  %a{ :name => "Restore_VM_From_Backup" }
+                  Restore VM From Backup
+                %p
+                  Restore the state of the associated
+                  %i
+                    VM
+                  from the saved state in this
+                  %i
+                    Backup
+                  \.
+                %p
+                  By convention, the name/value pairs included in the request may contain a field named
+                  %i
+                    note
+                  whose value is a text string intended for recording in a log on the server, to help identify this request during log file analysis.
+                %p
+                  %b
+                    Synopsis:
+                  POST {Restore URI provided in Backup representation}
+                %p
+                  %b
+                    Request Headers:
+                  Accept, Authorization, Content-Length, Content-Type, X-Cloud-Client-Specification-Version.
+                %p
+                  %b
+                    Request Parameters:
+                  N/A.
+                %p
+                  %b
+                    Request Message Body:
+                  Name/value pairs, with media type &quot;application/json&quot;.
+                %p
+                  %b
+                    Response Headers:
+                  Content-Length, Content-Type.
+                %p
+                  %b
+                    Response Message Body:
+                  Status for use in tracking request progress.
+                %p
+                  %b
+                    Response Status:
+                  202, 400, 401, 403, 404.
+                %p
+                  %b
+                    Status &quot;op&quot; Value:
+                  \&quot;restore-Backup&quot;
+                %p
+                  %b
+                    Status &quot;target_uri&quot; identifies:
+                  The Backup being restored.
+                %p
+                  %b
+                    Example Request:
+                  Restore associated VM from this Backup.
+                %pre
+                  POST /vms/33333/backups/456/restore
+                  Host: example.com
+                  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+                  Content-Length: nnn
+                  Content-Type: application/json
+                  X-Compute-Client-Specification-Version: 0.1
+                  
+                  {
+                  \&quot;note&quot; : &quot;Restore to known state&quot;
+                  }
+                %p
+                  %b
+                    Example Response:
+                %pre
+                  HTTP/1.1 202 Accepted
+                  Content-Type: application/vnd.com.sun.cloud.Status+json
+                  Content-Length: nnn
+                  
+                  {
+                  \&quot;op&quot;: &quot;restore-Backup&quot;,
+                  \&quot;progress&quot;: 0,
+                  \&quot;target_uri&quot;: &quot;/vms/33333/backups/456&quot;,
+                  \&quot;status_uri&quot;: &quot;/statuses?op=restore-Backup&amp;vm=33333&amp;b=456&quot;
+                  }
+                %p
+                  Copyright &copy; Sun Microsystems, 2009.  This work is licensed under
+                  %a.external{ :href => "http://creativecommons.org/licenses/by/3.0/" }
+                    Creative Commons Attribution 3.0 Unported License
+              .clear
+            /
+              END CONTENT AREA
+        #footer{ :style => "position:relative" }
+          %a{ :href => "/" }
+            Home
+          %span.separator
+            |
+          %a{ :href => "/mypage" }
+            My Page
+          %span.separator
+            |
+          %a{ :href => "/projects" }
+            Projects
+          %span.separator
+            |
+          %a{ :href => "/people" }
+            People
+          %span.separator
+            |
+          %a{ :href => "mailto:kenai-admin@sun.com" }
+            Contact Us
+          %span.separator
+            |
+          %a{ :href => "/people/signup" }
+            Join Now
+          %span.separator
+            |
+          %a{ :href => "/projects/help/pages/Home", :target => "_blank" }
+            Documentation
+        #footerCurves
+        %div{ :style => "padding-left:75px;" }
+          %ul.hList
+            %li
+              %a{ :href => "http://www.sun.com", :title => "Sun Microsystems" }
+                %img.reflect{ :src => "http://asset-3.kenai.com/images/sun.png?20091211.aae2446", :alt => "" }
+            %li
+              %a{ :href => "http://www.opensolaris.org", :title => "OpenSolaris" }
+                %img.reflect{ :src => "http://asset-3.kenai.com/images/opensolaris.png?20091211.aae2446", :alt => "" }
+            %li
+              %a{ :href => "http://www.mysql.org", :title => "MySQL" }
+                %img.reflect{ :src => "http://asset-3.kenai.com/images/mysql.png?20091211.aae2446", :alt => "Mysql" }
+            %li
+              %a{ :href => "https://glassfish.dev.java.net", :title => "GlassFish" }
+                %img.reflect{ :src => "http://asset-1.kenai.com/images/glassfish.png?20091211.aae2446", :alt => "Glassfish" }
+            %li
+              %a{ :href => "http://www.jruby.org", :title => "JRuby" }
+                %img.reflect{ :src => "http://asset-0.kenai.com/images/jruby.png?20091211.aae2446", :alt => "Jruby" }
+            %li
+              %a{ :href => "http://www.rubyonrails.org", :title => "Rails" }
+                %img.reflect{ :src => "http://asset-3.kenai.com/images/rails.png?20091211.aae2446", :alt => "Rails" }
+            %li
+              %a{ :href => "http://www.netbeans.org", :title => "Netbeans" }
+                %img.reflect{ :src => "http://asset-3.kenai.com/images/nblogo.png?20091211.aae2446", :alt => "Nblogo" }
+        %small.finePrint
+          %a.largeOverlayLink{ :href => "/terms_of_use", :title => "Terms of Use" }
+            Terms of Use
+          ;
+          %a{ :href => "http://www.sun.com/privacy/index.html" }
+            Privacy Policy
+          ;
+          Copyright &copy;2008-2010 (
+          %a{ :href => "/projects/help/pages/ReleaseNotes" }
+            revision 20091211.aae2446
+          )
+    /
+      popups that are anchored to specific elements
+    #contextMenuShadow.popupMenuShadow
+    #contextMenu.popupMenuContainer
+      .popupMenu.inline
+        .upArrow
+        .header
+        #contextMenuBody.contextMenuBody
+          \&nbsp;
+    /
+      large content loaded via ajax. Faded but not modal.
+    #jqm_large_overlay.jqmWindow
+      .jqmHeader
+        .jqmTitle
+          \&nbsp;
+        %img.jqmClose{ :src => "/images/close.gif" }
+      .jqmTarget
+        %img{ :src => "/images/activity.gif", :alt => "loading" }
+      .jqmFooter
+        .jqmClose.functionButtonContainer
+          %button.functionButton{ :title => "Done" }
+            Done
+    /
+      confirmation dialogs with buttons. Faded and modal.
+    #jqm_dialog.jqmWindow
+      .jqmHeader
+        .jqmTitle
+          Please Confirm
+        %img.jqmClose{ :src => "/images/close.gif" }
+      .jqmTarget
+        \&nbsp;
+      .jqmFooter
+        .jqmClose.functionButtonContainer
+          %button#jq_no_button.functionButton{ :title => "No", :onclick => "Modal.no()" }
+            No
+        .jqmClose.functionButtonContainer
+          %button#jq_yes_button.functionButton{ :title => "Yes", :onclick => "Modal.yes();" }
+            Yes
+    #jq-ui-autocomplete-parent
+    %script{ :src => "http://asset-2.kenai.com/javascripts/s_code_remote_packaged.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-2.kenai.com/javascripts/body_packaged.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-2.kenai.com/javascripts/syntax/scripts/shCore.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-3.kenai.com/javascripts/syntax/scripts/shLegacy.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-3.kenai.com/javascripts/syntax/scripts/shBrushAS3.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-2.kenai.com/javascripts/syntax/scripts/shBrushBash.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-0.kenai.com/javascripts/syntax/scripts/shBrushCpp.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-0.kenai.com/javascripts/syntax/scripts/shBrushCSharp.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-2.kenai.com/javascripts/syntax/scripts/shBrushCss.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-2.kenai.com/javascripts/syntax/scripts/shBrushDelphi.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-1.kenai.com/javascripts/syntax/scripts/shBrushDiff.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-3.kenai.com/javascripts/syntax/scripts/shBrushGroovy.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-1.kenai.com/javascripts/syntax/scripts/shBrushJava.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-0.kenai.com/javascripts/syntax/scripts/shBrushJavaFX.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-0.kenai.com/javascripts/syntax/scripts/shBrushJScript.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-3.kenai.com/javascripts/syntax/scripts/shBrushPerl.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-1.kenai.com/javascripts/syntax/scripts/shBrushPhp.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-1.kenai.com/javascripts/syntax/scripts/shBrushPlain.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-0.kenai.com/javascripts/syntax/scripts/shBrushPowerShell.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-2.kenai.com/javascripts/syntax/scripts/shBrushPython.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-3.kenai.com/javascripts/syntax/scripts/shBrushRuby.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-1.kenai.com/javascripts/syntax/scripts/shBrushScala.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-1.kenai.com/javascripts/syntax/scripts/shBrushSql.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-0.kenai.com/javascripts/syntax/scripts/shBrushVb.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-2.kenai.com/javascripts/syntax/scripts/shBrushXml.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :language => "JavaScript" }
+    $(document).ready(function(){
+    initWikiPageToc();
+    initWikiPagePreformattedBlocks();
+    initWikiPageSyntaxHighlight();
+    initWikiAccordionPageCreate();
+    });

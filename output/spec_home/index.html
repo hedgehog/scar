@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>Scar (Sun's cloud API reference) Project</title>
+    Sun Cloud API Home
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+      <link href='/stylesheet.css' media='screen' rel='stylesheet' type='text/css' />
+      <link href='/coderay.css' media='screen' rel='stylesheet' type='text/css' />
+    </meta>
+  </head>
+  <body>
+    <div id='main'>
+      <h3>
+        Introduction
+      </h3>
+      <p>
+        This wiki specifies a RESTful API for creating and managing cloud resources, including compute, storage, and networking components.
+      </p>
+      <p>
+        Usage of the API is via the HTTP protocol.  The GET, POST, PUT, and DELETE requests are all used, although most tasks can be accomplished with GET and POST.  Resource representations are in JSON.
+      </p>
+      <p>
+        The API presupposes no particular structure in the URI space.  The starting point is a URI, supplied by the cloud service provider, which identifies the cloud itself.  The cloud's representation contains URIs for the other resources in the cloud, and also for operations which may be performed upon them (for example deploying and starting virtual machines).
+      </p>
+      <p>
+        The specification of the Sun Cloud API includes:
+      </p>
+      <ul>
+        <li>
+          Common behaviors that apply across all requests and responses.
+        </li>
+        <li>
+          Resource models, which describe the JSON data structures used in requests and responses.
+        </li>
+        <li>
+          The requests that may be sent to cloud resources, and the responses expected.
+        </li>
+      </ul>
+      <p>
+        This API operates on the following primary resource types:
+      </p>
+      <ul>
+        <li>
+          Cloud: A top-level construct which groups all the Virtual Data Centers to which an API user has access.
+        </li>
+        <li>
+          Virtual Data Center (VDC): An isolated container which is populated with Clusters, Private Virtual Networks, Public Addresses, Storage Volumes, Volume Snapshots.
+        </li>
+        <li>
+          Cluster: An administrative grouping of Virtual Machines, useful for access control, copying or cloning, geographic isolation, and scripting automation.
+        </li>
+        <li>
+          Virtual Machine (VM): A server.
+        </li>
+        <li>
+          Private Virtual Network (VNet): A subnet, not connected to the Internet, which may be used to connect Virtual Machines within a VDC.
+        </li>
+        <li>
+          Public Address: A connection to the Internet.
+        </li>
+        <li>
+          Storage Volume: A storage resource which may be accessed via WebDAV and other storage protocols.
+        </li>
+        <li>
+          Volume Snapshot: A snapshot of the state of a Storage Volume.
+        </li>
+      </ul>
+      <p>
+        The API additionally operates on secondary resources such as VM Backups and Network Interfaces.
+      </p>
+      <p>
+        <a class='internal' href='/projects/suncloudapis/pages/HelloCloud'>
+          &quot;Hello, Cloud&quot;: An illustrative walk-through of the Sun Cloud API
+        </a>
+        is designed to serve as the starting-point for learning this API.
+      </p>
+    </div>
+    <div id='sidebar'>
+      <ul>
+        <li>
+          <a href='/'>
+            <strong>Scar Home</strong>
+          </a>
+        </li>
+      </ul>
+      <h2>
+        Specifications
+      </h2>
+      <ul>
+        <li>
+          <a href='/spec_home/'>
+            Spec Home
+          </a>
+        </li>
+        <li>
+          <a href='/spec_common/'>
+            Common Behavior
+          </a>
+        </li>
+        <li>
+          <a href='/spec_resources/'>
+            Resources
+          </a>
+        </li>
+        <li>
+          <strong>Requests to ...</strong>
+          <li>
+            <a href='/'>
+              <strong>Backup</strong>
+            </a>
+          </li>
+        </li>
+      </ul>
+      <h2>
+        Community
+      </h2>
+      <ul>
+        <li>
+          <a href='http://wiki.github.com/hedgehog/scar/'>
+            Scar wiki
+          </a>
+        </li>
+        <li>
+          <a href='http://github.com/hedgehog/scar/network'>
+            Scar network
+          </a>
+        </li>
+        <li>
+          <a href='http://github.com/hedgehog/scar/issues'>
+            Scar issues
+          </a>
+        </li>
+        <li>
+          <a href='http://kenai.com/projects/suncloudapis/pages/Home'>
+            Kenai wiki
+          </a>
+        </li>
+        <li>
+          <a href='http://kenai.com/projects/suncloudapis/forums/forum'>
+            Kenai forum
+          </a>
+        </li>
+        <li>
+          <a href='http://kenai.com/projects/suncloudapis/lists/extended-discussion/archive'>
+            Kenai maillist archive
+          </a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

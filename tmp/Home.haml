@@ -1,0 +1,501 @@
+!!!
+%html{ :xmlns => "http://www.w3.org/1999/xhtml" }
+  %head
+    %meta{ :content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type" }
+    %title
+      The APIs for the Sun Cloud: Wiki: Home &mdash; Project Kenai
+    %link{ :href => "http://asset-2.kenai.com/stylesheets/base_packaged.css?20091211.aae2446", :rel => "stylesheet", :media => "screen", :type => "text/css" }
+    /
+      [if IE 7]>
+      <link href="http://asset-3.kenai.com/stylesheets/ie7_packaged.css?20091211.aae2446" media="screen" rel="stylesheet" type="text/css" />    <![endif]
+    /
+      [if IE 6]>
+      <link href="http://asset-0.kenai.com/stylesheets/iex60.css?20091211.aae2446" media="screen" rel="stylesheet" type="text/css" />    <![endif]
+    %link{ :href => "http://asset-1.kenai.com/stylesheets/print_packaged.css?20091211.aae2446", :rel => "stylesheet", :media => "print", :type => "text/css" }
+    %script{ :src => "http://asset-3.kenai.com/javascripts/head_packaged.js?20091211.aae2446", :type => "text/javascript" }
+    %script{ :type => "text/javascript" }
+      \//
+      :cdata
+        var page={"token":"4b6aa49565fe212161521369b80aff4cacf6154f"};
+        \//
+    %script{ :type => "text/javascript", :charset => "utf-8" }
+      function debug(m){}
+    %link{ :href => "http://kenai.com/projects/suncloudapis/pages.atom", :title => "The APIs for the Sun Cloud Wiki Updates (Atom)", :rel => "alternate", :type => "application/atom+xml" }
+    %link{ :href => "http://kenai.com/projects/suncloudapis/pages/Home/revisions.atom", :title => "The APIs for the Sun Cloud Home Page Updates (Atom)", :rel => "alternate", :type => "application/atom+xml" }
+    %link{ :href => "http://asset-3.kenai.com/stylesheets/wiki_packaged.css?20091211.aae2446", :rel => "stylesheet", :media => "screen", :type => "text/css" }
+    %link{ :href => "http://asset-1.kenai.com/stylesheets/syntax/shCore.css?20091211.aae2446", :rel => "stylesheet", :media => "screen", :type => "text/css" }
+    %link{ :href => "http://asset-0.kenai.com/stylesheets/syntax/shThemeDefault.css?20091211.aae2446", :rel => "stylesheet", :media => "screen", :type => "text/css" }
+  %body#bg
+    %div{ :align => "center" }
+      #container
+        #headCurves
+        #masthead
+          .topLeft
+          .topRight
+          .contentmast
+            #logo{ :onclick => "document.location='/?clear=1'" }
+            .controls
+              .links
+                %a{ :href => "/people/login?original_uri=%2Fprojects%2Fsuncloudapis%2Fpages%2FHome", :rel => "nofollow" }
+                  Login
+                %span.separator
+                  |
+                %a{ :href => "/people/signup" }
+                  Join Now
+                %span.separator
+                  |
+                %a{ :href => "/projects/help/pages/Wikis", :target => "_blank" }
+                  Help
+              %form
+                %input#live-search{ :type => "text", :value => "Jump to...", :autocomplete => "off" }
+          .bottomLeft
+          .bottomRight
+        #breadcrumbs
+          %a{ :href => "/" }
+            kenai.com
+          %span
+            >
+          %a{ :href => "/projects" }
+            projects
+          %span
+            \&gt;
+          %a{ :href => "/projects/suncloudapis" }
+            suncloudapis
+          %span
+            \&gt;
+          %a{ :href => "/projects/suncloudapis/pages/Home" }
+            wiki
+          %span
+            >
+          %a.current{ :href => "/projects/suncloudapis/pages/Home" }
+            Home
+        #main
+          #printSideColumn
+            #sideColumn{ :style => "display:block" }
+              #hAccordion.hAccordion.home
+                %a#hTab_0{ :href => "/forums", :title => "Forums" }
+                %a#hTab_1{ :href => "/people", :title => "People" }
+                %a#hTab_2{ :href => "/projects", :title => "Projects" }
+                %a#hTab_3{ :href => "/mypage", :title => "My Page" }
+                %a#hTab_4{ :href => "/", :title => "Home" }
+              #nav2
+                .vAccordion
+                  %button#sidebar_project_features.tab
+                    .title
+                      Project Features
+                    .expCol
+                      \-
+                  .bucket{ :style => "" }
+                    %ul
+                      %li
+                        %strong
+                          Wiki
+                      %li
+                        %a{ :href => "/projects/suncloudapis/pages/Home" }
+                          \&raquo; Wiki
+                      %li
+                        %strong
+                          %a{ :href => "/projects/suncloudapis/forums" }
+                            Message Forum
+                      %li
+                        %a{ :href => "/projects/suncloudapis/forums/forum" }
+                          \&raquo; General Discussion
+                      %li
+                        %strong
+                          Downloads
+                      %li
+                        %a{ :href => "/projects/suncloudapis/downloads" }
+                          \&raquo; Downloads
+                      %li
+                        %strong
+                          %a{ :href => "/projects/suncloudapis/lists" }
+                            Mailing List
+                      %li
+                        %a{ :href => "/projects/suncloudapis/lists/extended-discussion/archive" }
+                          \&raquo; Extended Discussion
+                .vAccordion
+                  %button#sidebar_wiki_controls.tab
+                    .title
+                      Wiki Controls
+                    .expCol
+                      \-
+                  .bucket{ :style => "" }
+                    %ul
+                      %li
+                        \&raquo; Show Page
+                      %li
+                        %a{ :href => "/projects/suncloudapis/pages/Home/edit" }
+                          \&raquo; Edit Page
+                      %li
+                        %a{ :href => "/projects/suncloudapis/pages/Home/text" }
+                          \&raquo; Show Page as Text
+                      %li
+                        %a{ :href => "/projects/suncloudapis/pages/Home/revisions" }
+                          \&raquo; Show Page Revision History
+                    /
+                      Jump to page
+                    .vAccLabel{ :align => "left" }
+                      %label.vAccTextLabel{ :for => "jumpToPage" }
+                        Jump&nbsp;to&nbsp;Page:
+                    .vAccForm{ :align => "left" }
+                      %select.vAccPullDown{ :name => "jumpToPage", :onchange => "window.location='/projects/suncloudapis/pages'+'/' +this.value", :style => "width:150px;" }
+                        %option{ :value => "CLIExample1" }
+                          CLIExample1
+                        %option{ :value => "CloudAPIBackupRequests" }
+                          CloudAPIBackupRequests
+                        %option{ :value => "CloudAPICloudRequests" }
+                          CloudAPICloudRequests
+                        %option{ :value => "CloudAPIClusterRequests" }
+                          CloudAPIClusterRequests
+                        %option{ :value => "CloudAPIPublicAddressRequests" }
+                          CloudAPIPublicAddressRequests
+                        %option{ :value => "CloudAPISnapshotRequests" }
+                          CloudAPISnapshotRequests
+                        %option{ :value => "CloudAPISpecificationResourceModels" }
+                          CloudAPISpecificationResourceModels
+                        %option{ :value => "CloudAPIVDCRequests" }
+                          CloudAPIVDCRequests
+                        %option{ :value => "CloudAPIVMRequests" }
+                          CloudAPIVMRequests
+                        %option{ :value => "CloudAPIVNetRequests" }
+                          CloudAPIVNetRequests
+                        %option{ :value => "CloudAPIVolumeRequests" }
+                          CloudAPIVolumeRequests
+                        %option{ :value => "CloudCommandClient" }
+                          CloudCommandClient
+                        %option{ :value => "CommonBehaviors" }
+                          CommonBehaviors
+                        %option{ :value => "HelloCloud" }
+                          HelloCloud
+                        %option{ :selected => "selected", :value => "Home" }
+                          Home
+                    .clear
+                    %ul
+                      %li
+                        %a{ :href => "/projects/suncloudapis/pages" }
+                          \&raquo; List all Pages
+                      %li
+                        %a{ :href => "/projects/suncloudapis/wiki_images" }
+                          \&raquo; Manage Images
+                    .clear
+                    /
+                      Create new page
+                    %form#wiki_page_create{ :method => "GET", :action => "" }
+                      .vAccLabel{ :align => "left" }
+                        %label.vAccTextLabel{ :for => "newPage" }
+                          Create&nbsp;New&nbsp;Page:
+                      .vAccForm{ :align => "left" }
+                        #wiki_page_create_errors.vAccError
+                        %input#wiki_page_create_path{ :type => "hidden", :value => "/projects/suncloudapis/pages/_id_/edit" }
+                        %input#wiki_page_create_id.vAccTextField{ :name => "id", :maxlength => "128", :type => "text" }
+                        %button#wiki_page_create_submit.vAccGoButton{ :title => "go", :type => "submit" }
+                      .clear
+                .vAccordion
+                  %button#sidebar_project_about.tab
+                    .title
+                      About this Project
+                    .expCol
+                      \-
+                  .bucket{ :style => "" }
+                    %div{ :style => "text-align:left; margin:5px;" }
+                      %a{ :href => "/projects/suncloudapis" }
+                        The APIs for the Sun Cloud
+                      was started in
+                      February 2009, is owned by
+                      %a{ :href => "/people/2756-russcastronovo" }
+                        %span.person.-kenai-russcastronovo
+                          russcastronovo
+                      ,
+                      and has
+                      %a{ :href => "/projects/suncloudapis/members" }
+                        218 members
+                      \.
+                    %ul
+                      %li
+                        %a{ :href => "/projects/suncloudapis/watch" }
+                          \&raquo; Bookmark This Project
+            #sideColumnShow.side_nav{ :title => "hide side navigation" }
+          #pageContent.content
+            /
+              BEGIN CONTENT AREA
+            /
+              BEGIN CONTENT AREA
+            .contentPadding
+              .wikiMainHeader
+                .twoColumns
+                  .column
+                    %span
+                      Last updated
+                      %span.pretty-date{ :title => "2009-09-24 20:39:13 UTC" }
+                        September 24, 2009 20:39
+                      , by
+                    \&nbsp;
+                    %a{ :href => "/people/11-Craig-McClanahan" }
+                      Craig McClanahan
+                  .column{ :align => "right", :style => "float:right;width:10em;margin-right:50px;" }
+                    %span
+                      %a#social-bookmarks__.contextMenuAnchor{ :href => "#" }
+                        \&raquo;&nbsp;Share this
+                      #social-bookmarks___content{ :style => "display:none" }
+                        %div{ :style => "padding:3px;width:100px;" }
+                          %a.socialBookMarkItem{ :href => "http://del.icio.us/post?url=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FHome&title=The APIs for the Sun Cloud: Wiki: Home &amp;mdash; Project Kenai", :title => "del.icio.us" }
+                            %img{ :src => "http://asset-1.kenai.com/images/social_bookmarking/delicious.png?20091211.aae2446", :alt => "del.icio.us" }
+                          %a.socialBookMarkItem{ :href => "http://reddit.com/submit?url=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FHome&title=The APIs for the Sun Cloud: Wiki: Home &amp;mdash; Project Kenai", :title => "Reddit" }
+                            %img{ :src => "http://asset-0.kenai.com/images/social_bookmarking/reddit.png?20091211.aae2446", :alt => "Reddit" }
+                          %a.socialBookMarkItem{ :href => "http://digg.com/submit?url=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FHome&title=The APIs for the Sun Cloud: Wiki: Home &amp;mdash; Project Kenai&phase=2", :title => "Digg" }
+                            %img{ :src => "http://asset-3.kenai.com/images/social_bookmarking/digg.png?20091211.aae2446", :alt => "Digg" }
+                          %a.socialBookMarkItem{ :href => "http://www.newsvine.com/_tools/seed&save?u=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FHome&h=The APIs for the Sun Cloud: Wiki: Home &amp;mdash; Project Kenai", :title => "NewsVine" }
+                            %img{ :src => "http://asset-0.kenai.com/images/social_bookmarking/newsvine.png?20091211.aae2446", :alt => "NewsVine" }
+                          %a.socialBookMarkItem{ :href => "http://www.blinklist.com/index.php?url=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FHome&Title=The APIs for the Sun Cloud: Wiki: Home &amp;mdash; Project Kenai&Action=Blink/addblink.php", :title => "BlinkList" }
+                            %img{ :src => "http://asset-0.kenai.com/images/social_bookmarking/blinklist.png?20091211.aae2446", :alt => "BlinkList" }
+                          %a.socialBookMarkItem{ :href => "http://blogmarks.net/my/new.php?url=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FHome&title=The APIs for the Sun Cloud: Wiki: Home &amp;mdash; Project Kenai&mini=1&simple=1", :title => "Blogmarks" }
+                            %img{ :src => "http://asset-1.kenai.com/images/social_bookmarking/blogmarks.png?20091211.aae2446", :alt => "Blogmarks" }
+                          %a.socialBookMarkItem{ :href => "http://co.mments.com/track?url=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FHome&title=The APIs for the Sun Cloud: Wiki: Home &amp;mdash; Project Kenai", :title => "co.mments" }
+                            %img{ :src => "http://asset-2.kenai.com/images/social_bookmarking/comments.png?20091211.aae2446", :alt => "co.mments" }
+                          %a.socialBookMarkItem{ :href => "http://www.furl.net/storeIt.jsp?t=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FHome&u=The APIs for the Sun Cloud: Wiki: Home &amp;mdash; Project Kenai", :title => "Furl" }
+                            %img{ :src => "http://asset-1.kenai.com/images/social_bookmarking/furl.png?20091211.aae2446", :alt => "Furl" }
+                          %a.socialBookMarkItem{ :href => "http://ma.gnolia.com/beta/bookmarklet/add?url=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FHome&title=The APIs for the Sun Cloud: Wiki: Home &amp;mdash; Project Kenai", :title => "Ma.gnolia" }
+                            %img{ :src => "http://asset-1.kenai.com/images/social_bookmarking/magnolia.png?20091211.aae2446", :alt => "Ma.gnolia" }
+                          %a.socialBookMarkItem{ :href => "http://www.netvouz.com/action/submitBookmark?url=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FHome&title=The APIs for the Sun Cloud: Wiki: Home &amp;mdash; Project Kenai", :title => "Netvouz" }
+                            %img{ :src => "http://asset-2.kenai.com/images/social_bookmarking/netvouz.png?20091211.aae2446", :alt => "Netvouz" }
+                          %a.socialBookMarkItem{ :href => "http://www.simpy.com/simpy/LinkAdd.do?href=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FHome&title=The APIs for the Sun Cloud: Wiki: Home &amp;mdash; Project Kenai", :title => "Simpy" }
+                            %img{ :src => "http://asset-1.kenai.com/images/social_bookmarking/simpy.png?20091211.aae2446", :alt => "Simpy" }
+                          %a.socialBookMarkItem{ :href => "http://bookmarks.yahoo.com/myresults/bookmarklet?u=http%3A%2F%2Fkenai.com%2Fprojects%2Fsuncloudapis%2Fpages%2FHome", :title => "YahooMyWeb" }
+                            %img{ :src => "http://asset-1.kenai.com/images/social_bookmarking/yahoomyweb.png?20091211.aae2446", :alt => "YahooMyWeb" }
+                      \&nbsp;&nbsp;&nbsp;
+                .clear
+              .wikiMainBody
+                %p
+                  %h1
+                    The Sun Cloud API
+                %p
+                  %h3
+                    Introduction
+                %p
+                  This wiki specifies a RESTful API for creating and managing cloud resources, including compute, storage, and networking components.
+                %p
+                  Usage of the API is via the HTTP protocol.  The GET, POST, PUT, and DELETE requests are all used, although most tasks can be accomplished with GET and POST.  Resource representations are in JSON.
+                %p
+                  The API presupposes no particular structure in the URI space.  The starting point is a URI, supplied by the cloud service provider, which identifies the cloud itself.  The cloud's representation contains URIs for the other resources in the cloud, and also for operations which may be performed upon them (for example deploying and starting virtual machines).
+                %p
+                  The specification of the Sun Cloud API includes:
+                %ul
+                  %li
+                    Common behaviors that apply across all requests and responses.
+                  %li
+                    Resource models, which describe the JSON data structures used in requests and responses.
+                  %li
+                    The requests that may be sent to cloud resources, and the responses expected.
+                %p
+                  This API operates on the following primary resource types:
+                %ul
+                  %li
+                    Cloud: A top-level construct which groups all the Virtual Data Centers to which an API user has access.
+                  %li
+                    Virtual Data Center (VDC): An isolated container which is populated with Clusters, Private Virtual Networks, Public Addresses, Storage Volumes, Volume Snapshots.
+                  %li
+                    Cluster: An administrative grouping of Virtual Machines, useful for access control, copying or cloning, geographic isolation, and scripting automation.
+                  %li
+                    Virtual Machine (VM): A server.
+                  %li
+                    Private Virtual Network (VNet): A subnet, not connected to the Internet, which may be used to connect Virtual Machines within a VDC.
+                  %li
+                    Public Address: A connection to the Internet.
+                  %li
+                    Storage Volume: A storage resource which may be accessed via WebDAV and other storage protocols.
+                  %li
+                    Volume Snapshot: A snapshot of the state of a Storage Volume.
+                %p
+                  The API additionally operates on secondary resources such as VM Backups and Network Interfaces.
+                %p
+                  %a.internal{ :href => "/projects/suncloudapis/pages/HelloCloud" }
+                    \&quot;Hello, Cloud&quot;: An illustrative walk-through of the Sun Cloud API
+                  is designed to serve as the starting-point for learning this API.
+                %p
+                  %h3
+                    Specifications
+                %ul
+                  %li
+                    %a.internal{ :href => "/projects/suncloudapis/pages/CommonBehaviors" }
+                      Common Behaviors
+                  %li
+                    %a.internal{ :href => "/projects/suncloudapis/pages/CloudAPISpecificationResourceModels" }
+                      Resource Models
+                  %li
+                    %a.internal{ :href => "/projects/suncloudapis/pages/CloudAPIBackupRequests" }
+                      Requests to Backup Resources
+                  %li
+                    %a.internal{ :href => "/projects/suncloudapis/pages/CloudAPICloudRequests" }
+                      Requests to Cloud Resources
+                  %li
+                    %a.internal{ :href => "/projects/suncloudapis/pages/CloudAPIClusterRequests" }
+                      Requests to Cluster Resources
+                  %li
+                    %a.internal{ :href => "/projects/suncloudapis/pages/CloudAPIPublicAddressRequests" }
+                      Requests to Public Address Resources
+                  %li
+                    %a.internal{ :href => "/projects/suncloudapis/pages/CloudAPISnapshotRequests" }
+                      Requests to Snapshot Resources
+                  %li
+                    %a.internal{ :href => "/projects/suncloudapis/pages/CloudAPIVDCRequests" }
+                      Requests to VDC Resources
+                  %li
+                    %a.internal{ :href => "/projects/suncloudapis/pages/CloudAPIVMRequests" }
+                      Requests to VM Resources
+                  %li
+                    %a.internal{ :href => "/projects/suncloudapis/pages/CloudAPIVNetRequests" }
+                      Requests to VNet Resources
+                  %li
+                    %a.internal{ :href => "/projects/suncloudapis/pages/CloudAPIVolumeRequests" }
+                      Requests to Volume Resources
+                %p
+                  A
+                  %a.internal{ :href => "/projects/suncloudapis/pages/CloudCommandClient" }
+                    command line client
+                  for communicating with implementations of this API is also available.
+                %p
+                  (Work in progress):
+                  %a.internal{ :href => "/projects/suncloudapis/pages/CLIExample1" }
+                    a simple example using the CLI
+                %p
+                  Copyright &copy; Sun Microsystems, 2009.  This work is licensed under
+                  %a.external{ :href => "http://creativecommons.org/licenses/by/3.0/" }
+                    Creative Commons Attribution 3.0 Unported License
+                %p
+                  %br
+              .clear
+            /
+              END CONTENT AREA
+        #footer{ :style => "position:relative" }
+          %a{ :href => "/" }
+            Home
+          %span.separator
+            |
+          %a{ :href => "/mypage" }
+            My Page
+          %span.separator
+            |
+          %a{ :href => "/projects" }
+            Projects
+          %span.separator
+            |
+          %a{ :href => "/people" }
+            People
+          %span.separator
+            |
+          %a{ :href => "mailto:kenai-admin@sun.com" }
+            Contact Us
+          %span.separator
+            |
+          %a{ :href => "/people/signup" }
+            Join Now
+          %span.separator
+            |
+          %a{ :href => "/projects/help/pages/Home", :target => "_blank" }
+            Documentation
+        #footerCurves
+        %div{ :style => "padding-left:75px;" }
+          %ul.hList
+            %li
+              %a{ :href => "http://www.sun.com", :title => "Sun Microsystems" }
+                %img.reflect{ :src => "http://asset-3.kenai.com/images/sun.png?20091211.aae2446", :alt => "" }
+            %li
+              %a{ :href => "http://www.opensolaris.org", :title => "OpenSolaris" }
+                %img.reflect{ :src => "http://asset-3.kenai.com/images/opensolaris.png?20091211.aae2446", :alt => "" }
+            %li
+              %a{ :href => "http://www.mysql.org", :title => "MySQL" }
+                %img.reflect{ :src => "http://asset-3.kenai.com/images/mysql.png?20091211.aae2446", :alt => "Mysql" }
+            %li
+              %a{ :href => "https://glassfish.dev.java.net", :title => "GlassFish" }
+                %img.reflect{ :src => "http://asset-1.kenai.com/images/glassfish.png?20091211.aae2446", :alt => "Glassfish" }
+            %li
+              %a{ :href => "http://www.jruby.org", :title => "JRuby" }
+                %img.reflect{ :src => "http://asset-0.kenai.com/images/jruby.png?20091211.aae2446", :alt => "Jruby" }
+            %li
+              %a{ :href => "http://www.rubyonrails.org", :title => "Rails" }
+                %img.reflect{ :src => "http://asset-3.kenai.com/images/rails.png?20091211.aae2446", :alt => "Rails" }
+            %li
+              %a{ :href => "http://www.netbeans.org", :title => "Netbeans" }
+                %img.reflect{ :src => "http://asset-3.kenai.com/images/nblogo.png?20091211.aae2446", :alt => "Nblogo" }
+        %small.finePrint
+          %a.largeOverlayLink{ :href => "/terms_of_use", :title => "Terms of Use" }
+            Terms of Use
+          ;
+          %a{ :href => "http://www.sun.com/privacy/index.html" }
+            Privacy Policy
+          ;
+          Copyright &copy;2008-2010 (
+          %a{ :href => "/projects/help/pages/ReleaseNotes" }
+            revision 20091211.aae2446
+          )
+    /
+      popups that are anchored to specific elements
+    #contextMenuShadow.popupMenuShadow
+    #contextMenu.popupMenuContainer
+      .popupMenu.inline
+        .upArrow
+        .header
+        #contextMenuBody.contextMenuBody
+          \&nbsp;
+    /
+      large content loaded via ajax. Faded but not modal.
+    #jqm_large_overlay.jqmWindow
+      .jqmHeader
+        .jqmTitle
+          \&nbsp;
+        %img.jqmClose{ :src => "/images/close.gif" }
+      .jqmTarget
+        %img{ :src => "/images/activity.gif", :alt => "loading" }
+      .jqmFooter
+        .jqmClose.functionButtonContainer
+          %button.functionButton{ :title => "Done" }
+            Done
+    /
+      confirmation dialogs with buttons. Faded and modal.
+    #jqm_dialog.jqmWindow
+      .jqmHeader
+        .jqmTitle
+          Please Confirm
+        %img.jqmClose{ :src => "/images/close.gif" }
+      .jqmTarget
+        \&nbsp;
+      .jqmFooter
+        .jqmClose.functionButtonContainer
+          %button#jq_no_button.functionButton{ :title => "No", :onclick => "Modal.no()" }
+            No
+        .jqmClose.functionButtonContainer
+          %button#jq_yes_button.functionButton{ :title => "Yes", :onclick => "Modal.yes();" }
+            Yes
+    #jq-ui-autocomplete-parent
+    %script{ :src => "http://asset-2.kenai.com/javascripts/s_code_remote_packaged.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-2.kenai.com/javascripts/body_packaged.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-2.kenai.com/javascripts/syntax/scripts/shCore.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-3.kenai.com/javascripts/syntax/scripts/shLegacy.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-3.kenai.com/javascripts/syntax/scripts/shBrushAS3.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-2.kenai.com/javascripts/syntax/scripts/shBrushBash.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-0.kenai.com/javascripts/syntax/scripts/shBrushCpp.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-0.kenai.com/javascripts/syntax/scripts/shBrushCSharp.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-2.kenai.com/javascripts/syntax/scripts/shBrushCss.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-2.kenai.com/javascripts/syntax/scripts/shBrushDelphi.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-1.kenai.com/javascripts/syntax/scripts/shBrushDiff.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-3.kenai.com/javascripts/syntax/scripts/shBrushGroovy.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-1.kenai.com/javascripts/syntax/scripts/shBrushJava.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-0.kenai.com/javascripts/syntax/scripts/shBrushJavaFX.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-0.kenai.com/javascripts/syntax/scripts/shBrushJScript.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-3.kenai.com/javascripts/syntax/scripts/shBrushPerl.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-1.kenai.com/javascripts/syntax/scripts/shBrushPhp.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-1.kenai.com/javascripts/syntax/scripts/shBrushPlain.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-0.kenai.com/javascripts/syntax/scripts/shBrushPowerShell.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-2.kenai.com/javascripts/syntax/scripts/shBrushPython.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-3.kenai.com/javascripts/syntax/scripts/shBrushRuby.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-1.kenai.com/javascripts/syntax/scripts/shBrushScala.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-1.kenai.com/javascripts/syntax/scripts/shBrushSql.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-0.kenai.com/javascripts/syntax/scripts/shBrushVb.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :src => "http://asset-2.kenai.com/javascripts/syntax/scripts/shBrushXml.js?20091211.aae2446", :type => "text/javascript" }
+  %script{ :language => "JavaScript" }
+    $(document).ready(function(){
+    initWikiPageToc();
+    initWikiPagePreformattedBlocks();
+    initWikiPageSyntaxHighlight();
+    initWikiAccordionPageCreate();
+    });

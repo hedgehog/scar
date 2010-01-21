@@ -1,0 +1,54 @@
+!!! Strict
+%html
+  %head
+    %title Scar (Sun's cloud API reference) Project
+    = @item[:title]
+    %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
+      %link{ :href => "/stylesheet.css", :rel => "stylesheet", :type => "text/css", :media => "screen" }
+      %link{ :href => "/coderay.css", :rel => "stylesheet", :type => "text/css", :media => "screen" }
+  %body
+    #main
+      = yield 
+    #sidebar
+      %ul
+        %li
+          %a{ :href => "/" }
+            %strong Scar Home
+      %h2
+        Specifications
+      %ul
+        %li
+          %a{ :href => "/spec_home/" }
+            Spec Home
+        %li
+          %a{ :href => "/spec_common/" }
+            Common Behaviors
+        %li
+          %a{ :href => "/spec_resource_models/" }
+            Resource Models
+        %li
+          %strong Requests to ...
+          %li
+            %a{ :href => "/" }
+              %strong Backup
+      %h2
+        Community
+      %ul
+        %li
+          %a{ :href => "http://wiki.github.com/hedgehog/scar/" }
+            Scar wiki
+        %li
+          %a{ :href => "http://github.com/hedgehog/scar/network" }
+            Scar network
+        %li
+          %a{ :href => "http://github.com/hedgehog/scar/issues" }
+            Scar issues
+        %li
+          %a{ :href => "http://kenai.com/projects/suncloudapis/pages/Home" }
+            Kenai wiki
+        %li
+          %a{ :href => "http://kenai.com/projects/suncloudapis/forums/forum" }
+            Kenai forum
+        %li
+          %a{ :href => "http://kenai.com/projects/suncloudapis/lists/extended-discussion/archive" }
+            Kenai maillist archive

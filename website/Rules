@@ -1,12 +1,33 @@
 #!/usr/bin/env ruby
 
-compile '*' do
-  filter :erb
+compile '/stylesheet/*' do
+  filter :sass
+  rep.filter :relativize_paths, :type => :css
+end
+compile '/coderay/*' do
+  filter :sass
+  rep.filter :relativize_paths, :type => :css
+end
+
+compile '/*' do
+  filter :haml
   layout 'default'
+end
+#compile '/*' do
+#  filter :haml
+#  layout 'default'
+#end
+route '/stylesheet/*' do
+  item.identifier.chop + '.css' # so that the /stylesheet/screen/ item is compiled to /assets/style/screen.css
+end
+route '/coderay/*' do
+  item.identifier.chop + '.css' # so that the /stylesheet/screen/ item is compiled to /assets/style/screen.css
 end
 
 route '*' do
   item.identifier + 'index.html'
 end
 
-layout '*', :erb
+layout '/default/', :haml, :format => :html5
+
+layout '*', :haml

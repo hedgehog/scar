@@ -5,6 +5,7 @@ rdoc
 pkg
 website/tmp
 website/output
+website/.sass-cache
 nbproject
 webrat.log
 mech.log

@@ -9,3 +9,6 @@ nbproject
 webrat.log
 mech.log
 tmp
+scar.gemspec
+doc/
+.yardoc

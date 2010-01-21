@@ -27,7 +27,7 @@ end
 Given /^"([^\"]*)" file (does|does not) exist$/ do |file, does_invoke|
   in_project_folder do
     present = File.exists?(file)
-    puts "We are here #{present.to_s} #{file}"
+    # puts "We are here #{present.to_s} #{file}"
     @file_exists = present if does_invoke == "does"
     @file_not_exists = !present if does_invoke == "does not"
   end

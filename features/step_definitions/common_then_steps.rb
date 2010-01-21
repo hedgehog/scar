@@ -127,13 +127,6 @@ Then /^task "rake (.*)" is executed successfully/ do |task|
   actual_output.should_not match(/Error/i)
 end
 
-Then /^task "rake (.*)" is executed successfully/ do |task|
-  @stdout.should_not be_nil
-  actual_output = File.read(@stdout)
-  actual_output.should_not match(/^Don't know how to build task '#{task}'/)
-  actual_output.should_not match(/Error/i)
-end
-
 #
 # Help
 #

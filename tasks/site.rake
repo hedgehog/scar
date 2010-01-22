@@ -235,7 +235,7 @@ h3. Usage
       commands = <<-CMD.gsub(/^ /, '')
       git tag #{pre_tag}
       pushd ./#{website_folder}
-      nanco3 co
+      nanoc3 co
       popd
       pushd ./gh-pages
       cp -afr #{website_contents} .

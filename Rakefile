@@ -57,6 +57,7 @@ rescue LoadError
 end
 
 task :default => :spec
+Dir['tasks/**/*.rake'].each { |t| load t }
 
 begin
   require 'yard'

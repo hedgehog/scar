@@ -30,9 +30,9 @@ Feature: Sun Cloud API Reference
   | Request Status                        | Request Status             |
   | Snapshot                              | Snapshot                   |
   | Virtual Data Center                   | Virtual Data Center        |
-#  | Requests to Volume Resources          | requests/Volume            |
 #  | Command Line Client                   | ./CommandLineInterface     |
   | Virtual Machine                       | Virtual Machine            |
   | Virtual Machine Template              | Virtual Machine Template   |
   | Virtual Network                       | Virtual Network            |
+  | Volume                                | Volume                     |
 

@@ -1,0 +1,226 @@
+%h1
+  Cloud API Specification - Requests to Volume Resources
+%p
+  The requests documented in this section are directed to
+  %i
+    Volume
+  resources, which represent WebDAV volumes on the storage service.
+#toc.toc
+  #toctitle.toc-title
+    %span
+      Contents
+  #toccontents.toc-contents
+    %ul
+      %li
+        1
+        %a{ :href => "#Get_Volume" }
+          Get Volume
+      %li
+        2
+        %a{ :href => "#Update_Volume_Properties" }
+          Update Volume Properties
+      %li
+        3
+        %a{ :href => "#Delete_Volume" }
+          Delete Volume
+%p
+  %br
+%h1
+  %a{ :name => "Get_Volume" }
+  Get Volume
+%p
+  Retrieve information about a Volume.
+%p
+  %b
+    Synopsis:
+  GET {URI of Volume from owning VDC }
+%p
+  %b
+    Request Headers:
+  Accept, Authorization, X-Cloud-Client-Specification-Version.
+%p
+  %b
+    Request Message Body:
+  N/A.
+%p
+  %b
+    Response Headers:
+  Content-Length, Content-Type.
+%p
+  %b
+    Response Message Body:
+  Volume.
+%p
+  %b
+    Response Status:
+  200, 400, 401, 403, 404.
+%p
+  %b
+    Example Request:
+  Retrieve information about a Volume named &quot;backups&quot;.
+%pre
+  GET /volumes/1234567890
+  Host: example.com
+  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+  Accept: application/vnd.com.sun.cloud.Volume+json
+  X-Cloud-Client-Specification-Version: 0.1
+%p
+  %b
+    Example Response:
+%pre
+  HTTP/1.1 200 OK
+  Content-Type: application/vnd.com.sun.cloud.Volume+json
+  Content-Length: nnn
+
+  {
+  \&quot;name&quot; : &quot;backups&quot;,
+  \&quot;uri&quot; : &quot;
+  %a.external{ :href => "http://example.com/volumes/1234567890" }
+    http://example.com/volumes/1234567890
+  \&quot;,
+  \&quot;webdav&quot; : &quot;
+  %a.external{ :href => "https://storage.cloud.sun.com/uc999999/backups" }
+    https://storage.cloud.sun.com/uc999999/backups
+  \&quot;
+  }
+%h1
+  %a{ :name => "Update_Volume_Properties" }
+  Update Volume Properties
+%p
+  Update the specified properties of a Volume.  Only fields actually included in the request message body will be updated, and existing contents of those fields will be completely replaced.
+%p
+  %b
+    Synopsis:
+  PUT { URI of Volume }
+%p
+  %b
+    Request Headers:
+  Accept, Authorization, Content-Length, Content-Type, X-Cloud-Client-Specification-Version.
+%p
+  %b
+    Request Parameters:
+  N/A.
+%p
+  %b
+    Request Message Body:
+  Volume.
+%p
+  %b
+    Response Headers:
+  Content-Length, Content-Type.
+%p
+  %b
+    Response Message Body:
+  Status for use in tracking update progress.
+%p
+  %b
+    Response Status:
+  202, 400, 401, 403, 404.
+%p
+  %b
+    Status &quot;op&quot; Value:
+  \&quot;update-Volume&quot;.
+%p
+  %b
+    Status &quot;target_uri&quot; identifies:
+  The Volume receiving the PUT.
+%p
+  %b
+    Example Request:
+  Add a &quot;needs_snapshot&quot; tag to this volume.
+%pre
+  PUT /volumes/1234567890
+  Host: example.com
+  Authorization: Basic xxxxxxxxxxxxxx
+  Accept: application/vnd.com.sun.cloud.Volume+json
+  Content-Length: nnn
+  Content-Type: application/vnd.com.sun.cloud.Volume+json
+  X-Cloud-Client-Specification-Version: 0.1
+%pre
+  {
+  \&quot;tags&quot; : [ &quot;default&quot;, &quot;needs_snapshot&quot; ]
+  }
+%p
+  %b
+    Example Response:
+%pre
+  HTTP/1.1 202 Accepted
+  Content-Type: application/vnd.com.sun.cloud.Status+json
+  Content-Length: nnn
+
+  {
+  \&quot;op&quot;: &quot;update-Volume&quot;,
+  \&quot;progress&quot;: 0,
+  \&quot;target_uri&quot;: &quot;/volumes/1234567890&quot;,
+  \&quot;status_uri&quot;: &quot;/statuses?op=update-volume&amp;seq=73917192&quot;,
+  }
+%h1
+  %a{ :name => "Delete_Volume" }
+  Delete Volume
+%p
+  Delete the specified WebDAV volume from the storage service.
+%p
+  %b
+    Synopsis:
+  DELETE { URI of Volume }
+%p
+  %b
+    Request Headers:
+  Authorization, X-Cloud-Client-Specification-Version.
+%p
+  %b
+    Request Parameters:
+  N/A.
+%p
+  %b
+    Request Message Body:
+  N/A.
+%p
+  %b
+    Response Headers:
+  Content-Length, Content-Type.
+%p
+  %b
+    Response Message Body:
+  Status for use in tracking deletion progress.
+%p
+  %b
+    Response Status:
+  202, 400, 401, 403, 404.
+%p
+  %b
+    Status &quot;op&quot; Value:
+  \&quot;delete-Volume&quot;.
+%p
+  %b
+    Status &quot;target_uri&quot; identifies:
+  The Volume being deleted.
+%p
+  %b
+    Example Request:
+  Delete an existing Volume named &quot;backups&quot;
+%pre
+  DELETE /volumes/1234567890
+  Host: example.com
+  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+  X-Cloud-Client-Specification-Version: 0.1
+%p
+  %b
+    Example Response:
+%pre
+  HTTP/1.1 202 Accepted
+  Content-Type: application/vnd.com.sun.cloud.Status+json
+  Content-Length: nnn
+
+  {
+  \&quot;op&quot;: &quot;delete-Volume&quot;,
+  \&quot;progress&quot;: 0,
+  \&quot;target_uri&quot;: &quot;/volumes/1234567890&quot;,
+  \&quot;status_uri&quot;: &quot;/statuses?op=delete-volume&amp;cluster=1234567890&quot;,
+  }
+%p
+  Copyright &copy; Sun Microsystems, 2009.  This work is licensed under
+  %a.external{ :href => "http://creativecommons.org/licenses/by/3.0/" }
+    Creative Commons Attribution 3.0 Unported License
+.clear
+/

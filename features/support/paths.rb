@@ -70,6 +70,8 @@ module NavigationHelpers
       "#{@url_root}/spec_resource_virtual_network"
     when /Requests to VNet Resources/
       "#{@url_root}/CloudAPIVNetRequests"
+    when /Volume/
+      "#{@url_root}/spec_resource_volume"
     when /Requests to Volume Resources/
       "#{@url_root}/CloudAPIVolumeRequests"
     when /Command Line Client/

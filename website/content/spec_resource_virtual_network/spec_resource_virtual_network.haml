@@ -1,0 +1,231 @@
+%h1
+  %a{ :name => "Cloud_API_Specification_-_Requests_to_VNet_Resources" }
+  Cloud API Specification - Requests to VNet Resources
+%p
+  The requests documented in this section are directed to
+  %i
+    Virtual Network
+  (VNet) resources, which represent a communication path between VMs in the same Cluster, or across Clusters.
+#toc.toc
+  #toctitle.toc-title
+    %span
+      Contents
+  #toccontents.toc-contents
+    %ul
+      %li
+        1
+        %a{ :href => "#Cloud_API_Specification_-_Requests_to_VNet_Resources" }
+          Cloud API Specification - Requests to VNet Resources
+      %li
+        2
+        %a{ :href => "#Get_VNet" }
+          Get VNet
+      %li
+        3
+        %a{ :href => "#Update_VNet_Properties" }
+          Update VNet Properties
+      %li
+        4
+        %a{ :href => "#Delete_VNet" }
+          Delete VNet
+%p
+  %br
+%h1
+  %a{ :name => "Get_VNet" }
+  Get VNet
+%p
+  Retrieve information about a VNet.
+%p
+  %b
+    Synopsis:
+  GET {URI of VNet}
+%p
+  %b
+    Request Headers:
+  Accept, Authorization, X-Cloud-Client-Specification-Version.
+%p
+  %b
+    Request Message Body:
+  N/A.
+%p
+  %b
+    Response Headers:
+  Content-Length, Content-Type.
+%p
+  %b
+    Response Message Body:
+  VNet.
+%p
+  %b
+    Response Status:
+  200, 400, 401, 403, 404.
+%p
+  %b
+    Example Request:
+  Retrieve information about a VNet named &quot;Front End&quot;
+%pre
+  GET /vnets/abcdefg
+  Host: example.com
+  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+  Accept: application/vnd.com.sun.cloud.VNet+json
+  X-Cloud-Client-Specification-Version: 0.1
+%p
+  %b
+    Example Response:
+%pre
+  HTTP/1.1 200 OK
+  Content-Type: application/vnd.com.sun.cloud.VNet+json
+  Content-Length: nnn
+
+  {
+  \&quot;name&quot; : &quot;Front End&quot;,
+  \&quot;uri&quot; : &quot;
+  %a.external{ :href => "http://example.com/vnets/abcdefg" }
+    http://example.com/vnets/abcdefg
+  \&quot;,
+  \&quot;netmask&quot; : &quot;255.255.0.0&quot;,
+  \&quot;tags&quot; : [ &quot;webtier&quot;, &quot;apptier&quot; ]
+  }
+%h1
+  %a{ :name => "Update_VNet_Properties" }
+  Update VNet Properties
+%p
+  Update the specified properties of a VNet.  Only fields actually included in the request message body will be updated, and existing contents of those fields will be completely erased.
+%p
+  %b
+    Synopsis:
+  PUT { URI of VNet }
+%p
+  %b
+    Request Headers:
+  Accept, Authorization, Content-Length, Content-Type, X-Cloud-Client-Specification-Version.
+%p
+  %b
+    Request Parameters:
+  N/A.
+%p
+  %b
+    Request Message Body:
+  VNet
+%p
+  %b
+    Response Headers:
+  Content-Length, Content-Type.
+%p
+  %b
+    Response Message Body:
+  Status for use in tracking update progress.
+%p
+  %b
+    Response Status:
+  202, 400, 401, 403, 404.
+%p
+  %b
+    Status &quot;op&quot; Value:
+  \&quot;update-VNet&quot;.
+%p
+  %b
+    Status &quot;target_uri&quot; identifies:
+  The VNet receiving the PUT.
+%p
+  %b
+    Example Request:
+  Add a tag to the VNet named &quot;Front End&quot;
+%pre
+  PUT /vnets/abcdefg
+  Host: example.com
+  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+  Accept: application/vnd.com.sun.cloud.VNet+json
+  Content-Length: nnn
+  Content-Type: application/vnd.com.sun.cloud.VNet+json
+  X-Cloud-Client-Specification-Version: 0.1
+
+  {
+  \&quot;tags&quot; : [ &quot;webtier&quot;, &quot;apptier&quot;, &quot;monitored&quot; ]
+  }
+%p
+  %b
+    Example Response:
+%pre
+  HTTP/1.1 202 Accepted
+  Content-Type: application/vnd.com.sun.cloud.Status+json
+  Content-Length: nnn
+
+  {
+  \&quot;op&quot;: &quot;update-VNet&quot;,
+  \&quot;progress&quot;: 100,
+  \&quot;target_uri&quot;: &quot;/vnets/abcdefg&quot;,
+  \&quot;status_uri&quot;: &quot;/statuses?op=update-vnet&amp;seq=82047292&quot;,
+  \&quot;status&quot; : 200
+  }
+%h1
+  %a{ :name => "Delete_VNet" }
+  Delete VNet
+%p
+  Delete this VNet, disconnecting any attached VMs.
+%p
+  %b
+    Synopsis:
+  DELETE { URI of VNet }
+%p
+  %b
+    Request Headers:
+  Authorization, X-Cloud-Client-Specification-Version.
+%p
+  %b
+    Request Parameters:
+  N/A.
+%p
+  %b
+    Request Message Body:
+  N/A.
+%p
+  %b
+    Response Headers:
+  Content-Length, Content-Type.
+%p
+  %b
+    Response Message Body:
+  Status for use in tracking deletion progress.
+%p
+  %b
+    Response Status:
+  202, 400, 401, 403, 404.
+%p
+  %b
+    Status &quot;op&quot; Value:
+  \&quot;delete-VNet&quot;.
+%p
+  %b
+    Status &quot;target_uri&quot; identifies:
+  The VNet being deleted.
+%p
+  %b
+    Example Request:
+  Delete an existing VNet named &quot;Front End&quot;
+%pre
+  DELETE /vnets/abcdefg
+  Host: example.com
+  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+  X-Compute-Client-Specification-Version: 0.1
+%p
+  %b
+    Example Response:
+%pre
+  HTTP/1.1 202 Accepted
+  Content-Type: application/vnd.com.sun.cloud.Status+json
+  Content-Length: nnn
+
+  {
+  \&quot;op&quot;: &quot;delete-VNet&quot;,
+  \&quot;progress&quot;: 100,
+  \&quot;target_uri&quot;: &quot;/vnets/abcdefg&quot;,
+  \&quot;status_uri&quot;: &quot;/statuses?op=delete-vnet&amp;cluster=abcdefg&quot;,
+  \&quot;status&quot; : 200
+  }
+%p
+  Copyright &copy; Sun Microsystems, 2009.  This work is licensed under
+  %a.external{ :href => "http://creativecommons.org/licenses/by/3.0/" }
+    Creative Commons Attribution 3.0 Unported License
+.clear
+/

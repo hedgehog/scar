@@ -25,6 +25,8 @@ Feature: Sun Cloud API Reference
   | Cloud                                 | Cloud                      |
   | Cluster                               | Cluster                    |
 #  | Requests to Public Address Resources  | requests/PublicAddress     |
+#  | Requests to Interface Resources       | requests/Interface         |
+#  | Requests to Location Resources        | requests/Location          |
 #  | Requests to Snapshot Resources        | requests/Snapshot          |
 #  | Requests to VDC Resources             | requests/VirtualDataCenter |
 #  | Requests to VM Resources              | requests/VirtualMachine    |

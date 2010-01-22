@@ -50,6 +50,8 @@ module NavigationHelpers
       "#{@url_root}/spec_resource_public_address"
     when /Requests to Public Address Resources/
       "#{@url_root}/CloudAPIPublicAddressRequests"
+    when /Request Status/
+      "#{@url_root}/spec_resource_request_status"
     when /Requests to Snapshot Resources/
       "#{@url_root}/CloudAPISnapshotRequests"
     when /Requests to VDC Resources/

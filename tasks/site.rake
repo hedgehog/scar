@@ -200,19 +200,15 @@ h3. Usage
       cp -R #{website_folder} .
       git add .
       git commit -a -m 'First gh-pages commit of nanoc3 output'
-      git push --force
+      git push --force #{repo} gh-pages
       popd
-
       git checkout #{current_branch}
       git submodule add --branch gh-pages #{repo} ./gh-pages
       git submodule init
       git submodule update
       git add .
       git commit -a -m "repository in gh-pages folder added as submodule"
-      git push #{repo} gh-pages
-
-      git commit -a -m "website -> gh-pages folder"
-      git push
+      git push 
       CMD
       commands.split(/\n/).each { |cmd| Kernel.`(cmd) }
     end

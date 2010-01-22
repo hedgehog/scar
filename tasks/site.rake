@@ -222,14 +222,14 @@ h3. Usage
       puts "Moving #{website_folder} folder to branch gh-pages."
       puts "Working in #{current_branch} branch of #{repo}:"
       gitstatus=Kernel.send(:`,'git status')
-      clean = gitstatus =~ /nothing to commit (working directory clean)/i
+      clean = gitstatus =~ /nothing to commit \(working directory clean\)/i
       stashed=false
       unless clean
         gstash = "git stash save 'Uncommited changes stashed pre gh-pages migration: #{tmpid}'"
         stashed=true
         Kernel.send(:`,gstash)
         gitstatus=Kernel.send(:`,'git status')
-        clean = gitstatus =~ /nothing to commit (working directory clean)/i
+        clean = gitstatus =~ /nothing to commit \(working directory clean\)/i
       end
       raise RuntimeError.new("The git working directory is still not clean.") unless clean
       commands = <<-CMD.gsub(/^ /, '')

@@ -176,19 +176,31 @@ h3. Usage
   namespace 'github' do
     desc "Creates the gh-pages branch, and links to it as 'website' as submodule"
     task :setup do
+      tmpid = Time.now.gmtime.to_s.gsub(/ |:/,'')
+      pre_tag="pre-gh-pages-migration-tag-#{tmpid}"
       current_branch = Kernel.`('git branch | grep "^*" | sed -e "s/* //"').strip
       repo = Kernel.`('git config --list | grep "^remote.origin.url" | sed -e "s/remote.origin.url=//"').strip
       puts "Working in #{current_branch} branch of #{repo}:"
       commands = <<-CMD.gsub(/^ /, '')
+      git tag #{pre_tag}
+      mkdir gh-pages.git
+      pushd gh-pages
+      git --bare init
+      echo "My GitHub Page" > index.html
+      git add .
+      git commit -a -m 'First gh-pages commit'
+      git push origin gh-pages
+      popd
+      cp .git/index /tmp/git-index-#{tmpid}
       git symbolic-ref HEAD refs/heads/gh-pages
       rm .git/index
-      git clean -fdx
+      git clean -fd
       echo "My GitHub Page" > index.html
       git add .
       git commit -a -m 'First gh-pages commit'
       git push origin gh-pages
       git checkout #{current_branch}
-      git submodule add -b gh-pages #{repo} website
+      git submodule add -b gh-pages #{repo} gh-pages
       git commit -a -m "website -> gh-pages folder"
       git push
       CMD
@@ -201,6 +213,7 @@ h3. Usage
       tmpid = Time.now.gmtime.to_s.gsub(/ |:/,'')
       current_branch = Kernel.`('git branch | grep "^*" | sed -e "s/* //"').strip
       pre_branch="pre-gh-pages-migration-branch-#{tmpid}"
+      pre_tag="pre-gh-pages-migration-tag-#{tmpid}"
       repo = Kernel.`('git config --list | grep "^remote.origin.url" | sed -e "s/remote.origin.url=//"').strip
       website_folder = ENV['WEBSITE_PATH'] || 'website/output'
       tmp_folder = "/tmp/gh-pages-website-#{tmpid}"
@@ -217,7 +230,7 @@ h3. Usage
       end
       raise RuntimeError.new("The git working directory is still not clean.") if dirty
       commands = <<-CMD.gsub(/^ /, '')
-      git tag #{pre_branch}
+      git tag #{pre_tag}
       mv #{website_folder} #{tmp_folder}
       git branch -m #{current_branch} #{pre_branch}
       cp .git/index .git/index-#{tmpid}

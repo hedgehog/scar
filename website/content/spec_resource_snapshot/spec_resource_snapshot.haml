@@ -1,0 +1,305 @@
+%h1
+  Cloud API Specification - Requests to Snapshot Resources
+%p
+  The requests documented in this section are directed to
+  %i
+    Snapshot
+  resources, which represent a point-in-time backup of the contents of a Volume.
+#toc.toc
+  #toctitle.toc-title
+    %span
+      Contents
+  #toccontents.toc-contents
+    %ul
+      %li
+        1
+        %a{ :href => "#Get_Snapshot" }
+          Get Snapshot
+      %li
+        2
+        %a{ :href => "#Update_Snapshot_Properties" }
+          Update Snapshot Properties
+      %li
+        3
+        %a{ :href => "#Delete_Snapshot" }
+          Delete Snapshot
+      %li
+        4
+        %a{ :href => "#Create_Clone" }
+          Create Clone
+      %li
+        5
+        %a{ :href => "#Roll_Back_Volume_To_Snapshot" }
+          Roll Back Volume To Snapshot
+%p
+  %br
+%h1
+  %a{ :name => "Get_Snapshot" }
+  Get Snapshot
+%p
+  Retrieve information about a volume snapshot.
+%p
+  %b
+    Synopsis:
+  GET {Snapshot URI}
+%p
+  %b
+    Request Headers:
+  Accept, Authorization, X-Cloud-Client-Specification-Version.
+%p
+  %b
+    Request Parameters:
+  N/A.
+%p
+  %b
+    Request Message Body:
+  N/A.
+%p
+  %b
+    Response Headers:
+  Content-Length, Content-Type.
+%p
+  %b
+    Response Message Body:
+  Snapshot.
+%p
+  %b
+    Response Status:
+  200, 400, 401, 403.
+%p
+  %b
+    Example Request:
+  Retrieve information about a named &quot;backsnap&quot;.
+%pre
+  GET /snapshots/xxxxx
+  Host: example.com
+  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+  Accept: application/vnd.com.sun.cloud.Snapshot+json
+  X-Cloud-Client-Specification-Version: 0.1
+%p
+  %b
+    Example Response:
+%pre
+  HTTP/1.1 200 OK
+  Content-Type: application/vnd.com.sun.cloud.Snapshot+json
+  Content-Length: nnn
+
+  {
+  \&quot;name&quot; : &quot;backsnap&quot;,
+  \&quot;uri&quot; : &quot;/snapshots/yyyyy&quot;,
+  \&quot;created&quot; : 12345,
+  \&quot;clone&quot; : &quot;/create-clone/abc&quot;,
+  \&quot;rollback&quot; : /rollback/xyz&quot;
+  }
+%h1
+  %a{ :name => "Update_Snapshot_Properties" }
+  Update Snapshot Properties
+%p
+  There are no current snapshot properties that may be modified by the client, so this request type is not available.
+%h1
+  %a{ :name => "Delete_Snapshot" }
+  Delete Snapshot
+%p
+  Delete this snapshot from the owning volume.
+%p
+  %b
+    Synopsis:
+  DELETE { URI of Snapshot }
+%p
+  %b
+    Request Headers:
+  Authorization, X-Cloud-Client-Specification-Version.
+%p
+  %b
+    Request Parameters:
+  N/A.
+%p
+  %b
+    Request Message Body:
+  N/A.
+%p
+  %b
+    Response Headers:
+  Content-Length, Content-Type.
+%p
+  %b
+    Response Message Body:
+  Status for use in tracking snapshot-deletion progress.
+%p
+  %b
+    Response Status:
+  202, 400, 401, 403, 404.
+%p
+  %b
+    Status &quot;op&quot; Value:
+  \&quot;delete-Snapshot&quot;.
+%p
+  %b
+    Status &quot;target_uri&quot; identifies:
+  The Snapshot being deleted.
+%p
+  %b
+    Example Request:
+  Delete an existing snapshot named &quot;backsnap&quot;
+%pre
+  DELETE /snapshot/1234567890
+  Host: example.com
+  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+  X-Cloud-Client-Specification-Version: 0.1
+%p
+  %b
+    Example Response:
+%pre
+  HTTP/1.1 202 Accepted
+  Content-Type: application/vnd.com.sun.cloud.Status+json
+  Content-Length: nnn
+
+  {
+  \&quot;op&quot;: &quot;delete-Snapshot&quot;,
+  \&quot;progress&quot;: 100,
+  \&quot;target_uri&quot;:  /snapshot/1234567890&quot;,
+  \&quot;status_uri&quot;: &quot;/statuses?op=ds&amp;target=1234567890&quot;,
+  \&quot;status&quot;: 200
+  }
+%h1
+  %a{ :name => "Create_Clone" }
+  Create Clone
+%p
+  Create a new volume populated with initial content from this snapshot.
+%p
+  %b
+    Synopsis:
+  POST { URI from clone link of containing Snapshot }
+%p
+  %b
+    Request Headers:
+  Accept, Authorization, Content-Length, Content-Type, X-Compute-Client-Specification-Version.
+%p
+  %b
+    Request Parameters:
+  N/A.
+%p
+  %b
+    Request Message Body:
+  Volume.
+%p
+  %b
+    Response Headers:
+  Content-Length, Content-Type.
+%p
+  %b
+    Response Message Body:
+  Status for use in tracking clone creation progress.
+%p
+  %b
+    Response Status:
+  202, 400, 401, 403, 404.
+%p
+  %b
+    Status &quot;op&quot; Value:
+  \&quot;clone-Snapshot&quot;.
+%p
+  %b
+    Status &quot;target_uri&quot; identifies:
+  The new Volume once it is created.
+%p
+  %b
+    Example Request:
+  Create a new volume named &quot;restored_backups&quot; from this snapshot named &quot;backsnap&quot; on a volume named &quot;backups&quot;.
+%pre
+  POST /create-clone/xxx
+  Host: example.com
+  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+  Accept: application/vnd.com.sun.cloud.Volume+json
+  Content-Length: nnn
+  Content-Type: application/vnd.com.sun.cloud.Volume+json
+  X-Cloud-Client-Specification-Version: 0.1
+
+  {
+  \&quot;name&quot; : &quot;restored_backups&quot;
+  }
+%p
+  %b
+    Example Response:
+%pre
+  HTTP/1.1 202 Accepted
+  Content-Type: application/vnd.com.sun.cloud.Status+json
+  Content-Length: nnn
+
+  {
+  \&quot;op&quot;: &quot;clone-Snapshot&quot;,
+  \&quot;progress&quot;: 100,
+  \&quot;target_uri&quot;: &quot;/filesystems/foo&quot;,
+  \&quot;status_uri&quot;: &quot;/statuses?seq=efaa76r59327&quot;,
+  \&quot;status&quot;: 201
+  }
+%h1
+  %a{ :name => "Roll_Back_Volume_To_Snapshot" }
+  Roll Back Volume To Snapshot
+%p
+  Roll the contents of the owning volume back to the contents as of the moment this snapshot was taken.  No change occurs to the snapshot itself.
+%p
+  %b
+    Synopsis:
+  POST { URI from rollback link of containing Snapshot }
+%p
+  %b
+    Request Headers:
+  Accept, Authorization, Content-Length, Content-Type, X-Cloud-Client-Specification-Version.
+%p
+  %b
+    Request Parameters:
+  N/A.
+%p
+  %b
+    Request Message Body:
+  N/A.
+%p
+  %b
+    Response Headers:
+  Content-Length, Content-Type.
+%p
+  %b
+    Response Message Body:
+  Status for use in tracking rollback progress.
+%p
+  %b
+    Response Status:
+  202, 400, 401, 403, 404.
+%p
+  %b
+    Status &quot;op&quot; Value:
+  \&quot;rollback-to-Snapshot&quot;.
+%p
+  %b
+    Status &quot;target_uri&quot; identifies:
+  The snapshot receiving the request.
+%p
+  %b
+    Example Request:
+  Roll the &quot;backups&quot; filesystem, which owns this snapshot, back to the state as of the moment this snapshot was taken.
+%pre
+  POST /roll-back/xxx
+  Host: example.com
+  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+  X-Cloud-Client-Specification-Version: 0.1
+%p
+  %b
+    Example Response:
+%pre
+  HTTP/1.1 202 Accepted
+  Content-Type: application/vnd.com.sun.cloud.Status+json
+  Content-Length: nnn
+
+  {
+  \&quot;op&quot;: &quot;rollback-to-Snapshot&quot;,
+  \&quot;progress&quot;: 0,
+  \&quot;target_uri&quot;: &quot;/snapshots/SN03ax&quot;,
+  \&quot;status_uri&quot;: &quot;/statuses?seq=TThhaa983&quot;,
+  }
+%p
+  Copyright &copy; Sun Microsystems, 2009.  This work is licensed under
+  %a.external{ :href => "http://creativecommons.org/licenses/by/3.0/" }
+    Creative Commons Attribution 3.0 Unported License
+.clear
+/

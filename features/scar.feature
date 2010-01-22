@@ -27,8 +27,8 @@ Feature: Sun Cloud API Reference
   | Public Address                        | Public Address             |
   | Interface                             | Interface                  |
   | Location                              | Location                   |
-#  | Requests to Snapshot Resources        | requests/Snapshot          |
   | Request Status                        | Request Status             |
+  | Snapshot                              | Snapshot                   |
 #  | Requests to VDC Resources             | requests/VirtualDataCenter |
 #  | Requests to VM Resources              | requests/VirtualMachine    |
 #  | Requests to VNet Resources            | requests/VirtualNet        |

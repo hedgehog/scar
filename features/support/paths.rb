@@ -52,6 +52,8 @@ module NavigationHelpers
       "#{@url_root}/CloudAPIPublicAddressRequests"
     when /Request Status/
       "#{@url_root}/spec_resource_request_status"
+    when /Snapshot/
+      "#{@url_root}/spec_resource_snapshot"
     when /Requests to Snapshot Resources/
       "#{@url_root}/CloudAPISnapshotRequests"
     when /Requests to VDC Resources/

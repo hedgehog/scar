@@ -44,6 +44,8 @@ module NavigationHelpers
       "#{@url_root}/CloudAPIClusterRequests"
     when /Interface/
       "#{@url_root}/spec_resource_interface"
+    when /Location/
+      "#{@url_root}/spec_resource_location"
     when /Public Address/
       "#{@url_root}/spec_resource_public_address"
     when /Requests to Public Address Resources/

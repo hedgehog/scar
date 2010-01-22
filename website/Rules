@@ -2,16 +2,17 @@
 
 compile '/stylesheet/*' do
   filter :sass
-  rep.filter :relativize_paths, :type => :css
+  filter :relativize_paths, :type => :css
 end
 compile '/coderay/*' do
   filter :sass
-  rep.filter :relativize_paths, :type => :css
+  filter :relativize_paths, :type => :css
 end
 
 compile '/*' do
   filter :haml
-  filter :syntax_colorize 
+  filter :syntax_colorize
+  filter :relativize_paths, :type => :html
   layout 'default'
 end
 #compile '/*' do

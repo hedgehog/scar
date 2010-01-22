@@ -180,25 +180,22 @@ h3. Usage
       pre_tag="pre-gh-pages-migration-tag-#{tmpid}"
       current_branch = Kernel.`('git branch | grep "^*" | sed -e "s/* //"').strip
       repo = Kernel.`('git config --list | grep "^remote.origin.url" | sed -e "s/remote.origin.url=//"').strip
+      puts "Assume you have created the gh-pages branch via github's web pages"
+      puts "Append text 'My GitHub Page' to index.html"
       puts "Working in #{current_branch} branch of #{repo}:"
       commands = <<-CMD.gsub(/^ /, '')
       git tag #{pre_tag}
-      mkdir gh-pages.git
-      pushd gh-pages
-      git --bare init
-      echo "My GitHub Page" > index.html
+      git fetch #{repo}
+      git checkout --track -b gh-pages #{repo}/gh-pages
+      echo "My GitHub Page" >> index.html
       git add .
       git commit -a -m 'First gh-pages commit'
-      git push origin gh-pages
-      popd
-      cp .git/index /tmp/git-index-#{tmpid}
+      git push #{repo} gh-pages
+      git checkout #{current_branch}
+      git submodule add #{repo} ./gh-pages
+
       git symbolic-ref HEAD refs/heads/gh-pages
-      rm .git/index
-      git clean -fd
-      echo "My GitHub Page" > index.html
-      git add .
-      git commit -a -m 'First gh-pages commit'
-      git push origin gh-pages
+
       git checkout #{current_branch}
       git submodule add -b gh-pages #{repo} gh-pages
       git commit -a -m "website -> gh-pages folder"

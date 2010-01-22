@@ -11,6 +11,7 @@ end
 
 compile '/*' do
   filter :haml
+  filter :syntax_colorize 
   layout 'default'
 end
 #compile '/*' do

@@ -26,12 +26,17 @@
         Provide snapshots of Sun's Cloud API.
         %em Example
         To grab version 0.n
-        %blockquote
-          git clone git://github.com/hedgehog/scar.git
-          git checkout -b your_branch v0.n
+        %pre
+          %code.language-ruby
+            :preserve
+            git clone git://github.com/hedgehog/scar.git
+            git checkout -b your_branch v0.n
         If you don't want the whole repo, github is not configured to respond to
         git archive ... Instead, use
-        curl -O -L http://github.com/hedgehog/scar/downloads/...
+        %pre
+          %code.language-ruby
+            :preserve
+            curl -O -L http://github.com/hedgehog/scar/downloads/...
     %li
       %p
         Make transparent, and accessible, any ideas others explore or errors they

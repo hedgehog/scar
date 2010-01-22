@@ -186,11 +186,20 @@ h3. Usage
       commands = <<-CMD.gsub(/^ /, '')
       git tag #{pre_tag}
       git fetch #{repo}
-      git checkout --track -b gh-pages #{repo}/gh-pages
+      mkdir gh-pages
+      pushd gh-pages
+      git init
+      git remote add origin #{repo}
+      git fetch origin gh-pages:gh-pages
+      git checkout -f gh-pages
       echo "My GitHub Page" >> index.html
       git add .
       git commit -a -m 'First gh-pages commit'
       git push #{repo} gh-pages
+      cp -R ./../website/output/* .
+      git add .
+      git commit -a -m 'First gh-pages commit of nanoc3 output'
+      popd
       git checkout #{current_branch}
       git submodule add #{repo} ./gh-pages
 

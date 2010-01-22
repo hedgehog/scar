@@ -25,8 +25,8 @@
    end
 end
 
-include Nanoc3::Filters
-include Nanoc3::Helpers::Filtering
+#include Nanoc3::Filters
+#include Nanoc3::Helpers::Filtering
 
 
 #module ::Nanoc3::Helpers

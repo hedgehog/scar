@@ -23,7 +23,7 @@ Feature: Sun Cloud API Reference
   | Resources                             | Resources                  |
   | Backup                                | Backup                     |
   | Cloud                                 | Cloud                      |
-#  | Requests to Cluster Resources         | requests/Cluster           |
+  | Cluster                               | Cluster                    |
 #  | Requests to Public Address Resources  | requests/PublicAddress     |
 #  | Requests to Snapshot Resources        | requests/Snapshot          |
 #  | Requests to VDC Resources             | requests/VirtualDataCenter |

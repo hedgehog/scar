@@ -34,4 +34,5 @@ Feature: Sun Cloud API Reference
 #  | Requests to Volume Resources          | requests/Volume            |
 #  | Command Line Client                   | ./CommandLineInterface     |
   | Virtual Machine                       | Virtual Machine            |
+  | Virtual Machine Template              | Virtual Machine Template   |
 

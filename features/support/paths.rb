@@ -64,6 +64,8 @@ module NavigationHelpers
       "#{@url_root}/spec_resource_virtual_machine"
     when /Requests to VM Resources/
       "#{@url_root}/CloudAPIVMRequests"
+    when /Virtual Machine Template/
+      "#{@url_root}/spec_resource_virtual_machine_template"
     when /Requests to VNet Resources/
       "#{@url_root}/CloudAPIVNetRequests"
     when /Requests to Volume Resources/

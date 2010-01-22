@@ -34,6 +34,8 @@ module NavigationHelpers
       "#{@url_root}/spec_resource_backup"
     when /Requests to Backup Resources/
       "#{@url_root}/CloudAPIBackupRequests"
+    when /Cloud/
+      "#{@url_root}/spec_resource_cloud"
     when /Requests to Cloud Resources/
       "#{@url_root}/CloudAPIClusterRequests"
     when /Requests to Cluster Resources/

@@ -1,0 +1,90 @@
+%h1
+  Cloud API Specification - Requests to Cloud Resources
+%p
+  The requests documented in this section are directed to
+  %i
+    Cloud
+  resources, which allows a client to enumerate the cloud resources accessible to the user performing this request.
+#toc.toc
+  #toctitle.toc-title
+    %span
+      Contents
+  #toccontents.toc-contents
+    %ul
+      %li
+        1
+        %a{ :href => "#Get_Cloud" }
+          Get Cloud
+%p
+  %br
+%h1
+  %a{ :name => "Get_Cloud" }
+  Get Cloud
+%p
+  Retrieve information about accessible resources.
+%p
+  %b
+    Synopsis:
+  GET {Well Known URI of the Service}
+%p
+  %b
+    Request Headers:
+  Accept, Authorization, X-Cloud-Client-Specification-Version.
+%p
+  %b
+    Request Message Body:
+  N/A.
+%p
+  %b
+    Response Headers:
+  Content-Length, Content-Type.
+%p
+  %b
+    Response Message Body:
+  Cloud.
+%p
+  %b
+    Response Status:
+  200, 400, 401, 403, 404.
+%p
+  %b
+    Example Request:
+  Retrieve information about cloud resources for this user.
+%pre
+  GET /
+  Host: example.com
+  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+  Accept: application/vnd.com.sun.cloud.Cloud+json
+  X-Cloud-Client-Specification-Version: 0.1
+%p
+  %b
+    Example Response:
+%pre
+  HTTP/1.1 200 OK
+  Content-Type: application/vnd.com.sun.cloud.Cloud+json
+  Content-Length: nnn
+
+  {
+  \&quot;uri&quot; : &quot;
+  %a.external{ :href => "http://example.com/" }
+    http://example.com/
+  \&quot;,
+  \&quot;vdcs&quot; : [
+  { &quot;name&quot; : &quot;First VDC&quot;, &quot;uri&quot; : &quot;
+  %a.external{ :href => "http://example.com/vdcs/123" }
+    http://example.com/vdcs/123
+  \&quot; },
+  { &quot;name&quot; : &quot;Second VDC&quot;, &quot;uri&quot; : &quot;
+  %a.external{ :href => "http://example.com/vdcs/987" }
+    http://example.com/vdcs/987
+  \&quot; }
+  ],
+  { &quot;specification_version&quot; :  [  &quot;0.8&quot;  ]  },
+  { &quot;implementation_version&quot; : &quot;3.8RC2&quot; }
+  }
+%p
+  Copyright &copy; Sun Microsystems, 2009.  This work is licensed under
+  %a.external{ :href => "http://creativecommons.org/licenses/by/3.0/" }
+    Creative Commons Attribution 3.0 Unported License
+.clear
+/

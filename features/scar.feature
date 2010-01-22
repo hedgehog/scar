@@ -22,7 +22,7 @@ Feature: Sun Cloud API Reference
   | Common Behavior                       | Common Behavior            |
   | Resources                             | Resources                  |
   | Backup                                | Backup                     |
-#  | Requests to Cloud Resources           | requests/Cloud             |
+  | Cloud                                 | Cloud                      |
 #  | Requests to Cluster Resources         | requests/Cluster           |
 #  | Requests to Public Address Resources  | requests/PublicAddress     |
 #  | Requests to Snapshot Resources        | requests/Snapshot          |

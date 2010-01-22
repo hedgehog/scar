@@ -1,0 +1,227 @@
+%h1
+  %a{ :name => "Cloud_API_Specification_-_Requests_to_Public_Address_Resources" }
+  Cloud API Specification - Requests to Public Address Resources
+%p
+  The requests documented in this section are directed to
+  %i
+    Public Address
+  resources, which represent static IP addresses that are visible to the Public Internet.
+#toc.toc
+  #toctitle.toc-title
+    %span
+      Contents
+  #toccontents.toc-contents
+    %ul
+      %li
+        1
+        %a{ :href => "#Cloud_API_Specification_-_Requests_to_Public_Address_Resources" }
+          Cloud API Specification - Requests to Public Address Resources
+      %li
+        2
+        %a{ :href => "#Get_Public_Address" }
+          Get Public Address
+      %li
+        3
+        %a{ :href => "#Update_Public_Address_Properties" }
+          Update Public Address Properties
+      %li
+        4
+        %a{ :href => "#Delete_Public_Address" }
+          Delete Public Address
+%p
+  %br
+%h1
+  %a{ :name => "Get_Public_Address" }
+  Get Public Address
+%p
+  Retrieve information about a Public Address.
+%p
+  %b
+    Synopsis:
+  GET {URI of Public Address}
+%p
+  %b
+    Request Headers:
+  Accept, Authorization, X-Cloud-Client-Specification-Version.
+%p
+  %b
+    Request Message Body:
+  N/A.
+%p
+  %b
+    Response Headers:
+  Content-Length, Content-Type.
+%p
+  %b
+    Response Message Body:
+  Public Address.
+%p
+  %b
+    Response Status:
+  200, 400, 401, 403, 404.
+%p
+  %b
+    Example Request:
+  Retrieve information about a Public Address named &quot;Load Balanced&quot;.
+%pre
+  GET /addresses/107.236.66.83
+  Host: example.com
+  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+  Accept: application/vnd.com.sun.cloud.PublicAddress+json
+  X-Cloud-Client-Specification-Version: 0.1
+%p
+  %b
+    Example Response:
+%pre
+  HTTP/1.1 200 OK
+  Content-Type: application/vnd.com.sun.cloud.PublicAddress+json
+  Content-Length: nnn
+
+  {
+  \&quot;name&quot; : &quot;Load Balanced&quot;,
+  \&quot;uri&quot; : &quot;/addresses/107.236.66.83&quot;,
+  \&quot;ip_address&quot; : &quot;107.236.66.83&quot;,
+  \&quot;netmask&quot; : &quot;255.255.0.0&quot;,
+  \&quot;gateway&quot; : &quot;107.236.1.1&quot;,
+  \&quot;dns&quot; : [ &quot;22.22.22.22&quot;, &quot;22.22.22.23&quot; ],
+  \&quot;domain_names&quot; : [ ]
+  }
+%h1
+  %a{ :name => "Update_Public_Address_Properties" }
+  Update Public Address Properties
+%p
+  Update the specified properties of a Public Address.  Only fields actually included in the request message body will be updated, and existing contents of those fields will be completely erased.
+%p
+  %b
+    Synopsis:
+  PUT { URI of Public Address }
+%p
+  %b
+    Request Headers:
+  Accept, Authorization, Content-Length, Content-Type, X-Cloud-Client-Specification-Version.
+%p
+  %b
+    Request Parameters:
+  N/A.
+%p
+  %b
+    Request Message Body:
+  Public Address
+%p
+  %b
+    Response Headers:
+  Content-Length, Content-Type.
+%p
+  %b
+    Response Message Body:
+  Status for use in tracking update progress.
+%p
+  %b
+    Response Status:
+  202, 400, 401, 403, 404.
+%p
+  %b
+    Status &quot;op&quot; Value:
+  \&quot;update-Address&quot;.
+%p
+  %b
+    Status &quot;target_uri&quot; identifies:
+  The Public Address receiving the request.
+%p
+  %b
+    Example Request:
+  Update the domain-names associated with a Public Address named &quot;Load Balanced&quot;.
+%pre
+  PUT /addresses/107.236.66.83
+  Host: example.com
+  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+  X-Cloud-Client-Specification-Version: 0.1
+
+  {
+  \&quot;domain_names&quot; : [ &quot;animal.example.com&quot;, &quot;vegetable.example.com&quot; ]
+  }
+%p
+  %b
+    Example Response:
+%pre
+  HTTP/1.1 202 Accepted
+  Content-Type: application/vnd.com.sun.cloud.Status+json
+  Content-Length: nnn
+
+  {
+  \&quot;op&quot;: &quot;update-Address&quot;,
+  \&quot;progress&quot;: 100,
+  \&quot;target_uri&quot;: &quot;/addresses/107.236.66.83&quot;,
+  \&quot;status_uri&quot;: &quot;/statuses?id=32e2r2r3r1&quot;,
+  \&quot;status&quot;: 200
+  }
+%h1
+  %a{ :name => "Delete_Public_Address" }
+  Delete Public Address
+%p
+  Release allocation of this public address to the owning VDC.
+%p
+  %b
+    Synopsis:
+  DELETE { URI of Public Address }
+%p
+  %b
+    Request Headers:
+  Authorization, X-Cloud-Client-Specification-Version.
+%p
+  %b
+    Request Parameters:
+  N/A.
+%p
+  %b
+    Request Message Body:
+  N/A.
+%p
+  %b
+    Response Headers:
+  Content-Length, Content-Type.
+%p
+  %b
+    Response Message Body:
+  Status for use in tracking deletion progress.
+%p
+  %b
+    Response Status:
+  202, 400, 401, 403, 404.
+%p
+  %b
+    Status &quot;op&quot; Value:
+  \&quot;delete-Address&quot;.
+%p
+  %b
+    Status &quot;target_uri&quot; identifies:
+  The Public Address being deleted.
+%p
+  %b
+    Example Request:
+  Delete an existing Public Address named &quot;Load Balanced&quot;
+%pre
+  DELETE /addresses/107.236.66.83
+  Host: example.com
+  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+  X-Compute-Client-Specification-Version: 0.1
+%p
+  %b
+    Example Response:
+%pre
+  HTTP/1.1 202 Accepted
+  Content-Type: application/vnd.com.sun.cloud.Status+json
+  Content-Length: nnn
+
+  {
+  \&quot;op&quot;: &quot;delete-Address&quot;,
+  \&quot;progress&quot;: 0,
+  \&quot;target_uri&quot;: &quot;/addresses/107.236.66.83&quot;,
+  \&quot;status_uri&quot;: &quot;/statuses/AddrDel/107.236.66.83&quot;
+  }
+%p
+  Copyright &copy; Sun Microsystems, 2009.  This work is licensed under
+  %a.external{ :href => "http://creativecommons.org/licenses/by/3.0/" }
+    Creative Commons Attribution 3.0 Unported License
+.clear
+/

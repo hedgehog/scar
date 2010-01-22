@@ -42,6 +42,8 @@ module NavigationHelpers
       "#{@url_root}/spec_resource_cluster"
     when /Requests to Cluster Resources/
       "#{@url_root}/CloudAPIClusterRequests"
+    when /Public Address/
+      "#{@url_root}/spec_resource_public_address"
     when /Requests to Public Address Resources/
       "#{@url_root}/CloudAPIPublicAddressRequests"
     when /Requests to Snapshot Resources/

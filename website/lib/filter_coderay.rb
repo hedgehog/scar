@@ -1,3 +1,4 @@
+ require 'rubygems'
  module Nanoc3::Filters
    class SyntaxColorize < Nanoc3::Filter
 
@@ -24,7 +25,8 @@
    end
 end
 
-include  Nanoc3::Filters
+include Nanoc3::Filters
+include Nanoc3::Helpers::Filtering
 
 
 #module ::Nanoc3::Helpers

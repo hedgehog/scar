@@ -186,7 +186,6 @@ h3. Usage
       puts "Working in #{current_branch} branch of #{repo}:"
       commands = <<-CMD.gsub(/^ /, '')
       git tag #{pre_tag}
-      git fetch #{repo}
       mkdir gh-pages
       pushd gh-pages
       git init
@@ -194,10 +193,7 @@ h3. Usage
       git fetch origin gh-pages:gh-pages
       git checkout -f gh-pages
       echo "My GitHub Page" >> index.html
-      git add .
-      git commit -a -m 'First gh-pages commit'
-      git push #{repo} gh-pages
-      cp -R #{website_contents} .
+      cp -afr #{website_contents} .
       git add .
       git commit -a -m 'First gh-pages commit of nanoc3 output'
       git push --force #{repo} gh-pages
@@ -220,7 +216,8 @@ h3. Usage
       pre_branch="pre-gh-pages-migration-branch-#{tmpid}"
       pre_tag="pre-gh-pages-migration-tag-#{tmpid}"
       repo = Kernel.`('git config --list | grep "^remote.origin.url" | sed -e "s/remote.origin.url=//"').strip
-      website_folder = ENV['WEBSITE_PATH'] || 'website/output'
+      website_folder = ENV['WEBSITE_PATH'] || 'website'
+      website_contents="./../#{website_folder}/output/*"
       tmp_folder = "/tmp/gh-pages-website-#{tmpid}"
       puts "Moving #{website_folder} folder to branch gh-pages."
       puts "Working in #{current_branch} branch of #{repo}:"
@@ -235,37 +232,22 @@ h3. Usage
       end
       raise RuntimeError.new("The git working directory is still not clean.") if dirty
       commands = <<-CMD.gsub(/^ /, '')
-      pushd ./website
+      git tag #{pre_tag}
+      pushd ./#{website_folder}
       nanco3 co
       popd
       pushd ./gh-pages
-      cp -R #{website_contents} .
+      cp -afr #{website_contents} .
       git add .
-      git commit -a -m 'First gh-pages commit of nanoc3 output'
-      git push --force #{repo} gh-pages
-      
+      git commit -a -m 'Migrate nanoc3 co output to gh-pages'
+      git push --force #{repo} gh-pages     
       popd
-      git tag #{pre_tag}
-      mv #{website_folder} #{tmp_folder}
-      git branch -m #{current_branch} #{pre_branch}
-      cp .git/index .git/index-#{tmpid}
-      git commit -a -m "temporarily removing #{website_folder} whilst moving to branch gh-pages"
-      git symbolic-ref HEAD refs/heads/gh-pages
-      rm .git/index
-      git clean -fd
-      cp -R #{tmp_folder}/* .
       git add .
-      git commit -a -m 'Import original #{website_folder} folder copied out of #{current_branch} branch'
-      git push #{repo} gh-pages
-      git checkout #{pre_branch}
-      git submodule add -b gh-pages #{repo} #{website_folder}
-      git commit -a -m "migrated folder #{website_folder} -> branch gh-pages, and replaced with submodule link"
-      git push #{repo} gh-pages
-      git branch -m #{pre_branch} #{current_branch}
+      git commit -a -m 'commit gh-pages content to parent repo'
       CMD
       commands.split(/\n/).each do |cmd|
         puts "Executing: #{cmd}"
-        # Kernel.`(cmd)
+        Kernel.`(cmd)
         unless $? == 0
           puts "To reset: 1) Look for the branch crazyexperiment"
           puts "git branch -a"

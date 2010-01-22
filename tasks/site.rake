@@ -180,7 +180,8 @@ h3. Usage
       pre_tag="pre-gh-pages-migration-tag-#{tmpid}"
       current_branch = Kernel.`('git branch | grep "^*" | sed -e "s/* //"').strip
       repo = Kernel.`('git config --list | grep "^remote.origin.url" | sed -e "s/remote.origin.url=//"').strip
-      puts "Assume you have created the gh-pages branch via github's web pages"
+      website_folder='./../website/output/*'
+      puts "Assume you have created the branch gh-pages via github's web pages"
       puts "Append text 'My GitHub Page' to index.html"
       puts "Working in #{current_branch} branch of #{repo}:"
       commands = <<-CMD.gsub(/^ /, '')
@@ -196,17 +197,20 @@ h3. Usage
       git add .
       git commit -a -m 'First gh-pages commit'
       git push #{repo} gh-pages
-      cp -R ./../website/output/* .
+      cp -R #{website_folder} .
       git add .
       git commit -a -m 'First gh-pages commit of nanoc3 output'
+      git push --force
       popd
-      git checkout #{current_branch}
-      git submodule add #{repo} ./gh-pages
-
-      git symbolic-ref HEAD refs/heads/gh-pages
 
       git checkout #{current_branch}
-      git submodule add -b gh-pages #{repo} gh-pages
+      git submodule add --branch gh-pages #{repo} ./gh-pages
+      git submodule init
+      git submodule update
+      git add .
+      git commit -a -m "repository in gh-pages folder added as submodule"
+      git push #{repo} gh-pages
+
       git commit -a -m "website -> gh-pages folder"
       git push
       CMD

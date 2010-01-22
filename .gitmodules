@@ -1,3 +1,6 @@
 [submodule "website"]
 	path = website
 	url = git@github.com:hedgehog/scar.git
+[submodule "gh-pages"]
+	path = gh-pages
+	url = git@github.com:hedgehog/scar.git

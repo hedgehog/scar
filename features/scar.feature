@@ -24,9 +24,9 @@ Feature: Sun Cloud API Reference
   | Backup                                | Backup                     |
   | Cloud                                 | Cloud                      |
   | Cluster                               | Cluster                    |
-  | Public Address                        | Public Address             |
   | Interface                             | Interface                  |
   | Location                              | Location                   |
+  | Public Address                        | Public Address             |
   | Request Status                        | Request Status             |
   | Snapshot                              | Snapshot                   |
   | Virtual Data Center                   | Virtual Data Center        |

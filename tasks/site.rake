@@ -180,7 +180,7 @@ h3. Usage
       pre_tag="pre-gh-pages-migration-tag-#{tmpid}"
       current_branch = Kernel.`('git branch | grep "^*" | sed -e "s/* //"').strip
       repo = Kernel.`('git config --list | grep "^remote.origin.url" | sed -e "s/remote.origin.url=//"').strip
-      website_folder='./../website/output/*'
+      website_contents='./../website/output/*'
       puts "Assume you have created the branch gh-pages via github's web pages"
       puts "Append text 'My GitHub Page' to index.html"
       puts "Working in #{current_branch} branch of #{repo}:"
@@ -197,7 +197,7 @@ h3. Usage
       git add .
       git commit -a -m 'First gh-pages commit'
       git push #{repo} gh-pages
-      cp -R #{website_folder} .
+      cp -R #{website_contents} .
       git add .
       git commit -a -m 'First gh-pages commit of nanoc3 output'
       git push --force #{repo} gh-pages
@@ -208,7 +208,6 @@ h3. Usage
       git submodule update
       git add .
       git commit -a -m "repository in gh-pages folder added as submodule"
-      git push 
       CMD
       commands.split(/\n/).each { |cmd| Kernel.`(cmd) }
     end
@@ -236,6 +235,16 @@ h3. Usage
       end
       raise RuntimeError.new("The git working directory is still not clean.") if dirty
       commands = <<-CMD.gsub(/^ /, '')
+      pushd ./website
+      nanco3 co
+      popd
+      pushd ./gh-pages
+      cp -R #{website_contents} .
+      git add .
+      git commit -a -m 'First gh-pages commit of nanoc3 output'
+      git push --force #{repo} gh-pages
+      
+      popd
       git tag #{pre_tag}
       mv #{website_folder} #{tmp_folder}
       git branch -m #{current_branch} #{pre_branch}

@@ -60,6 +60,8 @@ module NavigationHelpers
       "#{@url_root}/spec_resource_virtual_data_center"
     when /Requests to VDC Resources/
       "#{@url_root}/CloudAPIVDCRequests"
+    when /Virtual Machine/
+      "#{@url_root}/spec_resource_virtual_machine"
     when /Requests to VM Resources/
       "#{@url_root}/CloudAPIVMRequests"
     when /Requests to VNet Resources/

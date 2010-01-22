@@ -1,0 +1,698 @@
+%h1
+  Cloud API Specification - Requests to VM Resources
+%p
+  The requests documented in this section are directed to
+  %i
+    VM
+  resources, which represent virtual machines.
+#toc.toc
+  #toctitle.toc-title
+    %span
+      Contents
+  #toccontents.toc-contents
+    %ul
+      %li
+        1
+        %a{ :href => "#Get_VM" }
+          Get VM
+      %li
+        2
+        %a{ :href => "#Update_VM_Properties" }
+          Update VM Properties
+      %li
+        3
+        %a{ :href => "#Delete_VM" }
+          Delete VM
+      %li
+        4
+        %a{ :href => "#Attach_VM_To_Public_Address_or_VNet" }
+          Attach VM To Public Address or VNet
+      %li
+        5
+        %a{ :href => "#Detach_VM_From_Public_Address_or_VNet" }
+          Detach VM From Public Address or VNet
+      %li
+        6
+        %a{ :href => "#Create_VM_Backup_Snapshot" }
+          Create VM Backup Snapshot
+      %li
+        7
+        %a{ :href => "#Control_VM" }
+          Control VM
+%p
+  %br
+%h1
+  %a{ :name => "Get_VM" }
+  Get VM
+%p
+  Retrieve information about a specific VM associated with a specified Cluster.
+%p
+  %b
+    Synopsis:
+  GET {URI of VM from the owning Cluster}
+%p
+  %b
+    Request Headers:
+  Accept, Authorization, X-Cloud-Client-Specification-Version.
+%p
+  %b
+    Request Message Body:
+  N/A.
+%p
+  %b
+    Response Headers:
+  Content-Length, Content-Type.
+%p
+  %b
+    Response Message Body:
+  VM.
+%p
+  %b
+    Response Status:
+  200, 400, 401, 403, 404.
+%p
+  %b
+    Example Request:
+  Retrieve information about a VM instance &quot;web01&quot;.
+%pre
+  GET /vms/33333
+  Host: example.com
+  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+  Accept: application/vnd.com.sun.cloud.VM+json
+  X-Cloud-Client-Specification-Version: 0.1
+%p
+  %b
+    Example Response:
+%pre
+  HTTP/1.1 200 OK
+  Content-Type: application/vnd.com.sun.cloud.VM+json
+  Content-Length: nnn
+
+  {
+  \&quot;name&quot; : &quot;web01&quot;,
+  \&quot;uri&quot; : &quot;
+  %a.external{ :href => "http://example.com/vms/33333" }
+    http://example.com/vms/33333
+  \&quot;
+  \&quot;run_status&quot; : &quot;STARTED&quot;,
+  \&quot;description&quot; : &quot;This is the old description&quot;
+  \...
+  \&quot;back_up&quot; : &quot;
+  %a.external{ :href => "http://example.com/back-up?vm=33333" }
+    http://example.com/back-up?vm=33333
+  \&quot;
+  \&quot;attach&quot; : &quot;
+  %a.external{ :href => "http://example.com/attach?vm=33333" }
+    http://example.com/attach?vm=33333
+  \&quot;,
+  \&quot;detach&quot; : &quot;
+  %a.external{ :href => "http://example.com/detach-ip?vm=33333" }
+    http://example.com/detach-ip?vm=33333
+  \&quot;,
+  \...
+  }
+%h1
+  %a{ :name => "Update_VM_Properties" }
+  Update VM Properties
+%p
+  Update an existing virtual machine definition.
+%p
+  %b
+    Synopsis:
+  PUT { URI of VM }
+%p
+  %b
+    Request Headers:
+  Accept, Authorization, Content-Length, Content-Type, X-Cloud-Client-Specification-Version.
+%p
+  %b
+    Request Parameters:
+  N/A.
+%p
+  %b
+    Request Message Body:
+  VM.
+%p
+  %b
+    Response Headers:
+  Content-Length, Content-Type.
+%p
+  %b
+    Response Message Body:
+  Status for use in tracking update progress.
+%p
+  %b
+    Response Status:
+  202, 400, 401, 403, 404.
+%p
+  %b
+    Status &quot;op&quot; Value:
+  \&quot;update-VM&quot;.
+%p
+  %b
+    Status &quot;target_uri&quot; identifies:
+  The VM receiving the PUT.
+%p
+  %b
+    Example Request:
+  Update an existing VM named &quot;web01&quot; by modifying its description.
+%pre
+  PUT /vms/33333
+  Host: example.com
+  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+  Accept: application/vnd.com.sun.cloud.VM+json
+  Content-Length: nnn
+  Content-Type: application/vnd.com.sun.cloud.VM+json
+  X-Cloud-Client-Specification-Version: 0.1
+
+  {
+  \&quot;description&quot; : &quot;This is the new description&quot;
+  }
+%p
+  %b
+    Example Response:
+%pre
+  HTTP/1.1 202 Accepted
+  Content-Type: application/vnd.com.sun.cloud.Status+json
+  Content-Length: nnn
+
+  {
+  \&quot;op&quot;: &quot;update-VM&quot;,
+  \&quot;progress&quot;: 100,
+  \&quot;target_uri&quot;: &quot;/vms/33333&quot;,
+  \&quot;status_uri&quot;: &quot;/statuses?op=update-vm&amp;seq=912874502&quot;,
+  \&quot;status&quot; : 200
+  }
+%h1
+  %a{ :name => "Delete_VM" }
+  Delete VM
+%p
+  Delete an existing virtual machine currently associated with the specified virtual private data center.
+%p
+  %b
+    Synopsis:
+  DELETE { URI of VM }
+%p
+  %b
+    Request Headers:
+  Authorization, X-Compute-Client-Specification-Version.
+%p
+  %b
+    Request Parameters:
+  N/A.
+%p
+  %b
+    Request Message Body:
+  N/A.
+%p
+  %b
+    Response Headers:
+  Content-Length, Content-Type.
+%p
+  %b
+    Response Message Body:
+  Status for use in tracking deletion progress.
+%p
+  %b
+    Response Status:
+  202, 400, 401, 403, 404.
+%p
+  %b
+    Status &quot;op&quot; Value:
+  \&quot;delete-VM&quot;.
+%p
+  %b
+    Status &quot;target_uri&quot; identifies:
+  The VM being deleted.
+%p
+  %b
+    Example Request:
+  Delete an existing VM named &quot;AppTier&quot; from an existing VDC named &quot;MyStore&quot;.
+%pre
+  DELETE /vdcs/MyStore/vms/AppTier
+  Host: example.com
+  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+  X-Compute-Client-Specification-Version: 0.1
+%p
+  %b
+    Example Response:
+%pre
+  HTTP/1.1 202 Accepted
+  Content-Type: application/vnd.com.sun.cloud.Status+json
+  Content-Length: nnn
+
+  {
+  \&quot;op&quot;: &quot;delete-VM&quot;,
+  \&quot;progress&quot;: 0,
+  \&quot;target_uri&quot;: &quot;/vdcs/MyStore/vms/AppTier&quot;,
+  \&quot;status_uri&quot;: &quot;/statuses?op=delete-vm&amp;vm=00eAA.f*&quot;
+  }
+%h1
+  %a{ :name => "Attach_VM_To_Public_Address_or_VNet" }
+  Attach VM To Public Address or VNet
+%p
+  Attach the specified VM to a Public Address or VNet, depending on the media type of the included representation.
+%p
+  %b
+    Synopsis:
+  POST { VM's attach URI }
+%p
+  %b
+    Request Headers:
+  Authorization, Content-Length, Content-Type, X-Cloud-Client-Specification-Version.
+%p
+  %b
+    Request Parameters:
+  N/A.
+%p
+  %b
+    Request Message Body:
+  Public Address or VNet resource model.  Only the &quot;uri&quot; element of this resource model
+  %b
+    MUST
+  be included.
+%p
+  %b
+    Response Headers:
+  Content-Length, Content-Type.
+%p
+  %b
+    Response Message Body:
+  Status for use in tracking attachment progress.
+%p
+  %b
+    Response Status:
+  202, 400, 401, 403, 404.
+%p
+  %b
+    Status &quot;op&quot; Value:
+  \&quot;attach&quot;.
+%p
+  %b
+    Status &quot;target_uri&quot; identifies:
+  The VM being attached to.
+%p
+  %b
+    Example 1 Request:
+  Attach VM &quot;web01&quot; to Public Address &quot;Load Balanced&quot;.
+%pre
+  POST /attach?vm=33333
+  Host: example.com
+  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+  Content-Length: nnn
+  Content-Type: application/vnd.com.sun.cloud.PublicAddress+json
+  X-Cloud-Client-Specification-Version: 0.1
+
+  {
+  \&quot;uri&quot; : &quot;
+  %a.external{ :href => "http://example.com/addresses/107.236.66.83" }
+    http://example.com/addresses/107.236.66.83
+  \&quot;
+  }
+%p
+  %b
+    Example 1 Response:
+%pre
+  HTTP/1.1 202 Accepted
+  Content-Type: application/vnd.com.sun.cloud.Status+json
+  Content-Length: nnn
+
+  {
+  \&quot;op&quot;: &quot;attach&quot;,
+  \&quot;progress&quot;: 0,
+  \&quot;target_uri&quot;: &quot;/X03/VirtualMachines/F83&quot;,
+  \&quot;status_uri&quot;: &quot;/statuses?op=attach-public&amp;a=107.236.66.83&quot;
+  }
+%p
+  %b
+    Example 2 Request:
+  Attach VM &quot;web01&quot; to VNet &quot;Front End&quot;.
+%pre
+  POST /attach?vm=33333
+  Host: example.com
+  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+  Content-Length: nnn
+  Content-Type: application/vnd.com.sun.cloud.VNet+json
+  X-Cloud-Client-Specification-Version: 0.1
+
+  {
+  \&quot;uri&quot; : &quot;
+  %a.external{ :href => "http://example.com/vnets/abcdefg" }
+    http://example.com/vnets/abcdefg
+  \&quot;
+  }
+%p
+  %b
+    Example 2 Response:
+%pre
+  HTTP/1.1 202 Accepted
+  Content-Type: application/vnd.com.sun.cloud.Status+json
+  Content-Length: nnn
+
+  {
+  \&quot;op&quot;: &quot;attach&quot;,
+  \&quot;progress&quot;: 100,
+  \&quot;target_uri&quot;: &quot;/X03/VirtualMachines/F83&quot;,
+  \&quot;status_uri&quot;: &quot;/statuses?op=attach-public&amp;v=abcdefg&quot;,
+  \&quot;status&quot;: 200
+  }
+%h1
+  %a{ :name => "Detach_VM_From_Public_Address_or_VNet" }
+  Detach VM From Public Address or VNet
+%p
+  Detach the specified VM from a Public Address or VNet, depending on the media type of the included representation.
+%p
+  %b
+    Synopsis:
+  POST { VM's detach URI }
+%p
+  %b
+    Request Headers:
+  Authorization, Content-Length, Content-Type, X-Cloud-Client-Specification-Version.
+%p
+  %b
+    Request Parameters:
+  N/A.
+%p
+  %b
+    Request Message Body:
+  Public Address or VNet resource model.  Only the &quot;uri&quot; element of this resource model
+  %b
+    MUST
+  be included.
+%p
+  %b
+    Response Headers:
+  Content-Length, Content-Type.
+%p
+  %b
+    Response Message Body:
+  Status for use in tracking detachment progress.
+%p
+  %b
+    Response Status:
+  202, 400, 401, 403, 404.
+%p
+  %b
+    Status &quot;op&quot; Value:
+  \&quot;detach&quot;.
+%p
+  %b
+    Status &quot;target_uri&quot; identifies:
+  The VM being detached from.
+%p
+  %b
+    Example 1 Request:
+  Detach VM &quot;web01&quot; from Public Address &quot;Load Balanced&quot;.
+%pre
+  POST /detach?vm=33333
+  Host: example.com
+  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+  Content-Length: nnn
+  Content-Type: application/vnd.com.sun.cloud.PublicAddress+json
+  X-Cloud-Client-Specification-Version: 0.1
+
+  {
+  \&quot;uri&quot; : &quot;
+  %a.external{ :href => "http://example.com/addresses/107.236.66.83" }
+    http://example.com/addresses/107.236.66.83
+  \&quot;
+  }
+%p
+  %b
+    Example 1 Response:
+%pre
+  HTTP/1.1 202 Accepted
+  Content-Type: application/vnd.com.sun.cloud.Status+json
+  Content-Length: nnn
+
+  {
+  \&quot;op&quot;: &quot;detach&quot;,
+  \&quot;progress&quot;: 100,
+  \&quot;target_uri&quot;: &quot;/X03/VirtualMachines/F83&quot;,
+  \&quot;status_uri&quot;: &quot;/statuses?op=detach&amp;a=107.236.66.83&quot;,
+  \&quot;status&quot;: 200
+  }
+%p
+  %b
+    Example 2 Request:
+  Detach VM &quot;web01&quot; from VNet &quot;Front End&quot;.
+%pre
+  POST /detach?vm=33333
+  Host: example.com
+  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+  Content-Length: nnn
+  Content-Type: application/vnd.com.sun.cloud.VNet+json
+  X-Cloud-Client-Specification-Version: 0.1
+
+  {
+  \&quot;uri&quot; : &quot;
+  %a.external{ :href => "http://example.com/vnets/abcdefg" }
+    http://example.com/vnets/abcdefg
+  \&quot;
+  }
+%p
+  %b
+    Example 2 Response:
+%pre
+  HTTP/1.1 202 Accepted
+  Content-Type: application/vnd.com.sun.cloud.Status+json
+  Content-Length: nnn
+
+  {
+  \&quot;op&quot;: &quot;detach&quot;,
+  \&quot;progress&quot;: 0,
+  \&quot;target_uri&quot;: &quot;/X03/VirtualMachines/F83&quot;,
+  \&quot;status_uri&quot;: &quot;/statuses?op=detach&amp;v=web01&quot;
+  }
+%h1
+  %a{ :name => "Create_VM_Backup_Snapshot" }
+  Create VM Backup Snapshot
+%p
+  Capture a backup snapshot of this VM, based on the characteristics in this request.
+%p
+  %b
+    Synopsis:
+  POST { VM's back_up URI }
+%p
+  %b
+    Request Headers:
+  Authorization, Content-Length, Content-Type, X-Cloud-Client-Specification-Version.
+%p
+  %b
+    Request Parameters:
+  N/A.
+%p
+  %b
+    Request Message Body:
+  Backup resource model.
+%p
+  %b
+    Response Headers:
+  Content-Length, Content-Type.
+%p
+  %b
+    Response Message Body:
+  Status for use in tracking backup progress.
+%p
+  %b
+    Response Status:
+  202, 400, 401, 403, 404.
+%p
+  %b
+    Status &quot;op&quot; Value:
+  \&quot;back_up&quot;.
+%p
+  %b
+    Status &quot;target_uri&quot; identifies:
+  The Backup being created.
+%p
+  %b
+    Example Request:
+  Create backup of VM &quot;web01&quot;.
+%pre
+  POST /back_up?vm=33333
+  Host: example.com
+  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+  Content-Length: nnn
+  Content-Type: application/vnd.com.sun.cloud.Backup+json
+  X-Cloud-Client-Specification-Version: 0.1
+
+  {
+  \&quot;name&quot; : &quot;web01_backup_YYYYMMDD&quot;
+  }
+%p
+  %b
+    Example Response:
+%pre
+  HTTP/1.1 202 Accepted
+  Content-Type: application/vnd.com.sun.cloud.Status+json
+  Content-Length: nnn
+
+  {
+  \&quot;op&quot;: &quot;back_up&quot;,
+  \&quot;progress&quot;: 0,
+  \&quot;target_uri&quot;: &quot;/X03/VirtualMachines/F83/Backups/456&quot;,
+  \&quot;status_uri&quot;: &quot;/statuses?op=back_up&amp;b=456&quot;
+  }
+%h1
+  %a{ :name => "Control_VM" }
+  Control VM
+%p
+  A
+  %i
+    VM
+  resource model may include one or more URIs in the
+  %i
+    controllers
+  field, each keyed by the name of a state change being requested.  Only the state changes that are legal for the current state of the VM will be included.  A client application requests a state change by doing a POST to the corresponding URI, and including in the request body an arbitrary set of name/value pairs used to influence the operation of the state change.
+%p
+  By convention, the name/value pairs included in the request may contain a field named
+  %i
+    note
+  whose value is a text string intended for recording in a log on the server, to help identify this request during log file analysis.
+  %b
+    Synopsis:
+  POST {URI provided in VM representation}
+%p
+  %b
+    Request Headers:
+  Accept, Authorization, Content-Length, Content-Type, X-Cloud-Client-Specification-Version.
+%p
+  %b
+    Request Parameters:
+  N/A.
+%p
+  %b
+    Request Message Body:
+  Name/value pairs, with media type &quot;application/json&quot;.
+%p
+  %b
+    Response Headers:
+  Content-Length, Content-Type.
+%p
+  %b
+    Response Message Body:
+  Status for use in tracking request progress.
+%p
+  %b
+    Response Status:
+  202, 400, 401, 403, 404.
+%p
+  %b
+    Status &quot;op&quot; Value:
+  \&quot;start-VM&quot;, &quot;stop-VM&quot;, &quot;reboot-VM&quot;, &quot;hibernate-VM&quot;, &quot;resume-VM&quot;
+%p
+  %b
+    Status &quot;target_uri&quot; identifies:
+  The VM receiving the request.
+%p
+  %b
+    Example Request:
+  Start this VM.
+%pre
+  POST /vms/33333?control=start
+  Host: example.com
+  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+  Content-Length: nnn
+  Content-Type: application/json
+  X-Compute-Client-Specification-Version: 0.1
+
+  {
+  \&quot;note&quot; : &quot;Start this web tier server&quot;
+  }
+%p
+  %b
+    Example Response:
+%pre
+  HTTP/1.1 202 Accepted
+  Content-Type: application/vnd.com.sun.cloud.Status+json
+  Content-Length: nnn
+
+  {
+  \&quot;op&quot;: &quot;start-VM&quot;,
+  \&quot;progress&quot;: 0,
+  \&quot;target_uri&quot;: &quot;/vms/33333&quot;,
+  \&quot;status_uri&quot;: &quot;/statuses?op=start-VM&amp;vm=33333&quot;
+  }
+%p
+  Here is a table describing the effects and usage of the available control URIs.
+%div{ :style => "overflow-x: auto;" }
+  %div{ :style => "margin: 0px 2px 0px 2px;" }
+    %table{ "-" => "", :border => "1", :width => "100%" }
+      %tr
+        %th
+          Change Type
+        %th
+          Start State
+        %th
+          Transitional State
+        %th
+          Transitional State
+        %th
+          Transitional State
+        %th
+          Destination State
+      %tr
+        %td
+          start
+        %td
+          STOPPED
+        %td
+          STARTING
+        %td
+        %td
+        %td
+          STARTED
+      %tr
+        %td
+          stop
+        %td
+          STARTED
+        %td
+          STOPPING
+        %td
+        %td
+        %td
+          STOPPED
+      %tr
+        %td
+          reboot
+        %td
+          STARTED
+        %td
+          STOPPING
+        %td
+          STOPPED
+        %td
+          STARTING
+        %td
+          STARTED
+      %tr
+        %td
+          hibernate
+        %td
+          STARTED
+        %td
+          SLEEPING
+        %td
+        %td
+        %td
+          ASLEEP
+      %tr
+        %td
+          resume
+        %td
+          ASLEEP
+        %td
+          WAKING
+        %td
+        %td
+        %td
+          STARTED
+%p
+  Copyright &copy; Sun Microsystems, 2009.  This work is licensed under
+  %a.external{ :href => "http://creativecommons.org/licenses/by/3.0/" }
+    Creative Commons Attribution 3.0 Unported License
+.clear
+/

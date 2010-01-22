@@ -29,7 +29,7 @@ Feature: Sun Cloud API Reference
   | Location                              | Location                   |
   | Request Status                        | Request Status             |
   | Snapshot                              | Snapshot                   |
-#  | Requests to VDC Resources             | requests/VirtualDataCenter |
+  | Virtual Data Center                   | Virtual Data Center        |
 #  | Requests to VM Resources              | requests/VirtualMachine    |
 #  | Requests to VNet Resources            | requests/VirtualNet        |
 #  | Requests to Volume Resources          | requests/Volume            |

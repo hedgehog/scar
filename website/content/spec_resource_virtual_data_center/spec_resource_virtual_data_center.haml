@@ -1,0 +1,260 @@
+%h1
+  Cloud API Specification - Requests to VDC Resources
+%p
+  The requests documented in this section are directed to
+  %i
+    VDC
+  resources, which represent an entire Virtual Data Center.  The
+  %i
+    VDC URI
+  used to retrieve a given VDC representation will be defined by the service implementor, not by this API specification.  From there on, the URIs for all resources related to this VDC can be discovered (directly or indirectly) from the VDC representation itself.
+%p
+  A VDC resource is read only from the perspective of this API, although its server side content is modified as a side effect of many other API requests.  You should plan on performing the Get VDC request periodically to update your client's view of the VDC resource model.
+#toc.toc
+  #toctitle.toc-title
+    %span
+      Contents
+  #toccontents.toc-contents
+    %ul
+      %li
+        1
+        %a{ :href => "#Get_VDC" }
+          Get VDC
+      %li
+        2
+        %a{ :href => "#Create_Public_Address" }
+          Create Public Address
+      %li
+        3
+        %a{ :href => "#Create_Volume" }
+          Create Volume
+%p
+  %br
+%h1
+  %a{ :name => "Get_VDC" }
+  Get VDC
+%p
+  Retrieve information about a cloud service VDC.
+%p
+  %b
+    Synopsis:
+  GET {VDC URI}
+%p
+  %b
+    Request Headers:
+  Accept, Authorization, X-Cloud-Client-Specification-Version.
+%p
+  %b
+    Request Parameters:
+  N/A.
+%p
+  %b
+    Request Message Body:
+  N/A.
+%p
+  %b
+    Response Headers:
+  Content-Length, Content-Type.
+%p
+  %b
+    Response Message Body:
+  VDC.
+%p
+  %b
+    Response Status:
+  200, 400, 401, 403.
+%p
+  %b
+    Example Request:
+  Retrieve information about a VDC.
+%pre
+  GET /
+  Host: example.com
+  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+  Accept: application/vnd.com.sun.cloud.VDC+json
+  X-Cloud-Client-Specification-Version: 0.1
+%p
+  %b
+    Example Response:
+%pre
+  HTTP/1.1 200 OK
+  Content-Type: application/vnd.com.sun.cloud.VDC+json
+  Content-Length: nnn
+
+  {
+  \&quot;name&quot; : &quot;Example VDC&quot;,
+  \&quot;uri&quot; : &quot;
+  %a.external{ :href => "http://example.com/vdc/123456" }
+    http://example.com/vdc/123456
+  \&quot;,
+  \&quot;addresses&quot; : [ ... ],
+  \&quot;cluster&quot; : { ... },
+  \&quot;tags&quot; : [ ... ],
+  \&quot;volumes&quot;: [ ... ],
+  \&quot;vm_templates&quot; : &quot;
+  %a.external{ :href => "http://example.com/templates/catalog" }
+    http://example.com/templates/catalog
+  \&quot;
+  }
+%h1
+  %a{ :name => "Create_Public_Address" }
+  Create Public Address
+%p
+  Request the Allocation of a new Public Address for use in this VDC.  Most of the fields of a Public Address resource are automatically set in the course of its use; the only field specified at creation time is its logical name.  The request is a POST to the URI of the VDC; the Content-Type
+  %b
+    MUST
+  be &quot;application/vnd.com.sun.cloud.PublicAddress+json&quot;
+%p
+  %b
+    Synopsis:
+  POST { URI of VDC }
+%p
+  %b
+    Request Headers:
+  Accept, Authorization, Content-Length, Content-Type, X-Cloud-Client-Specification-Version.
+%p
+  %b
+    Request Parameters:
+  N/A.
+%p
+  %b
+    Request Message Body:
+  Public Address.
+%p
+  %b
+    Response Headers:
+  Content-Length, Content-Type.
+%p
+  %b
+    Response Message Body:
+  Status for use in tracking Address allocaiton process.
+%p
+  %b
+    Response Status:
+  202, 400, 401, 403, 404.
+%p
+  %b
+    Status &quot;op&quot; Value:
+  \&quot;new-Address&quot;.
+%p
+  %b
+    Status &quot;target_uri&quot; identifies:
+  The new Public Address once it is allocated.
+%p
+  %b
+    Example 1 Request:
+  Create a new Public Address named
+  %i
+    Load Balanced
+  \.
+%pre
+  POST /vdcs/vdc001
+  Host: example.com
+  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+  Accept: application/vnd.com.sun.cloud.PublicAddress+json
+  Content-Length: nnn
+  Content-Type: application/vnd.com.sun.cloud.PublicAddress+json
+  X-Cloud-Specification-Version: 0.1
+
+  {
+  \&quot;name&quot; : &quot;Load Balanced&quot;
+  }
+%p
+  %b
+    Example 1 Response:
+%pre
+  HTTP/1.1 202 Accepted
+  Content-Type: application/vnd.com.sun.cloud.Status+json
+  Content-Length: nnn
+
+  {
+  \&quot;op&quot;: &quot;new-Address&quot;,
+  \&quot;progress&quot;: 100,
+  \&quot;target_uri&quot;: &quot;/addresses/107.236.66.83&quot;,
+  \&quot;status_uri&quot;: &quot;/statuses?op=na&amp;r=0389.aa6&quot;,
+  \&quot;status&quot;: 201
+  }
+%h1
+  %a{ :name => "Create_Volume" }
+  Create Volume
+%p
+  Request the creation of a WebDAV volume on the storage service for the owner of this VDC.  Most of the fields of a Volume resource are automatically set in the course of its use; the only field required at creation time is its logical name. The request is a POST to the URI of the VDC; the Content-Type
+  %b
+    MUST
+  be &quot;application/vnd.com.sun.cloud.Volume+json&quot;
+%p
+  %b
+    Synopsis:
+  POST { URI of VDC }
+%p
+  %b
+    Request Headers:
+  Accept, Authorization, Content-Length, Content-Type, X-Cloud-Client-Specification-Version.
+%p
+  %b
+    Request Parameters:
+  N/A.
+%p
+  %b
+    Request Message Body:
+  Volume.
+%p
+  %b
+    Response Headers:
+  Content-Length, Content-Type.
+%p
+  %b
+    Response Message Body:
+  Status for use in tracking volume-creation progress.
+%p
+  %b
+    Response Status:
+  202, 400, 401, 403, 404.
+%p
+  %b
+    Status &quot;op&quot; Value:
+  \&quot;new-Volume&quot;.
+%p
+  %b
+    Status &quot;target_uri&quot; identifies:
+  The new Volume once it is created.
+%p
+  %b
+    Example Request:
+  Create a new Volume named
+  %i
+    backups
+  \.
+%pre
+  POST /vdcs/vdc001
+  Host: example.com
+  Authorization: Basic xxxxxxxxxxxxxxxxxxx
+  Accept: application/vnd.com.sun.cloud.Volume+json
+  Content-Length: nnn
+  Content-Type: application/vnd.com.sun.cloud.Volume+json
+  X-Cloud-Client-Specification-Version: 0.1
+
+  {
+  \&quot;name&quot; : &quot;backups&quot;,
+  \&quot;tags&quot; : [ &quot;default&quot; ]
+  }
+%p
+  %b
+    Example Response:
+%pre
+  HTTP/1.1 202 Accepted
+  Content-Type: application/vnd.com.sun.cloud.Status+json
+  Content-Length: nnn
+
+  {
+  \&quot;op&quot;: &quot;new-Volume&quot;,
+  \&quot;progress&quot;: 0,
+  \&quot;target_uri&quot;: &quot;/volumes/1234567890&quot;,
+  \&quot;status_uri&quot;: &quot;/statuses?op=nv&amp;name=backups&quot;
+  }
+%p
+  Copyright &copy; Sun Microsystems, 2009.  This work is licensed under
+  %a.external{ :href => "http://creativecommons.org/licenses/by/3.0/" }
+    Creative Commons Attribution 3.0 Unported License
+.clear
+/

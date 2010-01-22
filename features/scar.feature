@@ -21,7 +21,7 @@ Feature: Sun Cloud API Reference
   | Spec Home                             | Spec Home                  |
   | Common Behavior                       | Common Behavior            |
   | Resources                             | Resources                  |
-#  | Requests to Backup Resources          | requests/Backup            |
+  | Backup                                | Backup                     |
 #  | Requests to Cloud Resources           | requests/Cloud             |
 #  | Requests to Cluster Resources         | requests/Cluster           |
 #  | Requests to Public Address Resources  | requests/PublicAddress     |

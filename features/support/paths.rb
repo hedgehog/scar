@@ -30,6 +30,8 @@ module NavigationHelpers
       "#{@url_root}/spec_resources"
     when /Resource Models/
       "#{@url_root}/CloudAPISpecificationResourceModels"
+    when /Backup/
+      "#{@url_root}/spec_resource_backup"
     when /Requests to Backup Resources/
       "#{@url_root}/CloudAPIBackupRequests"
     when /Requests to Cloud Resources/

@@ -222,15 +222,16 @@ h3. Usage
       puts "Moving #{website_folder} folder to branch gh-pages."
       puts "Working in #{current_branch} branch of #{repo}:"
       gitstatus=Kernel.send(:`,'git status')
-      dirty = gitstatus =~ /nothing to commit (working directory clean)/i
-      if dirty
+      clean = gitstatus =~ /nothing to commit (working directory clean)/i
+      stashed=false
+      unless clean
         gstash = "git stash save 'Uncommited changes stashed pre gh-pages migration: #{tmpid}'"
         stashed=true
         Kernel.send(:`,gstash)
         gitstatus=Kernel.send(:`,'git status')
-        dirty = gitstatus =~ /nothing to commit (working directory clean)/i
+        clean = gitstatus =~ /nothing to commit (working directory clean)/i
       end
-      raise RuntimeError.new("The git working directory is still not clean.") if dirty
+      raise RuntimeError.new("The git working directory is still not clean.") unless clean
       commands = <<-CMD.gsub(/^ /, '')
       git tag #{pre_tag}
       pushd ./#{website_folder}
@@ -247,18 +248,20 @@ h3. Usage
       CMD
       commands.split(/\n/).each do |cmd|
         puts "Executing: #{cmd}"
-        Kernel.`(cmd)
-        unless $? == 0
-          puts "To reset: 1) Look for the branch crazyexperiment"
-          puts "git branch -a"
-          puts "To reset: 2) if there is a branch crazyexperiment"
-          puts "git checkout crazyexperiment"
-          puts "To reset: 3) if there is no master branch"
-          puts "git checkout -b master"
-          puts "To reset: 4) Once satisfied everything is as you started"
-          puts "git branch -D crazyexperiment"
-          raise RuntimeError.new("Somthing went wrong.")
-        end
+        # Kernel.send(:`,cmd)
+        puts "Response:"
+        puts "Code: #{$?}"
+#        unless $? == 0
+#          puts "To reset: 1) Look for the branch crazyexperiment"
+#          puts "git branch -a"
+#          puts "To reset: 2) if there is a branch crazyexperiment"
+#          puts "git checkout crazyexperiment"
+#          puts "To reset: 3) if there is no master branch"
+#          puts "git checkout -b master"
+#          puts "To reset: 4) Once satisfied everything is as you started"
+#          puts "git branch -D crazyexperiment"
+#          raise RuntimeError.new("Somthing went wrong.")
+#        end
       end
       Kernel.send(:`, 'git stash apply stash@{0}') if stashed
       gitstatus=Kernel.send(:`,'git status')

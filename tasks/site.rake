@@ -172,5 +172,88 @@ h3. Usage
 			end
 		end
 	end
+  # Hat-tip to Dr Nic's sake tasks for the migration code
+  namespace 'github' do
+    desc "Creates the gh-pages branch, and links to it as 'website' as submodule"
+    task :setup do
+      current_branch = Kernel.`('git branch | grep "^*" | sed -e "s/* //"').strip
+      repo = Kernel.`('git config --list | grep "^remote.origin.url" | sed -e "s/remote.origin.url=//"').strip
+      puts "Working in #{current_branch} branch of #{repo}:"
+      commands = <<-CMD.gsub(/^ /, '')
+      git symbolic-ref HEAD refs/heads/gh-pages
+      rm .git/index
+      git clean -fdx
+      echo "My GitHub Page" > index.html
+      git add .
+      git commit -a -m 'First gh-pages commit'
+      git push origin gh-pages
+      git checkout #{current_branch}
+      git submodule add -b gh-pages #{repo} website
+      git commit -a -m "website -> gh-pages folder"
+      git push
+      CMD
+      commands.split(/\n/).each { |cmd| Kernel.`(cmd) }
+    end
+  end
+  namespace 'github' do
+    desc "Migrates an existing website folder into a gh-pages branch, and links back as submodule"
+    task :migrate do
+      tmpid = Time.now.gmtime.to_s.gsub(/ |:/,'')
+      current_branch = Kernel.`('git branch | grep "^*" | sed -e "s/* //"').strip
+      pre_branch="pre-gh-pages-migration-branch-#{tmpid}"
+      repo = Kernel.`('git config --list | grep "^remote.origin.url" | sed -e "s/remote.origin.url=//"').strip
+      website_folder = ENV['WEBSITE_PATH'] || 'website/output'
+      tmp_folder = "/tmp/gh-pages-website-#{tmpid}"
+      puts "Moving #{website_folder} folder to branch gh-pages."
+      puts "Working in #{current_branch} branch of #{repo}:"
+      gitstatus=Kernel.send(:`,'git status')
+      dirty = gitstatus =~ /nothing to commit (working directory clean)/i
+      if dirty
+        gstash = "git stash save 'Uncommited changes stashed pre gh-pages migration: #{tmpid}'"
+        stashed=true
+        Kernel.send(:`,gstash)
+        gitstatus=Kernel.send(:`,'git status')
+        dirty = gitstatus =~ /nothing to commit (working directory clean)/i
+      end
+      raise RuntimeError.new("The git working directory is still not clean.") if dirty
+      commands = <<-CMD.gsub(/^ /, '')
+      git tag #{pre_branch}
+      mv #{website_folder} #{tmp_folder}
+      git branch -m #{current_branch} #{pre_branch}
+      cp .git/index .git/index-#{tmpid}
+      git commit -a -m "temporarily removing #{website_folder} whilst moving to branch gh-pages"
+      git symbolic-ref HEAD refs/heads/gh-pages
+      rm .git/index
+      git clean -fd
+      cp -R #{tmp_folder}/* .
+      git add .
+      git commit -a -m 'Import original #{website_folder} folder copied out of #{current_branch} branch'
+      git push #{repo} gh-pages
+      git checkout #{pre_branch}
+      git submodule add -b gh-pages #{repo} #{website_folder}
+      git commit -a -m "migrated folder #{website_folder} -> branch gh-pages, and replaced with submodule link"
+      git push #{repo} gh-pages
+      git branch -m #{pre_branch} #{current_branch}
+      CMD
+      commands.split(/\n/).each do |cmd|
+        puts "Executing: #{cmd}"
+        # Kernel.`(cmd)
+        unless $? == 0
+          puts "To reset: 1) Look for the branch crazyexperiment"
+          puts "git branch -a"
+          puts "To reset: 2) if there is a branch crazyexperiment"
+          puts "git checkout crazyexperiment"
+          puts "To reset: 3) if there is no master branch"
+          puts "git checkout -b master"
+          puts "To reset: 4) Once satisfied everything is as you started"
+          puts "git branch -D crazyexperiment"
+          raise RuntimeError.new("Somthing went wrong.")
+        end
+      end
+      Kernel.send(:`, 'git stash apply stash@{0}') if stashed
+      gitstatus=Kernel.send(:`,'git status')
+      puts gitstatus
+    end
+  end
 
 end

@@ -34,5 +34,5 @@ Feature: Sun Cloud API Reference
   | Virtual Machine Template              | Virtual Machine Template   |
   | Virtual Network                       | Virtual Network            |
   | Volume                                | Volume                     |
-  | Command Line Client                   | Command Line Client        |
+  | Sun's CLI                             | Sun's CLI                  |
 

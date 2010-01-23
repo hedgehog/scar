@@ -22,8 +22,8 @@ module NavigationHelpers
       @url="#{@url_root}/spec_home/"
     when /Home/
       @url="#{@url_root}/Home"
-    when /Command Line Client/
-      @url="#{@url_root}/spec_command_line_client"
+    when /Sun's CLI/
+      @url="#{@url_root}/implementation/command_line_client/sun"
     when /Common Behavior/
       @url="#{@url_root}/spec_common"
     when /Common Behaviors/

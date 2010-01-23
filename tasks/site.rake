@@ -257,8 +257,8 @@ h3. Usage
       CMD
       commands.split(/\n/).each do |cmd|
         puts "Executing: #{cmd}"
-        # response=Kernel.send(:`,cmd)
-        #puts "Code: #{$?} Response:\n#{response}"
+        response=Kernel.send(:`,cmd)
+        puts "Code: #{$?}\nResponse:\n#{response}"
 #        unless $? == 0
 #          puts "To reset: 1) Look for the branch crazyexperiment"
 #          puts "git branch -a"
@@ -272,7 +272,7 @@ h3. Usage
 #        end
       end
       if stashed
-        puts "Apply the Git stash created before migrating the website."
+        puts "Apply (pop) the Git stash created before migrating the website."
         Kernel.send(:`, 'git stash pop stash@{0}')
       end
       gitstatus=Kernel.send(:`,'git status')

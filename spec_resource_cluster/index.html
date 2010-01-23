@@ -1,0 +1,1062 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Scar (Sun's cloud API reference) Project</title>
+</head>
+<body>
+<p>
+    RESTful Cloud API Specification
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"><link href="../stylesheet.css" media="screen" rel="stylesheet" type="text/css"><link href="../coderay.css" media="screen" rel="stylesheet" type="text/css"></p>
+    <div id="main">
+      <h1>
+        Cloud API Specification - Requests to Cluster Resources
+      </h1>
+      <p>
+        The requests documented in this section are directed to
+        <i>
+          Cluster
+        </i>
+        resources, which represent sets of virtual machines and private networks.
+      </p>
+      <div class="toc" id="toc">
+        <div class="toc-title" id="toctitle">
+          <span>
+            Contents
+          </span>
+        </div>
+        <div class="toc-contents" id="toccontents">
+          <ul>
+<li>
+              1
+              <a href="#Get_Cluster">
+                Get Cluster
+              </a>
+            </li>
+            <li>
+              2
+              <a href="#Update_Cluster_Properties">
+                Update Cluster Properties
+              </a>
+            </li>
+            <li>
+              3
+              <a href="#Delete_Cluster">
+                Delete Cluster
+              </a>
+            </li>
+            <li>
+              4
+              <a href="#Create_VM">
+                Create VM
+              </a>
+            </li>
+            <li>
+              5
+              <a href="#Create_VNet">
+                Create VNet
+              </a>
+            </li>
+            <li>
+              6
+              <a href="#Create_Cluster">
+                Create Cluster
+              </a>
+            </li>
+            <li>
+              7
+              <a href="#Control_Cluster">
+                Control Cluster
+              </a>
+            </li>
+          </ul>
+</div>
+      </div>
+      <p>
+        <br></p>
+      <h1>
+        <a name="Get_Cluster"></a>
+        Get Cluster
+      </h1>
+      <p>
+        Retrieve information about a specific cluster.
+      </p>
+      <p>
+        <b>
+          Synopsis:
+        </b>
+        GET {URI of Cluster from representation of containing VDC}
+      </p>
+      <p>
+        <b>
+          Request Headers:
+        </b>
+        Accept, Authorization, X-Cloud-Client-Specification-Version.
+      </p>
+      <p>
+        <b>
+          Request Message Body:
+        </b>
+        N/A.
+      </p>
+      <p>
+        <b>
+          Response Headers:
+        </b>
+        Content-Length, Content-Type.
+      </p>
+      <p>
+        <b>
+          Response Message Body:
+        </b>
+        Cluster.
+      </p>
+      <p>
+        <b>
+          Response Status:
+        </b>
+        200, 400, 401, 403, 404.
+      </p>
+      <p>
+        <b>
+          Example Request:
+        </b>
+        Retrieve information about a Cluster instance named "Staging WebTier".
+      </p>
+      <pre>GET /clusters/123456
+      Host: example.com
+      Authorization: Basic xxxxxxxxxxxxxxxxxxx
+      Accept: application/vnd.com.sun.cloud.Cluster+json
+      X-Cloud-Client-Specification-Version: 0.1</pre>
+      <p>
+        <b>
+          Example Response:
+        </b>
+      </p>
+      <pre>HTTP/1.1 200 OK
+      Content-Type: application/vnd.com.sun.cloud.Cluster+json
+      Content-Length: nnn
+      {
+      "name": "Staging Web Tier",
+      "uri" : "
+      <a class="external" href="http://example.com/clusters/123456">
+        http://example.com/clusters/123456
+      </a>
+      ",
+      "tags" : [ "staging" ],
+      "vms": [
+      { "name" : "web01", "uri" : "
+      <a class="external" href="http://example.com/vms/0003">
+        http://example.com/vms/0003
+      </a>
+      ", ... },
+      ...
+      ],
+      "controllers" : {
+      "halt" : "
+      <a class="external" href="http://example.com/cluster/halt?cluster=123456">
+        http://example.com/cluster/halt?cluster=123456
+      </a>
+      ",
+      }
+      }</pre>
+      <h1>
+        <a name="Update_Cluster_Properties"></a>
+        Update Cluster Properties
+      </h1>
+      <p>
+        Update an existing Cluster definition based on the fields actually present in the request message body.
+      </p>
+      <p>
+        <b>
+          Synopsis:
+        </b>
+        PUT { URI of Cluster }
+      </p>
+      <p>
+        <b>
+          Request Headers:
+        </b>
+        Accept, Authorization, Content-Length, Content-Type, X-Cloud-Client-Specification-Version.
+      </p>
+      <p>
+        <b>
+          Request Parameters:
+        </b>
+        N/A.
+      </p>
+      <p>
+        <b>
+          Request Message Body:
+        </b>
+        Cluster containing fields to update properties.
+      </p>
+      <p>
+        <b>
+          Response Headers:
+        </b>
+        Content-Length, Content-Type.
+      </p>
+      <p>
+        <b>
+          Response Message Body:
+        </b>
+        Status for use in tracking update progress.
+      </p>
+      <p>
+        <b>
+          Response Status:
+        </b>
+        202, 400, 401, 403, 404.
+      </p>
+      <p>
+        <b>
+          Status "op" Value:
+        </b>
+        "update-Cluster".
+      </p>
+      <p>
+        <b>
+          Status "target_uri" identifies:
+        </b>
+        The cluster receiving the PUT.
+      </p>
+      <p>
+        <b>
+          Example Request:
+        </b>
+        Add a tag on an existing Cluster named
+        <i>
+          Production Web Tier
+        </i>
+        .
+      </p>
+      <pre>PUT /clusters/654321
+      Host: example.com
+      Authorization: Basic xxxxxxxxxxxxxxxxxxx
+      Accept: application/vnd.com.sun.cloud.Cluster+json
+      Content-Length: nnn
+      Content-Type: application/vnd.com.sun.cloud.Cluster+json
+      X-Cloud-Client-Specification-Version: 0.1
+      {
+      tags : [ "production", "monitoring" ]
+      }</pre>
+      <p>
+        <b>
+          Example 1 Response:
+        </b>
+      </p>
+      <pre>HTTP/1.1 202 Accepted
+      Content-Type: application/vnd.com.sun.cloud.Status+json
+      Content-Length: nnn
+      {
+      "op": "update-Cluster",
+      "progress": 100,
+      "target_uri": "/clusters/654321",
+      "status_uri": "/statuses?op=update-cluster&amp;seq=3552354232",
+      "status" : 200
+      }</pre>
+      <h1>
+        <a name="Delete_Cluster"></a>
+        Delete Cluster
+      </h1>
+      <p>
+        Delete an existing cluster and all of its subordinate resources.
+      </p>
+      <p>
+        <b>
+          Synopsis:
+        </b>
+        DELETE { URI of Cluster }
+      </p>
+      <p>
+        <b>
+          Request Headers:
+        </b>
+        Authorization, X-Cloud-Client-Specification-Version.
+      </p>
+      <p>
+        <b>
+          Request Parameters:
+        </b>
+        N/A.
+      </p>
+      <p>
+        <b>
+          Request Message Body:
+        </b>
+        N/A.
+      </p>
+      <p>
+        <b>
+          Response Headers:
+        </b>
+        Content-Length, Content-Type.
+      </p>
+      <p>
+        <b>
+          Response Message Body:
+        </b>
+        Status for use in tracking deletion progress.
+      </p>
+      <p>
+        <b>
+          Response Status:
+        </b>
+        202, 400, 401, 403, 404.
+      </p>
+      <p>
+        <b>
+          Status "op" Value:
+        </b>
+        "delete-Cluster".
+      </p>
+      <p>
+        <b>
+          Status "target_uri" identifies:
+        </b>
+        The cluster being deleted.
+      </p>
+      <p>
+        <b>
+          Example Request:
+        </b>
+        Delete an existing cluster named
+        <i>
+          Staging Web Tier
+        </i>
+        .
+      </p>
+      <pre>DELETE /clusters/123456
+      Host: example.com
+      Authorization: Basic xxxxxxxxxxxxxxxxxxx
+      X-Cloud-Client-Specification-Version: 0.1</pre>
+      <p>
+        <b>
+          Example Response:
+        </b>
+      </p>
+      <pre>HTTP/1.1 202 Accepted
+      Content-Type: application/vnd.com.sun.cloud.Status+json
+      Content-Length: nnn
+      {
+      "op": "delete-Cluster",
+      "progress": 100,
+      "target_uri": "/clusters/123456",
+      "status_uri": "/statuses?op=delete-cluster&amp;cluster=123456",
+      "status" : 200
+      }</pre>
+      <h1>
+        <a name="Create_VM"></a>
+        Create VM
+      </h1>
+      <p>
+        Create a new VM associated with this Cluster.  You can optionally specify the URI of a
+        <i>
+          VM template
+        </i>
+        or an existing
+        <i>
+          VM
+        </i>
+        as a basis of default values.  The request is a POST of a VM representation, whose Media-Type
+        <b>
+          MUST
+        </b>
+        be "application/vnd.com.sun.cloud.VM+json".
+      </p>
+      <p>
+        <b>
+          Synopsis:
+        </b>
+        POST { URI of Cluster }
+      </p>
+      <p>
+        <b>
+          Request Headers:
+        </b>
+        Accept, Authorization, Content-Length, Content-Type, X-Cloud-Client-Specification-Version.
+      </p>
+      <p>
+        <b>
+          Request Parameters:
+        </b>
+        N/A.
+      </p>
+      <p>
+        <b>
+          Request Message Body:
+        </b>
+        VM.
+      </p>
+      <p>
+        <b>
+          Response Headers:
+        </b>
+        Content-Length, Content-Type.
+      </p>
+      <p>
+        <b>
+          Response Message Body:
+        </b>
+        Status for use in tracking VM creation progress.
+      </p>
+      <p>
+        <b>
+          Response Status:
+        </b>
+        202, 400, 401, 403, 404.
+      </p>
+      <p>
+        <b>
+          Status "op" Value:
+        </b>
+        "new-VM".
+      </p>
+      <p>
+        <b>
+          Status "target_uri" identifies:
+        </b>
+        The URI of the new VM once it is created.
+      </p>
+      <p>
+        <b>
+          Example 1 Request:
+        </b>
+        Create a new VM named "web01".
+      </p>
+      <pre>POST /clusters/cluster=123456
+      Host: example.com
+      Authorization: Basic xxxxxxxxxxxxxxxxxxx
+      Accept: application/vnd.com.sun.cloud.VM+json
+      Content-Length: nnn
+      Content-Type: application/vnd.com.sun.cloud.VM+json
+      X-Cloud-Client-Specification-Version: 0.1
+      {
+      "name" : "web01"
+      "description" : "This is the old description"
+      ... all the characteristics of a
+      <i>
+        VM
+      </i>
+      ...
+      }</pre>
+      <p>
+        <b>
+          Example 1 Response:
+        </b>
+      </p>
+      <pre>HTTP/1.1 202 Accepted
+      Content-Type: application/vnd.com.sun.cloud.Status+json
+      Content-Length: nnn
+      {
+      "op": "new-VM",
+      "progress": 0,
+      "target_uri": "/vms?cluster=123456&amp;vm=web01",
+      "status_uri": "/statuses?op=new-VM&amp;cluster=123456&amp;name=web01",
+      }</pre>
+      <p>
+        <b>
+          Example 2 Request:
+        </b>
+        Create a new VM named "web02" based on a
+        <i>
+          VM Template
+        </i>
+        but set the data disk size to 100gb.
+      </p>
+      <pre>POST /clusters/cluster=123456
+      Host: example.com
+      Authorization: Basic xxxxxxxxxxxxxxxxxxx
+      Accept: application/vnd.com.sun.cloud.VM+json
+      Content-Length: nnn
+      Content-Type: application/vnd.com.sun.cloud.VM+json
+      X-Cloud-Client-Specification-Version: 0.1
+      {
+      "name" : "web02"
+      "from_template": "
+      <a class="external" href="http://example.com/templates/xyz">
+        http://example.com/templates/xyz
+      </a>
+      ",
+      "data_disk" : 100
+      }</pre>
+      <p>
+        <b>
+          Example 2 Response:
+        </b>
+      </p>
+      <pre>HTTP/1.1 202 Accepted
+      Content-Type: application/vnd.com.sun.cloud.Status+json
+      Content-Length: nnn
+      {
+      "op": "new-VM",
+      "progress": 100,
+      "target_uri": "/vms?cluster=123456&amp;vm=web02",
+      "status_uri": "/statuses?op=new-VM&amp;cluster=123456&amp;name=web02",
+      "status": 201
+      }</pre>
+      <p>
+        <b>
+          Example 3 Request:
+        </b>
+        Create a new VM named "web03" based on existing VM "web01".
+      </p>
+      <pre>POST /clusters/cluster=123456
+      Host: example.com
+      Authorization: Basic xxxxxxxxxxxxxxxxxxx
+      Accept: application/vnd.com.sun.cloud.VM+json
+      Content-Length: nnn
+      Content-Type: application/vnd.com.sun.cloud.VM+json
+      X-Cloud-Client-Specification-Version: 0.1
+      {
+      "name" : "web03"
+      "from_vm": "
+      <a class="external" href="http://example.com/vms/33333">
+        http://example.com/vms/33333
+      </a>
+      "
+      }</pre>
+      <p>
+        <b>
+          Example 3 Response:
+        </b>
+      </p>
+      <pre>HTTP/1.1 202 Accepted
+      Content-Type: application/vnd.com.sun.cloud.Status+json
+      Content-Length: nnn
+      {
+      "op": "new-VM",
+      "progress": 0,
+      "target_uri": "/vms?cluster=123456&amp;vm=web03",
+      "status_uri": "/statuses?op=new-VM&amp;cluster=123456&amp;name=web03",
+      }</pre>
+      <h1>
+        <a name="Create_VNet"></a>
+        Create VNet
+      </h1>
+      <p>
+        Request the creation of a new VNet for use in this Cluster.  Most of the fields of a VNet resource are automatically set in the course of its use; the only field required at creation time is its logical name.  The request is a POST to the URI of the Cluster; the Content-Type
+        <b>
+          MUST
+        </b>
+        be "application/vnd.com.sun.cloud.VNet+json"
+      </p>
+      <p>
+        <b>
+          Synopsis:
+        </b>
+        POST { URI of Cluster }
+      </p>
+      <p>
+        <b>
+          Request Headers:
+        </b>
+        Accept, Authorization, Content-Length, Content-Type, X-Cloud-Client-Specification-Version.
+      </p>
+      <p>
+        <b>
+          Request Parameters:
+        </b>
+        N/A.
+      </p>
+      <p>
+        <b>
+          Request Message Body:
+        </b>
+        VNet.
+      </p>
+      <p>
+        <b>
+          Response Headers:
+        </b>
+        Content-Length, Content-Type.
+      </p>
+      <p>
+        <b>
+          Response Message Body:
+        </b>
+        Status for use in tracking VNet-creation progress.
+      </p>
+      <p>
+        <b>
+          Response Status:
+        </b>
+        202, 400, 401, 403, 404.
+      </p>
+      <p>
+        <b>
+          Status "op" Value:
+        </b>
+        "new-VNet".
+      </p>
+      <p>
+        <b>
+          Status "target_uri" identifies:
+        </b>
+        The URI of the new VNet once it is created.
+      </p>
+      <p>
+        <b>
+          Example 2 Request:
+        </b>
+        Create a new VNet named
+        <i>
+          Front End
+        </i>
+        which will be used to connect the web tier and application tier clusters.
+      </p>
+      <pre>POST /clusters/c~32425tt6231
+      Host: example.com
+      Authorization: Basic xxxxxxxxxxxxxxxxxxx
+      Accept: application/vnd.com.sun.cloud.VNet+json
+      Content-Length: nnn
+      Content-Type: application/vnd.com.sun.cloud.VNet+json
+      X-Cloud-Client-Specification-Version: 0.1
+      {
+      "name" : "Front End",
+      "tags" : [ "webtier", "apptier" ]
+      }</pre>
+      <p>
+        <b>
+          Example Response:
+        </b>
+      </p>
+      <pre>HTTP/1.1 202 Accepted
+      Content-Type: application/vnd.com.sun.cloud.Status+json
+      Content-Length: nnn
+      {
+      "op": "new-VNet",
+      "progress": 0,
+      "target_uri": "/vnets/SFMCO**x",
+      "status_uri": "/statuses?op=new-vnet&amp;seq=9983711",
+      }</pre>
+      <h1>
+        <a name="Create_Cluster"></a>
+        Create Cluster
+      </h1>
+      <p>
+        Create a new cluster, within this cluster, based on the request message body representation.  There are two options for defining the complete configuration of the new cluster:
+      </p>
+      <ul>
+<li>
+          Specify only the name of the new cluster, and any related values.
+        </li>
+        <li>
+          Specify the name of the new cluster, the name of an existing cluster (in the
+          <i>
+            from_cluster
+          </i>
+          field) from which to clone the current set of related resources, and any additional values to override those copied from the original cluster.
+        </li>
+      </ul>
+<p>
+        The request is a POST to the URI of the Cluster; the Content-Type
+        <b>
+          MUST
+        </b>
+        be "application/vnd.com.sun.cloud.Cluster+json"
+      </p>
+      <p>
+        <b>
+          Synopsis:
+        </b>
+        POST { URI of Cluster }
+      </p>
+      <p>
+        <b>
+          Request Headers:
+        </b>
+        Accept, Authorization, Content-Length, Content-Type, X-Cloud-Client-Specification-Version.
+      </p>
+      <p>
+        <b>
+          Request Parameters:
+        </b>
+        N/A.
+      </p>
+      <p>
+        <b>
+          Request Message Body:
+        </b>
+        A
+        <i>
+          Cluster
+        </i>
+        resource model representing all of the required values, or only those that override an existing cluster as a source of default values.
+      </p>
+      <p>
+        <b>
+          Response Headers:
+        </b>
+        Content-Length, Content-Type.
+      </p>
+      <p>
+        <b>
+          Response Message Body:
+        </b>
+        Status for use in tracking cluster-creation progress.
+      </p>
+      <p>
+        <b>
+          Response Status:
+        </b>
+        202, 400, 401, 403, 404.
+      </p>
+      <p>
+        <b>
+          Status "op" Value:
+        </b>
+        "new-Cluster".
+      </p>
+      <p>
+        <b>
+          Status "target_uri" identifies:
+        </b>
+        The URI of the new Cluster once it is created.
+      </p>
+      <p>
+        <b>
+          Example 1 Request:
+        </b>
+        Create a new empty cluster named
+        <i>
+          Staging Web Tier
+        </i>
+        .
+      </p>
+      <pre>POST /vdcs/clusters?id=13589fj92h92f
+      Host: example.com
+      Authorization: Basic xxxxxxxxxxxxxxxxxxx
+      Accept: application/vnd.com.sun.cloud.Cluster+json
+      Content-Length: nnn
+      Content-Type: application/vnd.com.sun.cloud.Cluster+json
+      X-Cloud-Client-Specification-Version: 0.1
+      {
+      "name" : "Staging Web Tier",
+      "tags" : [ "staging" ]
+      }</pre>
+      <p>
+        <b>
+          Example 1 Response:
+        </b>
+      </p>
+      <pre>HTTP/1.1 202 Accepted
+      Content-Type: application/vnd.com.sun.cloud.Status+json
+      Content-Length: nnn
+      {
+      "op": "new-Cluster",
+      "progress": 0,
+      "target_uri": "
+      <a class="external" href="http://example.com/clusters/123456">
+        http://example.com/clusters/123456
+      </a>
+      ",
+      "status_uri": "/statuses?op=new-cluster&amp;parent=13589fj92h92f",
+      }</pre>
+      <p>
+        <b>
+          Example 2 Request:
+        </b>
+        Create a new cluster named
+        <i>
+          Production Web Tier
+        </i>
+        , cloned from "Staging Web Tier" after the resources for that tier had been built up and tested.
+      </p>
+      <pre>POST /clusters?id=03AB3FF
+      Host: example.com
+      Authorization: Basic xxxxxxxxxxxxxxxxxxx
+      Accept: application/vnd.com.sun.cloud.Cluster+json
+      Content-Length: nnn
+      Content-Type: application/vnd.com.sun.cloud.Cluster+json
+      X-Cloud-Client-Specification-Version: 0.1
+      {
+      "name" : "Production Web Tier",
+      "from_cluster" : "Staging Web Tier",
+      "tags" : [ "production" ]
+      }</pre>
+      <p>
+        <b>
+          Example 2 Response:
+        </b>
+      </p>
+      <pre>HTTP/1.1 202 Accepted
+      Content-Type: application/vnd.com.sun.cloud.Status+json
+      Content-Length: nnn
+      {
+      "op": "new-Cluster",
+      "progress": 0,
+      "target_uri": "
+      <a class="external" href="http://example.com/clusters/654321">
+        http://example.com/clusters/654321
+      </a>
+      ",
+      "status_uri": "/statuses/209382tuy2-3t942"
+      }</pre>
+      <h1>
+        <a name="Control_Cluster"></a>
+        Control Cluster
+      </h1>
+      <p>
+        A
+        <i>
+          Cluster
+        </i>
+        resource model may include one or more URIs in the
+        <i>
+          controllers
+        </i>
+        field, each keyed by the name of a state change being requested.  Only the state changes that are legal for the current state of the Cluster will be included.  A client application requests a state change by doing a POST to the correponding URI, and including in the request body an arbitrary set of name/value pairs used to influence the operation of the state change.
+      </p>
+      <p>
+        By convention, the name/value pairs included in the request may contain a field named
+        <i>
+          note
+        </i>
+        whose value is a text string intended for recording in a log on the server, to help identify this request during log file analysis.
+      </p>
+      <p>
+        <b>
+          Synopsis:
+        </b>
+        POST {URI provided in Cluster representation}
+      </p>
+      <p>
+        <b>
+          Request Headers:
+        </b>
+        Accept, Authorization, Content-Length, Content-Type, X-Cloud-Client-Specification-Version.
+      </p>
+      <p>
+        <b>
+          Request Parameters:
+        </b>
+        N/A.
+      </p>
+      <p>
+        <b>
+          Request Message Body:
+        </b>
+        Name/value pairs with media type "application/json".
+      </p>
+      <p>
+        <b>
+          Response Headers:
+        </b>
+        Content-Length, Content-Type.
+      </p>
+      <p>
+        <b>
+          Response Message Body:
+        </b>
+        Status for use in tracking request progress.
+      </p>
+      <p>
+        <b>
+          Response Status:
+        </b>
+        202, 400, 401, 403, 404.
+      </p>
+      <p>
+        <b>
+          Status "op" Value:
+        </b>
+        "start-Cluster" or "stop-Cluster".
+      </p>
+      <p>
+        <b>
+          Status "target_uri" identifies:
+        </b>
+        The cluster receiving the request.
+      </p>
+      <p>
+        <b>
+          Example Request:
+        </b>
+        Start all VMs in Cluster.
+      </p>
+      <pre>POST /cluster/start?name=123456
+      Host: example.com
+      Authorization: Basic xxxxxxxxxxxxxxxxxxx
+      Content-Length: nnn
+      Content-Type: application/json
+      X-Cloud-Client-Specification-Version: 0.1
+      {
+      "note": "Start testbed per Friday meeting"
+      }</pre>
+      <p>
+        <b>
+          Example Response:
+        </b>
+      </p>
+      <pre>HTTP/1.1 202 Accepted
+      Content-Type: application/vnd.com.sun.cloud.Status+json
+      Content-Length: nnn
+      {
+      "op": "start-Cluster",
+      "progress": 38,
+      "target_uri": "/cluster/name=123456",
+      "status_uri": "/statuses?op=start-cluster&amp;cluster=123456"
+      }</pre>
+      <p>
+        Copyright © Sun Microsystems, 2009.  This work is licensed under
+        <a class="external" href="http://creativecommons.org/licenses/by/3.0/">
+          Creative Commons Attribution 3.0 Unported License
+        </a>
+      </p>
+      <div class="clear"></div>
+      <!--
+      -->
+    </div>
+    <div id="sidebar">
+      <ul>
+<li>
+          <a href="../">
+            <strong>Scar Home</strong>
+          </a>
+        </li>
+      </ul>
+<h2>
+        Specifications
+      </h2>
+      <ul>
+<li>
+          <a href="../spec_home/">
+            Spec Home
+          </a>
+        </li>
+        <li>
+          <a href="../spec_common/">
+            Common Behavior
+          </a>
+        </li>
+        <li>
+          <a href="../spec_resources/">
+            Resources
+          </a>
+        </li>
+        <li>
+          <a href="../spec_command_line_client/">
+            Command Line Client
+          </a>
+        </li>
+        <li>
+          <strong>Requests to ...</strong>
+          </li>
+<li>
+            <a href="../spec_resource_backup/">
+              <strong>Backup</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_cloud/">
+              <strong>Cloud</strong>
+            </a>
+          </li>
+          <li>
+            <a href="./">
+              <strong>Cluster</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_interface/">
+              <strong>Interface</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_location/">
+              <strong>Location</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_public_address/">
+              <strong>Public Address</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_request_status/">
+              <strong>Request Status</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_snapshot/">
+              <strong>Snapshot</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_virtual_data_center/">
+              <strong>Virtual Data Center</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_virtual_machine/">
+              <strong>Virtual Machine</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_virtual_machine_template/">
+              <strong>Virtual Machine Template</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_virtual_network/">
+              <strong>Virtual Network</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_volume/">
+              <strong>Volume</strong>
+            </a>
+          </li>
+        
+      </ul>
+<h2>
+        Implmentations
+      </h2>
+      <ul>
+<li>
+          <a href="http://wiki.github.com/hedgehog/scar/">
+            TBA
+          </a>
+        </li>
+      </ul>
+<h2>
+        Community
+      </h2>
+      <ul>
+<li>
+          <a href="http://wiki.github.com/hedgehog/scar/">
+            Scar wiki
+          </a>
+        </li>
+        <li>
+          <a href="http://github.com/hedgehog/scar/network">
+            Scar network
+          </a>
+        </li>
+        <li>
+          <a href="http://github.com/hedgehog/scar/issues">
+            Scar issues
+          </a>
+        </li>
+        <li>
+          <a href="http://kenai.com/projects/suncloudapis/pages/Home">
+            Kenai wiki
+          </a>
+        </li>
+        <li>
+          <a href="http://kenai.com/projects/suncloudapis/forums/forum">
+            Kenai forum
+          </a>
+        </li>
+        <li>
+          <a href="http://kenai.com/projects/suncloudapis/lists/extended-discussion/archive">
+            Kenai maillist archive
+          </a>
+        </li>
+      </ul>
+</div>
+  
+</body>
+</html>

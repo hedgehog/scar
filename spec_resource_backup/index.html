@@ -1,0 +1,577 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Scar (Sun's cloud API reference) Project</title>
+</head>
+<body>
+<p>
+    RESTful Cloud API Specification
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"><link href="../stylesheet.css" media="screen" rel="stylesheet" type="text/css"><link href="../coderay.css" media="screen" rel="stylesheet" type="text/css"></p>
+    <div id="main">
+      <h1>
+        Cloud API Specification - Requests to Backup Resources
+      </h1>
+      <p>
+        The requests documented in this section are directed to
+        <i>
+          Backup
+        </i>
+        resources, which represent backup snapshots of virtual machines.
+      </p>
+      <div class="toc" id="toc">
+        <div class="toc-title" id="toctitle">
+          <span>
+            Contents
+          </span>
+        </div>
+        <div class="toc-contents" id="toccontents">
+          <ul>
+<li>
+              1
+              <a href="#Get_Backup">
+                Get Backup
+              </a>
+            </li>
+            <li>
+              2
+              <a href="#Update_Backup_Properties">
+                Update Backup Properties
+              </a>
+            </li>
+            <li>
+              3
+              <a href="#Delete_Backup">
+                Delete Backup
+              </a>
+            </li>
+            <li>
+              4
+              <a href="#Restore_VM_From_Backup">
+                Restore VM From Backup
+              </a>
+            </li>
+          </ul>
+</div>
+      </div>
+      <p>
+        <br></p>
+      <h1>
+        <a name="Get_Backup"></a>
+        Get Backup
+      </h1>
+      <p>
+        Retrieve information about a specific Backup of a specific VM.
+      </p>
+      <p>
+        <b>
+          Synopsis:
+        </b>
+        GET {URI of Backup}
+      </p>
+      <p>
+        <b>
+          Request Headers:
+        </b>
+        Accept, Authorization, X-Cloud-Client-Specification-Version.
+      </p>
+      <p>
+        <b>
+          Request Message Body:
+        </b>
+        N/A.
+      </p>
+      <p>
+        <b>
+          Response Headers:
+        </b>
+        Content-Length, Content-Type.
+      </p>
+      <p>
+        <b>
+          Response Message Body:
+        </b>
+        VM.
+      </p>
+      <p>
+        <b>
+          Response Status:
+        </b>
+        200, 400, 401, 403, 404.
+      </p>
+      <p>
+        <b>
+          Example Request:
+        </b>
+        Retrieve information about a VM instance "web01".
+      </p>
+      <pre>GET /vms/33333/backups/456
+      Host: example.com
+      Authorization: Basic xxxxxxxxxxxxxxxxxxx
+      Accept: application/vnd.com.sun.cloud.Backup+json
+      X-Cloud-Client-Specification-Version: 0.1</pre>
+      <p>
+        <b>
+          Example Response:
+        </b>
+      </p>
+      <pre>HTTP/1.1 200 OK
+      Content-Type: application/vnd.com.sun.cloud.Backup+json
+      Content-Length: nnn
+      {
+      "name" : "web01_YYYYMMDD",
+      "uri" : "
+      <a class="external" href="http://example.com/vms/33333/backups/456">
+        http://example.com/vms/33333/backups/456
+      </a>
+      ",
+      "restore" : "
+      <a class="external" href="http://example.com/vms/33333/backups/456/restore">
+        http://example.com/vms/33333/backups/456/restore
+      </a>
+      ",
+      ...
+      }</pre>
+      <h1>
+        <a name="Update_Backup_Properties"></a>
+        Update Backup Properties
+      </h1>
+      <p>
+        Update an existing backup definition.
+      </p>
+      <p>
+        <b>
+          Synopsis:
+        </b>
+        PUT { URI of Backup }
+      </p>
+      <p>
+        <b>
+          Request Headers:
+        </b>
+        Accept, Authorization, Content-Length, Content-Type, X-Cloud-Client-Specification-Version.
+      </p>
+      <p>
+        <b>
+          Request Parameters:
+        </b>
+        N/A.
+      </p>
+      <p>
+        <b>
+          Request Message Body:
+        </b>
+        Backup.
+      </p>
+      <p>
+        <b>
+          Response Headers:
+        </b>
+        Content-Length, Content-Type.
+      </p>
+      <p>
+        <b>
+          Response Message Body:
+        </b>
+        Status for use in tracking update progress.
+      </p>
+      <p>
+        <b>
+          Response Status:
+        </b>
+        202, 400, 401, 403, 404.
+      </p>
+      <p>
+        <b>
+          Status "op" Value:
+        </b>
+        "update-Backup".
+      </p>
+      <p>
+        <b>
+          Status "target_uri" identifies:
+        </b>
+        The Backup receiving the PUT.
+      </p>
+      <p>
+        <b>
+          Example Request:
+        </b>
+        Update an existing Backup by modifying the associated tags.
+      </p>
+      <pre>PUT /vms/33333/backups/456
+      Host: example.com
+      Authorization: Basic xxxxxxxxxxxxxxxxxxx
+      Accept: application/vnd.com.sun.cloud.Backup+json
+      Content-Length: nnn
+      Content-Type: application/vnd.com.sun.Backup.VM+json
+      X-Cloud-Client-Specification-Version: 0.1
+      {
+      "tags" : [ "foo", "bar" ]
+      }</pre>
+      <p>
+        <b>
+          Example Response:
+        </b>
+      </p>
+      <pre>HTTP/1.1 202 Accepted
+      Content-Type: application/vnd.com.sun.cloud.Status+json
+      Content-Length: nnn
+      {
+      "op": "update-Backup",
+      "progress": 100,
+      "target_uri": "/vms/33333/backups/456",
+      "status_uri": "/statuses?op=update-backup&amp;seq=912874502",
+      "status" : 200
+      }</pre>
+      <h1>
+        <a name="Delete_Backup"></a>
+        Delete Backup
+      </h1>
+      <p>
+        Delete an existing virtual machine snapshot backup.
+      </p>
+      <p>
+        <b>
+          Synopsis:
+        </b>
+        DELETE { URI of Backup }
+      </p>
+      <p>
+        <b>
+          Request Headers:
+        </b>
+        Authorization, X-Compute-Client-Specification-Version.
+      </p>
+      <p>
+        <b>
+          Request Parameters:
+        </b>
+        N/A.
+      </p>
+      <p>
+        <b>
+          Request Message Body:
+        </b>
+        N/A.
+      </p>
+      <p>
+        <b>
+          Response Headers:
+        </b>
+        Content-Length, Content-Type.
+      </p>
+      <p>
+        <b>
+          Response Message Body:
+        </b>
+        Status for use in tracking deletion progress.
+      </p>
+      <p>
+        <b>
+          Response Status:
+        </b>
+        202, 400, 401, 403, 404.
+      </p>
+      <p>
+        <b>
+          Status "op" Value:
+        </b>
+        "delete-Backup".
+      </p>
+      <p>
+        <b>
+          Status "target_uri" identifies:
+        </b>
+        The Backup being deleted.
+      </p>
+      <p>
+        <b>
+          Example Request:
+        </b>
+        Delete an existing Backup resource.
+      </p>
+      <pre>DELETE /vms/333333/backups/456
+      Host: example.com
+      Authorization: Basic xxxxxxxxxxxxxxxxxxx
+      X-Compute-Client-Specification-Version: 0.1</pre>
+      <p>
+        <b>
+          Example Response:
+        </b>
+      </p>
+      <pre>HTTP/1.1 202 Accepted
+      Content-Type: application/vnd.com.sun.cloud.Status+json
+      Content-Length: nnn
+      {
+      "op": "delete-Backup",
+      "progress": 0,
+      "target_uri": "/vms/333333/backups/456",
+      "status_uri": "/statuses?op=delete-Backup&amp;backup=456"
+      }</pre>
+      <h1>
+        <a name="Restore_VM_From_Backup"></a>
+        Restore VM From Backup
+      </h1>
+      <p>
+        Restore the state of the associated
+        <i>
+          VM
+        </i>
+        from the saved state in this
+        <i>
+          Backup
+        </i>
+        .
+      </p>
+      <p>
+        By convention, the name/value pairs included in the request may contain a field named
+        <i>
+          note
+        </i>
+        whose value is a text string intended for recording in a log on the server, to help identify this request during log file analysis.
+      </p>
+      <p>
+        <b>
+          Synopsis:
+        </b>
+        POST {Restore URI provided in Backup representation}
+      </p>
+      <p>
+        <b>
+          Request Headers:
+        </b>
+        Accept, Authorization, Content-Length, Content-Type, X-Cloud-Client-Specification-Version.
+      </p>
+      <p>
+        <b>
+          Request Parameters:
+        </b>
+        N/A.
+      </p>
+      <p>
+        <b>
+          Request Message Body:
+        </b>
+        Name/value pairs, with media type "application/json".
+      </p>
+      <p>
+        <b>
+          Response Headers:
+        </b>
+        Content-Length, Content-Type.
+      </p>
+      <p>
+        <b>
+          Response Message Body:
+        </b>
+        Status for use in tracking request progress.
+      </p>
+      <p>
+        <b>
+          Response Status:
+        </b>
+        202, 400, 401, 403, 404.
+      </p>
+      <p>
+        <b>
+          Status "op" Value:
+        </b>
+        "restore-Backup"
+      </p>
+      <p>
+        <b>
+          Status "target_uri" identifies:
+        </b>
+        The Backup being restored.
+      </p>
+      <p>
+        <b>
+          Example Request:
+        </b>
+        Restore associated VM from this Backup.
+      </p>
+      <pre>POST /vms/33333/backups/456/restore
+      Host: example.com
+      Authorization: Basic xxxxxxxxxxxxxxxxxxx
+      Content-Length: nnn
+      Content-Type: application/json
+      X-Compute-Client-Specification-Version: 0.1
+      {
+      "note" : "Restore to known state"
+      }</pre>
+      <p>
+        <b>
+          Example Response:
+        </b>
+      </p>
+      <pre>HTTP/1.1 202 Accepted
+      Content-Type: application/vnd.com.sun.cloud.Status+json
+      Content-Length: nnn
+      {
+      "op": "restore-Backup",
+      "progress": 0,
+      "target_uri": "/vms/33333/backups/456",
+      "status_uri": "/statuses?op=restore-Backup&amp;vm=33333&amp;b=456"
+      }</pre>
+      <p>
+        Copyright © Sun Microsystems, 2009.  This work is licensed under
+        <a class="external" href="http://creativecommons.org/licenses/by/3.0/">
+          Creative Commons Attribution 3.0 Unported License
+        </a>
+      </p>
+      <div class="clear"></div>
+      <!--
+      -->
+    </div>
+    <div id="sidebar">
+      <ul>
+<li>
+          <a href="../">
+            <strong>Scar Home</strong>
+          </a>
+        </li>
+      </ul>
+<h2>
+        Specifications
+      </h2>
+      <ul>
+<li>
+          <a href="../spec_home/">
+            Spec Home
+          </a>
+        </li>
+        <li>
+          <a href="../spec_common/">
+            Common Behavior
+          </a>
+        </li>
+        <li>
+          <a href="../spec_resources/">
+            Resources
+          </a>
+        </li>
+        <li>
+          <a href="../spec_command_line_client/">
+            Command Line Client
+          </a>
+        </li>
+        <li>
+          <strong>Requests to ...</strong>
+          </li>
+<li>
+            <a href="./">
+              <strong>Backup</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_cloud/">
+              <strong>Cloud</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_cluster/">
+              <strong>Cluster</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_interface/">
+              <strong>Interface</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_location/">
+              <strong>Location</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_public_address/">
+              <strong>Public Address</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_request_status/">
+              <strong>Request Status</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_snapshot/">
+              <strong>Snapshot</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_virtual_data_center/">
+              <strong>Virtual Data Center</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_virtual_machine/">
+              <strong>Virtual Machine</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_virtual_machine_template/">
+              <strong>Virtual Machine Template</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_virtual_network/">
+              <strong>Virtual Network</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_volume/">
+              <strong>Volume</strong>
+            </a>
+          </li>
+        
+      </ul>
+<h2>
+        Implmentations
+      </h2>
+      <ul>
+<li>
+          <a href="http://wiki.github.com/hedgehog/scar/">
+            TBA
+          </a>
+        </li>
+      </ul>
+<h2>
+        Community
+      </h2>
+      <ul>
+<li>
+          <a href="http://wiki.github.com/hedgehog/scar/">
+            Scar wiki
+          </a>
+        </li>
+        <li>
+          <a href="http://github.com/hedgehog/scar/network">
+            Scar network
+          </a>
+        </li>
+        <li>
+          <a href="http://github.com/hedgehog/scar/issues">
+            Scar issues
+          </a>
+        </li>
+        <li>
+          <a href="http://kenai.com/projects/suncloudapis/pages/Home">
+            Kenai wiki
+          </a>
+        </li>
+        <li>
+          <a href="http://kenai.com/projects/suncloudapis/forums/forum">
+            Kenai forum
+          </a>
+        </li>
+        <li>
+          <a href="http://kenai.com/projects/suncloudapis/lists/extended-discussion/archive">
+            Kenai maillist archive
+          </a>
+        </li>
+      </ul>
+</div>
+  
+</body>
+</html>

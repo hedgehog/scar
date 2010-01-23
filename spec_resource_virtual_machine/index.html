@@ -1,0 +1,1073 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Scar (Sun's cloud API reference) Project</title>
+</head>
+<body>
+<p>
+    RESTful Cloud API Specification
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"><link href="../stylesheet.css" media="screen" rel="stylesheet" type="text/css"><link href="../coderay.css" media="screen" rel="stylesheet" type="text/css"></p>
+    <div id="main">
+      <h1>
+        Cloud API Specification - Requests to VM Resources
+      </h1>
+      <p>
+        The requests documented in this section are directed to
+        <i>
+          VM
+        </i>
+        resources, which represent virtual machines.
+      </p>
+      <div class="toc" id="toc">
+        <div class="toc-title" id="toctitle">
+          <span>
+            Contents
+          </span>
+        </div>
+        <div class="toc-contents" id="toccontents">
+          <ul>
+<li>
+              1
+              <a href="#Get_VM">
+                Get VM
+              </a>
+            </li>
+            <li>
+              2
+              <a href="#Update_VM_Properties">
+                Update VM Properties
+              </a>
+            </li>
+            <li>
+              3
+              <a href="#Delete_VM">
+                Delete VM
+              </a>
+            </li>
+            <li>
+              4
+              <a href="#Attach_VM_To_Public_Address_or_VNet">
+                Attach VM To Public Address or VNet
+              </a>
+            </li>
+            <li>
+              5
+              <a href="#Detach_VM_From_Public_Address_or_VNet">
+                Detach VM From Public Address or VNet
+              </a>
+            </li>
+            <li>
+              6
+              <a href="#Create_VM_Backup_Snapshot">
+                Create VM Backup Snapshot
+              </a>
+            </li>
+            <li>
+              7
+              <a href="#Control_VM">
+                Control VM
+              </a>
+            </li>
+          </ul>
+</div>
+      </div>
+      <p>
+        <br></p>
+      <h1>
+        <a name="Get_VM"></a>
+        Get VM
+      </h1>
+      <p>
+        Retrieve information about a specific VM associated with a specified Cluster.
+      </p>
+      <p>
+        <b>
+          Synopsis:
+        </b>
+        GET {URI of VM from the owning Cluster}
+      </p>
+      <p>
+        <b>
+          Request Headers:
+        </b>
+        Accept, Authorization, X-Cloud-Client-Specification-Version.
+      </p>
+      <p>
+        <b>
+          Request Message Body:
+        </b>
+        N/A.
+      </p>
+      <p>
+        <b>
+          Response Headers:
+        </b>
+        Content-Length, Content-Type.
+      </p>
+      <p>
+        <b>
+          Response Message Body:
+        </b>
+        VM.
+      </p>
+      <p>
+        <b>
+          Response Status:
+        </b>
+        200, 400, 401, 403, 404.
+      </p>
+      <p>
+        <b>
+          Example Request:
+        </b>
+        Retrieve information about a VM instance "web01".
+      </p>
+      <pre>GET /vms/33333
+      Host: example.com
+      Authorization: Basic xxxxxxxxxxxxxxxxxxx
+      Accept: application/vnd.com.sun.cloud.VM+json
+      X-Cloud-Client-Specification-Version: 0.1</pre>
+      <p>
+        <b>
+          Example Response:
+        </b>
+      </p>
+      <pre>HTTP/1.1 200 OK
+      Content-Type: application/vnd.com.sun.cloud.VM+json
+      Content-Length: nnn
+      {
+      "name" : "web01",
+      "uri" : "
+      <a class="external" href="http://example.com/vms/33333">
+        http://example.com/vms/33333
+      </a>
+      "
+      "run_status" : "STARTED",
+      "description" : "This is the old description"
+      ...
+      "back_up" : "
+      <a class="external" href="http://example.com/back-up?vm=33333">
+        http://example.com/back-up?vm=33333
+      </a>
+      "
+      "attach" : "
+      <a class="external" href="http://example.com/attach?vm=33333">
+        http://example.com/attach?vm=33333
+      </a>
+      ",
+      "detach" : "
+      <a class="external" href="http://example.com/detach-ip?vm=33333">
+        http://example.com/detach-ip?vm=33333
+      </a>
+      ",
+      ...
+      }</pre>
+      <h1>
+        <a name="Update_VM_Properties"></a>
+        Update VM Properties
+      </h1>
+      <p>
+        Update an existing virtual machine definition.
+      </p>
+      <p>
+        <b>
+          Synopsis:
+        </b>
+        PUT { URI of VM }
+      </p>
+      <p>
+        <b>
+          Request Headers:
+        </b>
+        Accept, Authorization, Content-Length, Content-Type, X-Cloud-Client-Specification-Version.
+      </p>
+      <p>
+        <b>
+          Request Parameters:
+        </b>
+        N/A.
+      </p>
+      <p>
+        <b>
+          Request Message Body:
+        </b>
+        VM.
+      </p>
+      <p>
+        <b>
+          Response Headers:
+        </b>
+        Content-Length, Content-Type.
+      </p>
+      <p>
+        <b>
+          Response Message Body:
+        </b>
+        Status for use in tracking update progress.
+      </p>
+      <p>
+        <b>
+          Response Status:
+        </b>
+        202, 400, 401, 403, 404.
+      </p>
+      <p>
+        <b>
+          Status "op" Value:
+        </b>
+        "update-VM".
+      </p>
+      <p>
+        <b>
+          Status "target_uri" identifies:
+        </b>
+        The VM receiving the PUT.
+      </p>
+      <p>
+        <b>
+          Example Request:
+        </b>
+        Update an existing VM named "web01" by modifying its description.
+      </p>
+      <pre>PUT /vms/33333
+      Host: example.com
+      Authorization: Basic xxxxxxxxxxxxxxxxxxx
+      Accept: application/vnd.com.sun.cloud.VM+json
+      Content-Length: nnn
+      Content-Type: application/vnd.com.sun.cloud.VM+json
+      X-Cloud-Client-Specification-Version: 0.1
+      {
+      "description" : "This is the new description"
+      }</pre>
+      <p>
+        <b>
+          Example Response:
+        </b>
+      </p>
+      <pre>HTTP/1.1 202 Accepted
+      Content-Type: application/vnd.com.sun.cloud.Status+json
+      Content-Length: nnn
+      {
+      "op": "update-VM",
+      "progress": 100,
+      "target_uri": "/vms/33333",
+      "status_uri": "/statuses?op=update-vm&amp;seq=912874502",
+      "status" : 200
+      }</pre>
+      <h1>
+        <a name="Delete_VM"></a>
+        Delete VM
+      </h1>
+      <p>
+        Delete an existing virtual machine currently associated with the specified virtual private data center.
+      </p>
+      <p>
+        <b>
+          Synopsis:
+        </b>
+        DELETE { URI of VM }
+      </p>
+      <p>
+        <b>
+          Request Headers:
+        </b>
+        Authorization, X-Compute-Client-Specification-Version.
+      </p>
+      <p>
+        <b>
+          Request Parameters:
+        </b>
+        N/A.
+      </p>
+      <p>
+        <b>
+          Request Message Body:
+        </b>
+        N/A.
+      </p>
+      <p>
+        <b>
+          Response Headers:
+        </b>
+        Content-Length, Content-Type.
+      </p>
+      <p>
+        <b>
+          Response Message Body:
+        </b>
+        Status for use in tracking deletion progress.
+      </p>
+      <p>
+        <b>
+          Response Status:
+        </b>
+        202, 400, 401, 403, 404.
+      </p>
+      <p>
+        <b>
+          Status "op" Value:
+        </b>
+        "delete-VM".
+      </p>
+      <p>
+        <b>
+          Status "target_uri" identifies:
+        </b>
+        The VM being deleted.
+      </p>
+      <p>
+        <b>
+          Example Request:
+        </b>
+        Delete an existing VM named "AppTier" from an existing VDC named "MyStore".
+      </p>
+      <pre>DELETE /vdcs/MyStore/vms/AppTier
+      Host: example.com
+      Authorization: Basic xxxxxxxxxxxxxxxxxxx
+      X-Compute-Client-Specification-Version: 0.1</pre>
+      <p>
+        <b>
+          Example Response:
+        </b>
+      </p>
+      <pre>HTTP/1.1 202 Accepted
+      Content-Type: application/vnd.com.sun.cloud.Status+json
+      Content-Length: nnn
+      {
+      "op": "delete-VM",
+      "progress": 0,
+      "target_uri": "/vdcs/MyStore/vms/AppTier",
+      "status_uri": "/statuses?op=delete-vm&amp;vm=00eAA.f*"
+      }</pre>
+      <h1>
+        <a name="Attach_VM_To_Public_Address_or_VNet"></a>
+        Attach VM To Public Address or VNet
+      </h1>
+      <p>
+        Attach the specified VM to a Public Address or VNet, depending on the media type of the included representation.
+      </p>
+      <p>
+        <b>
+          Synopsis:
+        </b>
+        POST { VM's attach URI }
+      </p>
+      <p>
+        <b>
+          Request Headers:
+        </b>
+        Authorization, Content-Length, Content-Type, X-Cloud-Client-Specification-Version.
+      </p>
+      <p>
+        <b>
+          Request Parameters:
+        </b>
+        N/A.
+      </p>
+      <p>
+        <b>
+          Request Message Body:
+        </b>
+        Public Address or VNet resource model.  Only the "uri" element of this resource model
+        <b>
+          MUST
+        </b>
+        be included.
+      </p>
+      <p>
+        <b>
+          Response Headers:
+        </b>
+        Content-Length, Content-Type.
+      </p>
+      <p>
+        <b>
+          Response Message Body:
+        </b>
+        Status for use in tracking attachment progress.
+      </p>
+      <p>
+        <b>
+          Response Status:
+        </b>
+        202, 400, 401, 403, 404.
+      </p>
+      <p>
+        <b>
+          Status "op" Value:
+        </b>
+        "attach".
+      </p>
+      <p>
+        <b>
+          Status "target_uri" identifies:
+        </b>
+        The VM being attached to.
+      </p>
+      <p>
+        <b>
+          Example 1 Request:
+        </b>
+        Attach VM "web01" to Public Address "Load Balanced".
+      </p>
+      <pre>POST /attach?vm=33333
+      Host: example.com
+      Authorization: Basic xxxxxxxxxxxxxxxxxxx
+      Content-Length: nnn
+      Content-Type: application/vnd.com.sun.cloud.PublicAddress+json
+      X-Cloud-Client-Specification-Version: 0.1
+      {
+      "uri" : "
+      <a class="external" href="http://example.com/addresses/107.236.66.83">
+        http://example.com/addresses/107.236.66.83
+      </a>
+      "
+      }</pre>
+      <p>
+        <b>
+          Example 1 Response:
+        </b>
+      </p>
+      <pre>HTTP/1.1 202 Accepted
+      Content-Type: application/vnd.com.sun.cloud.Status+json
+      Content-Length: nnn
+      {
+      "op": "attach",
+      "progress": 0,
+      "target_uri": "/X03/VirtualMachines/F83",
+      "status_uri": "/statuses?op=attach-public&amp;a=107.236.66.83"
+      }</pre>
+      <p>
+        <b>
+          Example 2 Request:
+        </b>
+        Attach VM "web01" to VNet "Front End".
+      </p>
+      <pre>POST /attach?vm=33333
+      Host: example.com
+      Authorization: Basic xxxxxxxxxxxxxxxxxxx
+      Content-Length: nnn
+      Content-Type: application/vnd.com.sun.cloud.VNet+json
+      X-Cloud-Client-Specification-Version: 0.1
+      {
+      "uri" : "
+      <a class="external" href="http://example.com/vnets/abcdefg">
+        http://example.com/vnets/abcdefg
+      </a>
+      "
+      }</pre>
+      <p>
+        <b>
+          Example 2 Response:
+        </b>
+      </p>
+      <pre>HTTP/1.1 202 Accepted
+      Content-Type: application/vnd.com.sun.cloud.Status+json
+      Content-Length: nnn
+      {
+      "op": "attach",
+      "progress": 100,
+      "target_uri": "/X03/VirtualMachines/F83",
+      "status_uri": "/statuses?op=attach-public&amp;v=abcdefg",
+      "status": 200
+      }</pre>
+      <h1>
+        <a name="Detach_VM_From_Public_Address_or_VNet"></a>
+        Detach VM From Public Address or VNet
+      </h1>
+      <p>
+        Detach the specified VM from a Public Address or VNet, depending on the media type of the included representation.
+      </p>
+      <p>
+        <b>
+          Synopsis:
+        </b>
+        POST { VM's detach URI }
+      </p>
+      <p>
+        <b>
+          Request Headers:
+        </b>
+        Authorization, Content-Length, Content-Type, X-Cloud-Client-Specification-Version.
+      </p>
+      <p>
+        <b>
+          Request Parameters:
+        </b>
+        N/A.
+      </p>
+      <p>
+        <b>
+          Request Message Body:
+        </b>
+        Public Address or VNet resource model.  Only the "uri" element of this resource model
+        <b>
+          MUST
+        </b>
+        be included.
+      </p>
+      <p>
+        <b>
+          Response Headers:
+        </b>
+        Content-Length, Content-Type.
+      </p>
+      <p>
+        <b>
+          Response Message Body:
+        </b>
+        Status for use in tracking detachment progress.
+      </p>
+      <p>
+        <b>
+          Response Status:
+        </b>
+        202, 400, 401, 403, 404.
+      </p>
+      <p>
+        <b>
+          Status "op" Value:
+        </b>
+        "detach".
+      </p>
+      <p>
+        <b>
+          Status "target_uri" identifies:
+        </b>
+        The VM being detached from.
+      </p>
+      <p>
+        <b>
+          Example 1 Request:
+        </b>
+        Detach VM "web01" from Public Address "Load Balanced".
+      </p>
+      <pre>POST /detach?vm=33333
+      Host: example.com
+      Authorization: Basic xxxxxxxxxxxxxxxxxxx
+      Content-Length: nnn
+      Content-Type: application/vnd.com.sun.cloud.PublicAddress+json
+      X-Cloud-Client-Specification-Version: 0.1
+      {
+      "uri" : "
+      <a class="external" href="http://example.com/addresses/107.236.66.83">
+        http://example.com/addresses/107.236.66.83
+      </a>
+      "
+      }</pre>
+      <p>
+        <b>
+          Example 1 Response:
+        </b>
+      </p>
+      <pre>HTTP/1.1 202 Accepted
+      Content-Type: application/vnd.com.sun.cloud.Status+json
+      Content-Length: nnn
+      {
+      "op": "detach",
+      "progress": 100,
+      "target_uri": "/X03/VirtualMachines/F83",
+      "status_uri": "/statuses?op=detach&amp;a=107.236.66.83",
+      "status": 200
+      }</pre>
+      <p>
+        <b>
+          Example 2 Request:
+        </b>
+        Detach VM "web01" from VNet "Front End".
+      </p>
+      <pre>POST /detach?vm=33333
+      Host: example.com
+      Authorization: Basic xxxxxxxxxxxxxxxxxxx
+      Content-Length: nnn
+      Content-Type: application/vnd.com.sun.cloud.VNet+json
+      X-Cloud-Client-Specification-Version: 0.1
+      {
+      "uri" : "
+      <a class="external" href="http://example.com/vnets/abcdefg">
+        http://example.com/vnets/abcdefg
+      </a>
+      "
+      }</pre>
+      <p>
+        <b>
+          Example 2 Response:
+        </b>
+      </p>
+      <pre>HTTP/1.1 202 Accepted
+      Content-Type: application/vnd.com.sun.cloud.Status+json
+      Content-Length: nnn
+      {
+      "op": "detach",
+      "progress": 0,
+      "target_uri": "/X03/VirtualMachines/F83",
+      "status_uri": "/statuses?op=detach&amp;v=web01"
+      }</pre>
+      <h1>
+        <a name="Create_VM_Backup_Snapshot"></a>
+        Create VM Backup Snapshot
+      </h1>
+      <p>
+        Capture a backup snapshot of this VM, based on the characteristics in this request.
+      </p>
+      <p>
+        <b>
+          Synopsis:
+        </b>
+        POST { VM's back_up URI }
+      </p>
+      <p>
+        <b>
+          Request Headers:
+        </b>
+        Authorization, Content-Length, Content-Type, X-Cloud-Client-Specification-Version.
+      </p>
+      <p>
+        <b>
+          Request Parameters:
+        </b>
+        N/A.
+      </p>
+      <p>
+        <b>
+          Request Message Body:
+        </b>
+        Backup resource model.
+      </p>
+      <p>
+        <b>
+          Response Headers:
+        </b>
+        Content-Length, Content-Type.
+      </p>
+      <p>
+        <b>
+          Response Message Body:
+        </b>
+        Status for use in tracking backup progress.
+      </p>
+      <p>
+        <b>
+          Response Status:
+        </b>
+        202, 400, 401, 403, 404.
+      </p>
+      <p>
+        <b>
+          Status "op" Value:
+        </b>
+        "back_up".
+      </p>
+      <p>
+        <b>
+          Status "target_uri" identifies:
+        </b>
+        The Backup being created.
+      </p>
+      <p>
+        <b>
+          Example Request:
+        </b>
+        Create backup of VM "web01".
+      </p>
+      <pre>POST /back_up?vm=33333
+      Host: example.com
+      Authorization: Basic xxxxxxxxxxxxxxxxxxx
+      Content-Length: nnn
+      Content-Type: application/vnd.com.sun.cloud.Backup+json
+      X-Cloud-Client-Specification-Version: 0.1
+      {
+      "name" : "web01_backup_YYYYMMDD"
+      }</pre>
+      <p>
+        <b>
+          Example Response:
+        </b>
+      </p>
+      <pre>HTTP/1.1 202 Accepted
+      Content-Type: application/vnd.com.sun.cloud.Status+json
+      Content-Length: nnn
+      {
+      "op": "back_up",
+      "progress": 0,
+      "target_uri": "/X03/VirtualMachines/F83/Backups/456",
+      "status_uri": "/statuses?op=back_up&amp;b=456"
+      }</pre>
+      <h1>
+        <a name="Control_VM"></a>
+        Control VM
+      </h1>
+      <p>
+        A
+        <i>
+          VM
+        </i>
+        resource model may include one or more URIs in the
+        <i>
+          controllers
+        </i>
+        field, each keyed by the name of a state change being requested.  Only the state changes that are legal for the current state of the VM will be included.  A client application requests a state change by doing a POST to the corresponding URI, and including in the request body an arbitrary set of name/value pairs used to influence the operation of the state change.
+      </p>
+      <p>
+        By convention, the name/value pairs included in the request may contain a field named
+        <i>
+          note
+        </i>
+        whose value is a text string intended for recording in a log on the server, to help identify this request during log file analysis.
+        <b>
+          Synopsis:
+        </b>
+        POST {URI provided in VM representation}
+      </p>
+      <p>
+        <b>
+          Request Headers:
+        </b>
+        Accept, Authorization, Content-Length, Content-Type, X-Cloud-Client-Specification-Version.
+      </p>
+      <p>
+        <b>
+          Request Parameters:
+        </b>
+        N/A.
+      </p>
+      <p>
+        <b>
+          Request Message Body:
+        </b>
+        Name/value pairs, with media type "application/json".
+      </p>
+      <p>
+        <b>
+          Response Headers:
+        </b>
+        Content-Length, Content-Type.
+      </p>
+      <p>
+        <b>
+          Response Message Body:
+        </b>
+        Status for use in tracking request progress.
+      </p>
+      <p>
+        <b>
+          Response Status:
+        </b>
+        202, 400, 401, 403, 404.
+      </p>
+      <p>
+        <b>
+          Status "op" Value:
+        </b>
+        "start-VM", "stop-VM", "reboot-VM", "hibernate-VM", "resume-VM"
+      </p>
+      <p>
+        <b>
+          Status "target_uri" identifies:
+        </b>
+        The VM receiving the request.
+      </p>
+      <p>
+        <b>
+          Example Request:
+        </b>
+        Start this VM.
+      </p>
+      <pre>POST /vms/33333?control=start
+      Host: example.com
+      Authorization: Basic xxxxxxxxxxxxxxxxxxx
+      Content-Length: nnn
+      Content-Type: application/json
+      X-Compute-Client-Specification-Version: 0.1
+      {
+      "note" : "Start this web tier server"
+      }</pre>
+      <p>
+        <b>
+          Example Response:
+        </b>
+      </p>
+      <pre>HTTP/1.1 202 Accepted
+      Content-Type: application/vnd.com.sun.cloud.Status+json
+      Content-Length: nnn
+      {
+      "op": "start-VM",
+      "progress": 0,
+      "target_uri": "/vms/33333",
+      "status_uri": "/statuses?op=start-VM&amp;vm=33333"
+      }</pre>
+      <p>
+        Here is a table describing the effects and usage of the available control URIs.
+      </p>
+      <div style="overflow-x: auto;">
+        <div style="margin: 0px 2px 0px 2px;">
+          <table border="1" width="100%">
+<tr>
+<th>
+                Change Type
+              </th>
+              <th>
+                Start State
+              </th>
+              <th>
+                Transitional State
+              </th>
+              <th>
+                Transitional State
+              </th>
+              <th>
+                Transitional State
+              </th>
+              <th>
+                Destination State
+              </th>
+            </tr>
+<tr>
+<td>
+                start
+              </td>
+              <td>
+                STOPPED
+              </td>
+              <td>
+                STARTING
+              </td>
+              <td></td>
+              <td></td>
+              <td>
+                STARTED
+              </td>
+            </tr>
+<tr>
+<td>
+                stop
+              </td>
+              <td>
+                STARTED
+              </td>
+              <td>
+                STOPPING
+              </td>
+              <td></td>
+              <td></td>
+              <td>
+                STOPPED
+              </td>
+            </tr>
+<tr>
+<td>
+                reboot
+              </td>
+              <td>
+                STARTED
+              </td>
+              <td>
+                STOPPING
+              </td>
+              <td>
+                STOPPED
+              </td>
+              <td>
+                STARTING
+              </td>
+              <td>
+                STARTED
+              </td>
+            </tr>
+<tr>
+<td>
+                hibernate
+              </td>
+              <td>
+                STARTED
+              </td>
+              <td>
+                SLEEPING
+              </td>
+              <td></td>
+              <td></td>
+              <td>
+                ASLEEP
+              </td>
+            </tr>
+<tr>
+<td>
+                resume
+              </td>
+              <td>
+                ASLEEP
+              </td>
+              <td>
+                WAKING
+              </td>
+              <td></td>
+              <td></td>
+              <td>
+                STARTED
+              </td>
+            </tr>
+</table>
+</div>
+      </div>
+      <p>
+        Copyright © Sun Microsystems, 2009.  This work is licensed under
+        <a class="external" href="http://creativecommons.org/licenses/by/3.0/">
+          Creative Commons Attribution 3.0 Unported License
+        </a>
+      </p>
+      <div class="clear"></div>
+      <!--
+      -->
+    </div>
+    <div id="sidebar">
+      <ul>
+<li>
+          <a href="../">
+            <strong>Scar Home</strong>
+          </a>
+        </li>
+      </ul>
+<h2>
+        Specifications
+      </h2>
+      <ul>
+<li>
+          <a href="../spec_home/">
+            Spec Home
+          </a>
+        </li>
+        <li>
+          <a href="../spec_common/">
+            Common Behavior
+          </a>
+        </li>
+        <li>
+          <a href="../spec_resources/">
+            Resources
+          </a>
+        </li>
+        <li>
+          <a href="../spec_command_line_client/">
+            Command Line Client
+          </a>
+        </li>
+        <li>
+          <strong>Requests to ...</strong>
+          </li>
+<li>
+            <a href="../spec_resource_backup/">
+              <strong>Backup</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_cloud/">
+              <strong>Cloud</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_cluster/">
+              <strong>Cluster</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_interface/">
+              <strong>Interface</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_location/">
+              <strong>Location</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_public_address/">
+              <strong>Public Address</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_request_status/">
+              <strong>Request Status</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_snapshot/">
+              <strong>Snapshot</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_virtual_data_center/">
+              <strong>Virtual Data Center</strong>
+            </a>
+          </li>
+          <li>
+            <a href="./">
+              <strong>Virtual Machine</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_virtual_machine_template/">
+              <strong>Virtual Machine Template</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_virtual_network/">
+              <strong>Virtual Network</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_volume/">
+              <strong>Volume</strong>
+            </a>
+          </li>
+        
+      </ul>
+<h2>
+        Implmentations
+      </h2>
+      <ul>
+<li>
+          <a href="http://wiki.github.com/hedgehog/scar/">
+            TBA
+          </a>
+        </li>
+      </ul>
+<h2>
+        Community
+      </h2>
+      <ul>
+<li>
+          <a href="http://wiki.github.com/hedgehog/scar/">
+            Scar wiki
+          </a>
+        </li>
+        <li>
+          <a href="http://github.com/hedgehog/scar/network">
+            Scar network
+          </a>
+        </li>
+        <li>
+          <a href="http://github.com/hedgehog/scar/issues">
+            Scar issues
+          </a>
+        </li>
+        <li>
+          <a href="http://kenai.com/projects/suncloudapis/pages/Home">
+            Kenai wiki
+          </a>
+        </li>
+        <li>
+          <a href="http://kenai.com/projects/suncloudapis/forums/forum">
+            Kenai forum
+          </a>
+        </li>
+        <li>
+          <a href="http://kenai.com/projects/suncloudapis/lists/extended-discussion/archive">
+            Kenai maillist archive
+          </a>
+        </li>
+      </ul>
+</div>
+  
+</body>
+</html>

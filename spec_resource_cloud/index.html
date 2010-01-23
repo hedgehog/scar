@@ -6,73 +6,130 @@
 </head>
 <body>
 <p>
-    Sun Cloud API Home
+    RESTful Cloud API Specification
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type"><link href="../stylesheet.css" media="screen" rel="stylesheet" type="text/css"><link href="../coderay.css" media="screen" rel="stylesheet" type="text/css"></p>
     <div id="main">
-      <h3>
-        Introduction
-      </h3>
+      <h1>
+        Cloud API Specification - Requests to Cloud Resources
+      </h1>
       <p>
-        This wiki specifies a RESTful API for creating and managing cloud resources, including compute, storage, and networking components.
+        The requests documented in this section are directed to
+        <i>
+          Cloud
+        </i>
+        resources, which allows a client to enumerate the cloud resources accessible to the user performing this request.
       </p>
-      <p>
-        Usage of the API is via the HTTP protocol.  The GET, POST, PUT, and DELETE requests are all used, although most tasks can be accomplished with GET and POST.  Resource representations are in JSON.
-      </p>
-      <p>
-        The API presupposes no particular structure in the URI space.  The starting point is a URI, supplied by the cloud service provider, which identifies the cloud itself.  The cloud's representation contains URIs for the other resources in the cloud, and also for operations which may be performed upon them (for example deploying and starting virtual machines).
-      </p>
-      <p>
-        The specification of the Sun Cloud API includes:
-      </p>
-      <ul>
+      <div class="toc" id="toc">
+        <div class="toc-title" id="toctitle">
+          <span>
+            Contents
+          </span>
+        </div>
+        <div class="toc-contents" id="toccontents">
+          <ul>
 <li>
-          Common behaviors that apply across all requests and responses.
-        </li>
-        <li>
-          Resource models, which describe the JSON data structures used in requests and responses.
-        </li>
-        <li>
-          The requests that may be sent to cloud resources, and the responses expected.
-        </li>
-      </ul>
-<p>
-        This API operates on the following primary resource types:
-      </p>
-      <ul>
-<li>
-          Cloud: A top-level construct which groups all the Virtual Data Centers to which an API user has access.
-        </li>
-        <li>
-          Virtual Data Center (VDC): An isolated container which is populated with Clusters, Private Virtual Networks, Public Addresses, Storage Volumes, Volume Snapshots.
-        </li>
-        <li>
-          Cluster: An administrative grouping of Virtual Machines, useful for access control, copying or cloning, geographic isolation, and scripting automation.
-        </li>
-        <li>
-          Virtual Machine (VM): A server.
-        </li>
-        <li>
-          Private Virtual Network (VNet): A subnet, not connected to the Internet, which may be used to connect Virtual Machines within a VDC.
-        </li>
-        <li>
-          Public Address: A connection to the Internet.
-        </li>
-        <li>
-          Storage Volume: A storage resource which may be accessed via WebDAV and other storage protocols.
-        </li>
-        <li>
-          Volume Snapshot: A snapshot of the state of a Storage Volume.
-        </li>
-      </ul>
-<p>
-        The API additionally operates on secondary resources such as VM Backups and Network Interfaces.
+              1
+              <a href="#Get_Cloud">
+                Get Cloud
+              </a>
+            </li>
+          </ul>
+</div>
+      </div>
+      <p>
+        <br></p>
+      <h1>
+        <a name="Get_Cloud"></a>
+        Get Cloud
+      </h1>
+      <p>
+        Retrieve information about accessible resources.
       </p>
       <p>
-        <a class="internal" href="../projects/suncloudapis/pages/HelloCloud">
-          "Hello, Cloud": An illustrative walk-through of the Sun Cloud API
+        <b>
+          Synopsis:
+        </b>
+        GET {Well Known URI of the Service}
+      </p>
+      <p>
+        <b>
+          Request Headers:
+        </b>
+        Accept, Authorization, X-Cloud-Client-Specification-Version.
+      </p>
+      <p>
+        <b>
+          Request Message Body:
+        </b>
+        N/A.
+      </p>
+      <p>
+        <b>
+          Response Headers:
+        </b>
+        Content-Length, Content-Type.
+      </p>
+      <p>
+        <b>
+          Response Message Body:
+        </b>
+        Cloud.
+      </p>
+      <p>
+        <b>
+          Response Status:
+        </b>
+        200, 400, 401, 403, 404.
+      </p>
+      <p>
+        <b>
+          Example Request:
+        </b>
+        Retrieve information about cloud resources for this user.
+      </p>
+      <pre>GET /
+      Host: example.com
+      Authorization: Basic xxxxxxxxxxxxxxxxxxx
+      Accept: application/vnd.com.sun.cloud.Cloud+json
+      X-Cloud-Client-Specification-Version: 0.1</pre>
+      <p>
+        <b>
+          Example Response:
+        </b>
+      </p>
+      <pre>HTTP/1.1 200 OK
+      Content-Type: application/vnd.com.sun.cloud.Cloud+json
+      Content-Length: nnn
+      {
+      "uri" : "
+      <a class="external" href="http://example.com/">
+        http://example.com/
+      </a>
+      ",
+      "vdcs" : [
+      { "name" : "First VDC", "uri" : "
+      <a class="external" href="http://example.com/vdcs/123">
+        http://example.com/vdcs/123
+      </a>
+      " },
+      { "name" : "Second VDC", "uri" : "
+      <a class="external" href="http://example.com/vdcs/987">
+        http://example.com/vdcs/987
+      </a>
+      " }
+      ],
+      { "specification_version" :  [  "0.8"  ]  },
+      { "implementation_version" : "3.8RC2" }
+      }</pre>
+      <p>
+        Copyright © Sun Microsystems, 2009.  This work is licensed under
+        <a class="external" href="http://creativecommons.org/licenses/by/3.0/">
+          Creative Commons Attribution 3.0 Unported License
         </a>
-        is designed to serve as the starting-point for learning this API.
       </p>
+      <div class="clear"></div>
+      <!--
+      -->
     </div>
     <div id="sidebar">
       <ul>
@@ -87,7 +144,7 @@
       </h2>
       <ul>
 <li>
-          <a href="./">
+          <a href="../spec_home/">
             Spec Home
           </a>
         </li>
@@ -115,7 +172,7 @@
             </a>
           </li>
           <li>
-            <a href="../spec_resource_cloud/">
+            <a href="./">
               <strong>Cloud</strong>
             </a>
           </li>

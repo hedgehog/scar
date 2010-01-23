@@ -1,0 +1,465 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Scar (Sun's cloud API reference) Project</title>
+</head>
+<body>
+<p>
+    RESTful Cloud API Specification
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"><link href="../stylesheet.css" media="screen" rel="stylesheet" type="text/css"><link href="../coderay.css" media="screen" rel="stylesheet" type="text/css"></p>
+    <div id="main">
+      <h1>
+        <a name="Cloud_API_Specification_-_Requests_to_Public_Address_Resources"></a>
+        Cloud API Specification - Requests to Public Address Resources
+      </h1>
+      <p>
+        The requests documented in this section are directed to
+        <i>
+          Public Address
+        </i>
+        resources, which represent static IP addresses that are visible to the Public Internet.
+      </p>
+      <div class="toc" id="toc">
+        <div class="toc-title" id="toctitle">
+          <span>
+            Contents
+          </span>
+        </div>
+        <div class="toc-contents" id="toccontents">
+          <ul>
+<li>
+              1
+              <a href="#Cloud_API_Specification_-_Requests_to_Public_Address_Resources">
+                Cloud API Specification - Requests to Public Address Resources
+              </a>
+            </li>
+            <li>
+              2
+              <a href="#Get_Public_Address">
+                Get Public Address
+              </a>
+            </li>
+            <li>
+              3
+              <a href="#Update_Public_Address_Properties">
+                Update Public Address Properties
+              </a>
+            </li>
+            <li>
+              4
+              <a href="#Delete_Public_Address">
+                Delete Public Address
+              </a>
+            </li>
+          </ul>
+</div>
+      </div>
+      <p>
+        <br></p>
+      <h1>
+        <a name="Get_Public_Address"></a>
+        Get Public Address
+      </h1>
+      <p>
+        Retrieve information about a Public Address.
+      </p>
+      <p>
+        <b>
+          Synopsis:
+        </b>
+        GET {URI of Public Address}
+      </p>
+      <p>
+        <b>
+          Request Headers:
+        </b>
+        Accept, Authorization, X-Cloud-Client-Specification-Version.
+      </p>
+      <p>
+        <b>
+          Request Message Body:
+        </b>
+        N/A.
+      </p>
+      <p>
+        <b>
+          Response Headers:
+        </b>
+        Content-Length, Content-Type.
+      </p>
+      <p>
+        <b>
+          Response Message Body:
+        </b>
+        Public Address.
+      </p>
+      <p>
+        <b>
+          Response Status:
+        </b>
+        200, 400, 401, 403, 404.
+      </p>
+      <p>
+        <b>
+          Example Request:
+        </b>
+        Retrieve information about a Public Address named "Load Balanced".
+      </p>
+      <pre>GET /addresses/107.236.66.83
+      Host: example.com
+      Authorization: Basic xxxxxxxxxxxxxxxxxxx
+      Accept: application/vnd.com.sun.cloud.PublicAddress+json
+      X-Cloud-Client-Specification-Version: 0.1</pre>
+      <p>
+        <b>
+          Example Response:
+        </b>
+      </p>
+      <pre>HTTP/1.1 200 OK
+      Content-Type: application/vnd.com.sun.cloud.PublicAddress+json
+      Content-Length: nnn
+      {
+      "name" : "Load Balanced",
+      "uri" : "/addresses/107.236.66.83",
+      "ip_address" : "107.236.66.83",
+      "netmask" : "255.255.0.0",
+      "gateway" : "107.236.1.1",
+      "dns" : [ "22.22.22.22", "22.22.22.23" ],
+      "domain_names" : [ ]
+      }</pre>
+      <h1>
+        <a name="Update_Public_Address_Properties"></a>
+        Update Public Address Properties
+      </h1>
+      <p>
+        Update the specified properties of a Public Address.  Only fields actually included in the request message body will be updated, and existing contents of those fields will be completely erased.
+      </p>
+      <p>
+        <b>
+          Synopsis:
+        </b>
+        PUT { URI of Public Address }
+      </p>
+      <p>
+        <b>
+          Request Headers:
+        </b>
+        Accept, Authorization, Content-Length, Content-Type, X-Cloud-Client-Specification-Version.
+      </p>
+      <p>
+        <b>
+          Request Parameters:
+        </b>
+        N/A.
+      </p>
+      <p>
+        <b>
+          Request Message Body:
+        </b>
+        Public Address
+      </p>
+      <p>
+        <b>
+          Response Headers:
+        </b>
+        Content-Length, Content-Type.
+      </p>
+      <p>
+        <b>
+          Response Message Body:
+        </b>
+        Status for use in tracking update progress.
+      </p>
+      <p>
+        <b>
+          Response Status:
+        </b>
+        202, 400, 401, 403, 404.
+      </p>
+      <p>
+        <b>
+          Status "op" Value:
+        </b>
+        "update-Address".
+      </p>
+      <p>
+        <b>
+          Status "target_uri" identifies:
+        </b>
+        The Public Address receiving the request.
+      </p>
+      <p>
+        <b>
+          Example Request:
+        </b>
+        Update the domain-names associated with a Public Address named "Load Balanced".
+      </p>
+      <pre>PUT /addresses/107.236.66.83
+      Host: example.com
+      Authorization: Basic xxxxxxxxxxxxxxxxxxx
+      X-Cloud-Client-Specification-Version: 0.1
+      {
+      "domain_names" : [ "animal.example.com", "vegetable.example.com" ]
+      }</pre>
+      <p>
+        <b>
+          Example Response:
+        </b>
+      </p>
+      <pre>HTTP/1.1 202 Accepted
+      Content-Type: application/vnd.com.sun.cloud.Status+json
+      Content-Length: nnn
+      {
+      "op": "update-Address",
+      "progress": 100,
+      "target_uri": "/addresses/107.236.66.83",
+      "status_uri": "/statuses?id=32e2r2r3r1",
+      "status": 200
+      }</pre>
+      <h1>
+        <a name="Delete_Public_Address"></a>
+        Delete Public Address
+      </h1>
+      <p>
+        Release allocation of this public address to the owning VDC.
+      </p>
+      <p>
+        <b>
+          Synopsis:
+        </b>
+        DELETE { URI of Public Address }
+      </p>
+      <p>
+        <b>
+          Request Headers:
+        </b>
+        Authorization, X-Cloud-Client-Specification-Version.
+      </p>
+      <p>
+        <b>
+          Request Parameters:
+        </b>
+        N/A.
+      </p>
+      <p>
+        <b>
+          Request Message Body:
+        </b>
+        N/A.
+      </p>
+      <p>
+        <b>
+          Response Headers:
+        </b>
+        Content-Length, Content-Type.
+      </p>
+      <p>
+        <b>
+          Response Message Body:
+        </b>
+        Status for use in tracking deletion progress.
+      </p>
+      <p>
+        <b>
+          Response Status:
+        </b>
+        202, 400, 401, 403, 404.
+      </p>
+      <p>
+        <b>
+          Status "op" Value:
+        </b>
+        "delete-Address".
+      </p>
+      <p>
+        <b>
+          Status "target_uri" identifies:
+        </b>
+        The Public Address being deleted.
+      </p>
+      <p>
+        <b>
+          Example Request:
+        </b>
+        Delete an existing Public Address named "Load Balanced"
+      </p>
+      <pre>DELETE /addresses/107.236.66.83
+      Host: example.com
+      Authorization: Basic xxxxxxxxxxxxxxxxxxx
+      X-Compute-Client-Specification-Version: 0.1</pre>
+      <p>
+        <b>
+          Example Response:
+        </b>
+      </p>
+      <pre>HTTP/1.1 202 Accepted
+      Content-Type: application/vnd.com.sun.cloud.Status+json
+      Content-Length: nnn
+      {
+      "op": "delete-Address",
+      "progress": 0,
+      "target_uri": "/addresses/107.236.66.83",
+      "status_uri": "/statuses/AddrDel/107.236.66.83"
+      }</pre>
+      <p>
+        Copyright © Sun Microsystems, 2009.  This work is licensed under
+        <a class="external" href="http://creativecommons.org/licenses/by/3.0/">
+          Creative Commons Attribution 3.0 Unported License
+        </a>
+      </p>
+      <div class="clear"></div>
+      <!--
+      -->
+    </div>
+    <div id="sidebar">
+      <ul>
+<li>
+          <a href="../">
+            <strong>Scar Home</strong>
+          </a>
+        </li>
+      </ul>
+<h2>
+        Specifications
+      </h2>
+      <ul>
+<li>
+          <a href="../spec_home/">
+            Spec Home
+          </a>
+        </li>
+        <li>
+          <a href="../spec_common/">
+            Common Behavior
+          </a>
+        </li>
+        <li>
+          <a href="../spec_resources/">
+            Resources
+          </a>
+        </li>
+        <li>
+          <a href="../spec_command_line_client/">
+            Command Line Client
+          </a>
+        </li>
+        <li>
+          <strong>Requests to ...</strong>
+          </li>
+<li>
+            <a href="../spec_resource_backup/">
+              <strong>Backup</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_cloud/">
+              <strong>Cloud</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_cluster/">
+              <strong>Cluster</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_interface/">
+              <strong>Interface</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_location/">
+              <strong>Location</strong>
+            </a>
+          </li>
+          <li>
+            <a href="./">
+              <strong>Public Address</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_request_status/">
+              <strong>Request Status</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_snapshot/">
+              <strong>Snapshot</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_virtual_data_center/">
+              <strong>Virtual Data Center</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_virtual_machine/">
+              <strong>Virtual Machine</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_virtual_machine_template/">
+              <strong>Virtual Machine Template</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_virtual_network/">
+              <strong>Virtual Network</strong>
+            </a>
+          </li>
+          <li>
+            <a href="../spec_resource_volume/">
+              <strong>Volume</strong>
+            </a>
+          </li>
+        
+      </ul>
+<h2>
+        Implmentations
+      </h2>
+      <ul>
+<li>
+          <a href="http://wiki.github.com/hedgehog/scar/">
+            TBA
+          </a>
+        </li>
+      </ul>
+<h2>
+        Community
+      </h2>
+      <ul>
+<li>
+          <a href="http://wiki.github.com/hedgehog/scar/">
+            Scar wiki
+          </a>
+        </li>
+        <li>
+          <a href="http://github.com/hedgehog/scar/network">
+            Scar network
+          </a>
+        </li>
+        <li>
+          <a href="http://github.com/hedgehog/scar/issues">
+            Scar issues
+          </a>
+        </li>
+        <li>
+          <a href="http://kenai.com/projects/suncloudapis/pages/Home">
+            Kenai wiki
+          </a>
+        </li>
+        <li>
+          <a href="http://kenai.com/projects/suncloudapis/forums/forum">
+            Kenai forum
+          </a>
+        </li>
+        <li>
+          <a href="http://kenai.com/projects/suncloudapis/lists/extended-discussion/archive">
+            Kenai maillist archive
+          </a>
+        </li>
+      </ul>
+</div>
+  
+</body>
+</html>

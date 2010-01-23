@@ -1,15 +1,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
-  <head>
-    <title>Scar (Sun's cloud API reference) Project</title>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Scar (Sun's cloud API reference) Project</title>
+</head>
+<body>
+<p>
     RESTful Cloud API Specification
-    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
-      <link href='/stylesheet.css' media='screen' rel='stylesheet' type='text/css' />
-      <link href='/coderay.css' media='screen' rel='stylesheet' type='text/css' />
-    </meta>
-  </head>
-  <body>
-    <div id='main'>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"><link href="../stylesheet.css" media="screen" rel="stylesheet" type="text/css"><link href="../coderay.css" media="screen" rel="stylesheet" type="text/css"></p>
+    <div id="main">
       <h1>
         Common Behaviors
       </h1>
@@ -26,133 +25,132 @@
         : 9 February 2009
       </p>
       <p>
-        This document specifies constraints that apply to all the requests and responses that occur in the RESTful APIs supported by the Sun Cloud Computing Platform, hereinafter referred to as &quot;The Platform&quot;.
+        This document specifies constraints that apply to all the requests and responses that occur in the RESTful APIs supported by the Sun Cloud Computing Platform, hereinafter referred to as "The Platform".
       </p>
-      <div class='toc' id='toc'>
-        <div class='toc-title' id='toctitle'>
+      <div class="toc" id="toc">
+        <div class="toc-title" id="toctitle">
           <span>
             Contents
           </span>
         </div>
-        <div class='toc-contents' id='toccontents'>
+        <div class="toc-contents" id="toccontents">
           <ul>
-            <li>
+<li>
               1
-              <a href='#Imperative_Terms_In_Specifications'>
+              <a href="#Imperative_Terms_In_Specifications">
                 Imperative Terms In Specifications
               </a>
             </li>
             <li>
               2
-              <a href='#Transport_Protocol'>
+              <a href="#Transport_Protocol">
                 Transport Protocol
               </a>
             </li>
             <li>
               3
-              <a href='#URI_Space'>
+              <a href="#URI_Space">
                 URI Space
               </a>
             </li>
             <li>
               4
-              <a href='#Media_Types'>
+              <a href="#Media_Types">
                 Media Types
               </a>
             </li>
             <li>
               5
-              <a href='#Request_Headers'>
+              <a href="#Request_Headers">
                 Request Headers
               </a>
             </li>
             <li>
               6
-              <a href='#Request_Parameters'>
+              <a href="#Request_Parameters">
                 Request Parameters
               </a>
             </li>
             <li>
               7
-              <a href='#Response_Headers'>
+              <a href="#Response_Headers">
                 Response Headers
               </a>
             </li>
             <li>
               8
-              <a href='#Standard_HTTP_Status_Codes'>
+              <a href="#Standard_HTTP_Status_Codes">
                 Standard HTTP Status Codes
               </a>
             </li>
             <li>
               9
-              <a href='#Error_Response_Message_Bodies'>
+              <a href="#Error_Response_Message_Bodies">
                 Error Response Message Bodies
               </a>
             </li>
           </ul>
-          <ul>
-            <li>
+<ul>
+<li>
               9.1
-              <a href='#Introduction'>
+              <a href="#Introduction">
                 Introduction
               </a>
             </li>
             <li>
               9.2
-              <a href='#Data_Models'>
+              <a href="#Data_Models">
                 Data Models
               </a>
             </li>
           </ul>
-          <ul>
-            <li>
+<ul>
+<li>
               9.2.1
-              <a href='#Messages_Data_Model'>
+              <a href="#Messages_Data_Model">
                 Messages Data Model
               </a>
             </li>
             <li>
               9.2.2
-              <a href='#Message_Data_Model'>
+              <a href="#Message_Data_Model">
                 Message Data Model
               </a>
             </li>
           </ul>
-          <li>
+<li>
             10
-            <a href='#Version_Request_Type'>
+            <a href="#Version_Request_Type">
               Version Request Type
             </a>
           </li>
           <ul>
-            <li>
+<li>
               10.1
-              <a href='#Introduction'>
+              <a href="#Introduction">
                 Introduction
               </a>
             </li>
             <li>
               10.2
-              <a href='#Version_Data_Model'>
+              <a href="#Version_Data_Model">
                 Version Data Model
               </a>
             </li>
           </ul>
-        </div>
+</div>
       </div>
       <p>
-        <br />
-      </p>
+        <br></p>
       <h1>
-        <a name='Imperative_Terms_In_Specifications'></a>
+        <a name="Imperative_Terms_In_Specifications"></a>
         Imperative Terms In Specifications
       </h1>
       <p>
-        The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;, &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this document, and all other documents that comprise the specification of The Platform RESTful API, are to be interpreted as described in &quot;Key words for use in RFCs to Indicate Requirement Levels&quot; (RFC 2119).
+        The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document, and all other documents that comprise the specification of The Platform RESTful API, are to be interpreted as described in "Key words for use in RFCs to Indicate Requirement Levels" (RFC 2119).
       </p>
       <h1>
-        <a name='Transport_Protocol'></a>
+        <a name="Transport_Protocol"></a>
         Transport Protocol
       </h1>
       <p>
@@ -167,7 +165,7 @@
         protocol.
       </p>
       <h1>
-        <a name='URI_Space'></a>
+        <a name="URI_Space"></a>
         URI Space
       </h1>
       <p>
@@ -177,7 +175,7 @@
         Clients MUST NOT make assumptions about the layout of the URIs within a Space.
       </p>
       <h1>
-        <a name='Media_Types'></a>
+        <a name="Media_Types"></a>
         Media Types
       </h1>
       <p>
@@ -188,7 +186,7 @@
         <i>
           application/vnd.com.sun.cloud.xxxxx+json
         </i>
-        , where &quot;xxxxx&quot; represents the portion of the identifier unique to a particular representation format for each service.
+        , where "xxxxx" represents the portion of the identifier unique to a particular representation format for each service.
       </p>
       <p>
         The Platform
@@ -217,17 +215,17 @@
         (i.e. simple HTML forms) for request entities that only need simple name/value pairs.
       </p>
       <h1>
-        <a name='Request_Headers'></a>
+        <a name="Request_Headers"></a>
         Request Headers
       </h1>
       <p>
         In requests made to services implementing Sun Cloud Computing Platform APIs, several specific HTTP headers are used as described in the following table:
       </p>
-      <div style='overflow-x: auto;'>
-        <div style='margin: 0px 2px 0px 2px;'>
-          <table -='' border='1' width='100%'>
-            <tr>
-              <th>
+      <div style="overflow-x: auto;">
+        <div style="margin: 0px 2px 0px 2px;">
+          <table border="1" width="100%">
+<tr>
+<th>
                 Header
               </th>
               <th>
@@ -240,8 +238,8 @@
                 Required
               </th>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 Accept
               </td>
               <td>
@@ -254,12 +252,12 @@
                 Recommended, on requests that will produce a response message body.
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 Authorization
               </td>
               <td>
-                &quot;Basic &quot; plus username and password (per RFC 2617).
+                "Basic " plus username and password (per RFC 2617).
               </td>
               <td>
                 Identifies the authorized user making this request.
@@ -268,8 +266,8 @@
                 Yes, on all requests.
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 Content-Length
               </td>
               <td>
@@ -282,8 +280,8 @@
                 Yes, on requests that contain a message body.(1)
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 Content-Type
               </td>
               <td>
@@ -296,8 +294,8 @@
                 Yes, on requests that contain a message body.
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 Host
               </td>
               <td>
@@ -310,8 +308,8 @@
                 All requests.  Note that since a single Space may spread its URIs across multiple hosts, this may need to be re-set for each request.
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 X-YYYYY-Client-Specification-Version
               </td>
               <td>
@@ -324,15 +322,15 @@
                 No (current version is assumed if this header is not present).
               </td>
             </tr>
-          </table>
-        </div>
+</table>
+</div>
       </div>
       <p>
         (1) Some APIs
         <b>
           MAY
         </b>
-        require a &quot;Content-Length: 0&quot; header to be included on a POST request that contains no request message body.
+        require a "Content-Length: 0" header to be included on a POST request that contains no request message body.
       </p>
       <p>
         Note that, since all interactions with RESTful Sun Cloud Computing Platform APIs are stateless, no
@@ -342,24 +340,24 @@
         header (or any other mechanism to provide a session identifier) is used.
       </p>
       <h1>
-        <a name='Request_Parameters'></a>
+        <a name="Request_Parameters"></a>
         Request Parameters
       </h1>
       <p>
         Since the URI space is controlled by the server, client programs MUST not make any assumptions about the meanings of request parameters.
       </p>
       <h1>
-        <a name='Response_Headers'></a>
+        <a name="Response_Headers"></a>
         Response Headers
       </h1>
       <p>
         In responses returned by The Platform, several specific HTTP headers are used as described in the following table:
       </p>
-      <div style='overflow-x: auto;'>
-        <div style='margin: 0px 2px 0px 2px;'>
-          <table -='' border='1' width='100%'>
-            <tr>
-              <th>
+      <div style="overflow-x: auto;">
+        <div style="margin: 0px 2px 0px 2px;">
+          <table border="1" width="100%">
+<tr>
+<th>
                 Header
               </th>
               <th>
@@ -372,8 +370,8 @@
                 Required
               </th>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 Content-Length
               </td>
               <td>
@@ -386,8 +384,8 @@
                 Yes, on responses that contain a message body.
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 Content-Type
               </td>
               <td>
@@ -400,8 +398,8 @@
                 Yes, on responses that contain a message body.
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 Location
               </td>
               <td>
@@ -414,32 +412,32 @@
                 Yes, on responses to requests that create new server side resources accessible via a URI.
               </td>
             </tr>
-          </table>
-        </div>
+</table>
+</div>
       </div>
       <p>
         FIXME - Document cache control headers and behavior somewhere.
       </p>
       <h1>
-        <a name='Standard_HTTP_Status_Codes'></a>
+        <a name="Standard_HTTP_Status_Codes"></a>
         Standard HTTP Status Codes
       </h1>
       <p>
         Sun Cloud Computing Platform APIs will return standard HTTP response codes as described in the following table, under the conditions listed in the description.
       </p>
-      <div style='overflow-x: auto;'>
-        <div style='margin: 0px 2px 0px 2px;'>
-          <table -='' border='1' width='100%'>
-            <tr>
-              <th>
+      <div style="overflow-x: auto;">
+        <div style="margin: 0px 2px 0px 2px;">
+          <table border="1" width="100%">
+<tr>
+<th>
                 HTTP Status
               </th>
               <th>
                 Description
               </th>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 200 OK
               </td>
               <td>
@@ -450,8 +448,8 @@
                 header containing the canonical URI for the newly created resource.
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 201 Created
               </td>
               <td>
@@ -462,8 +460,8 @@
                 header containing the canonical URI for the newly created resource should also be returned.
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 202 Accepted
               </td>
               <td>
@@ -474,24 +472,24 @@
                 include an indication of the request's current status, and either a pointer to a status monitor or some estimate of when the user can expect the request to be fulfilled.
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 204 No Content
               </td>
               <td>
                 The server fulfilled the request, but does not need to return a response message body.
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 400 Bad Request
               </td>
               <td>
                 The request could not be processed because it contains missing or invalid information (such as validation error on an input field, a missing required value, and so on).
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 401 Unauthorized
               </td>
               <td>
@@ -502,32 +500,32 @@
                 header in the response.
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 403 Forbidden
               </td>
               <td>
                 The server recognized your credentials, but you do not possess authorization to perform this request.
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 404 Not Found
               </td>
               <td>
                 The request specified a URI of a resource that does not exist.
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 405 Method Not Allowed
               </td>
               <td>
                 The HTTP verb specified in the request (DELETE, GET, HEAD, POST, PUT) is not supported for this request URI.
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 406 Not Acceptable
               </td>
               <td>
@@ -538,50 +536,50 @@
                 header of the request.
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 409 Conflict
               </td>
               <td>
                 A creation or update request could not be completed, because it would cause a conflict in the current state of the resources supported by the server (for example, an attempt to create a new resource with a unique identifier already assigned to some existing resource).
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 500 Internal Server Error
               </td>
               <td>
                 The server encountered an unexpected condition which prevented it from fulfilling the request.
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 501 Not Implemented
               </td>
               <td>
                 The server does not (currently) support the functionality required to fulfill the request.
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 503 Service Unavailable
               </td>
               <td>
                 The server is currently unable to handle the request due to temporary overloading or maintenance of the server.
               </td>
             </tr>
-          </table>
-        </div>
+</table>
+</div>
       </div>
       <p>
         FIXME - Do we need to worry about redirects?
       </p>
       <h1>
-        <a name='Error_Response_Message_Bodies'></a>
+        <a name="Error_Response_Message_Bodies"></a>
         Error Response Message Bodies
       </h1>
       <h2>
-        <a name='Introduction'></a>
+        <a name="Introduction"></a>
         Introduction
       </h2>
       <p>
@@ -607,14 +605,14 @@
         data models, describing what went wrong.  The text values of such messages might be used, for example, to communicate with a human user of the client side application.
       </p>
       <h2>
-        <a name='Data_Models'></a>
+        <a name="Data_Models"></a>
         Data Models
       </h2>
       <p>
         Note that these data models, while discussed in the context of reporting error conditions, are also suitable for a general event logging interface, and might get additionally purposed for this use at some point in the future.
       </p>
       <h3>
-        <a name='Messages_Data_Model'></a>
+        <a name="Messages_Data_Model"></a>
         Messages Data Model
       </h3>
       <p>
@@ -627,11 +625,11 @@
           application/vnd.com.sun.cloud.common.Messages+json
         </i>
       </p>
-      <div style='overflow-x: auto;'>
-        <div style='margin: 0px 2px 0px 2px;'>
-          <table -='' border='1' width='100%'>
-            <tr>
-              <th>
+      <div style="overflow-x: auto;">
+        <div style="margin: 0px 2px 0px 2px;">
+          <table border="1" width="100%">
+<tr>
+<th>
                 Field Name
               </th>
               <th>
@@ -644,8 +642,8 @@
                 Description
               </th>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 message
               </td>
               <td>
@@ -662,11 +660,11 @@
                 data models for each individual message.
               </td>
             </tr>
-          </table>
-        </div>
+</table>
+</div>
       </div>
       <h3>
-        <a name='Message_Data_Model'></a>
+        <a name="Message_Data_Model"></a>
         Message Data Model
       </h3>
       <p>
@@ -676,11 +674,11 @@
         </i>
         contains the following fields:
       </p>
-      <div style='overflow-x: auto;'>
-        <div style='margin: 0px 2px 0px 2px;'>
-          <table -='' border='1' width='100%'>
-            <tr>
-              <th>
+      <div style="overflow-x: auto;">
+        <div style="margin: 0px 2px 0px 2px;">
+          <table border="1" width="100%">
+<tr>
+<th>
                 Field Name
               </th>
               <th>
@@ -693,8 +691,8 @@
                 Description
               </th>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 action
               </td>
               <td>
@@ -707,8 +705,8 @@
                 Symbolic identifier of the action being performed by the service implementation that triggered the creation of this message.
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 code
               </td>
               <td>
@@ -721,8 +719,8 @@
                 Symbolic error code identifying the type of error reported by this message.
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 field
               </td>
               <td>
@@ -735,8 +733,8 @@
                 Name of the input field (from the request data model) that this message is associated with.  If not specified, this message should be considered global to the entire request.
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 hint
               </td>
               <td>
@@ -749,8 +747,8 @@
                 Localized text further describing the nature of the problem, possibly including potential workarounds that the client could try.
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 severity
               </td>
               <td>
@@ -763,8 +761,8 @@
                 Label indicating the severity of the error condition represented by this message (SEVERE, WARNING, CONFIG, INFO, FINE, FINER, FINEST).
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 source
               </td>
               <td>
@@ -777,8 +775,8 @@
                 Symbolic identifier of the service implementation component that triggered this message.
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 stack-trace
               </td>
               <td>
@@ -791,8 +789,8 @@
                 Stack trace associated with this message.
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 <b>
                   text
                 </b>
@@ -811,8 +809,8 @@
                 .
               </td>
             </tr>
-          </table>
-        </div>
+</table>
+</div>
       </div>
       <p>
         <b>
@@ -841,11 +839,11 @@
         be used in messages transmitted between internal application components.
       </p>
       <h1>
-        <a name='Version_Request_Type'></a>
+        <a name="Version_Request_Type"></a>
         Version Request Type
       </h1>
       <h2>
-        <a name='Introduction'></a>
+        <a name="Introduction"></a>
         Introduction
       </h2>
       <p>
@@ -864,7 +862,7 @@
         .
       </p>
       <h2>
-        <a name='Version_Data_Model'></a>
+        <a name="Version_Data_Model"></a>
         Version Data Model
       </h2>
       <p>
@@ -876,11 +874,11 @@
       <p>
         The data model contains the following fields:
       </p>
-      <div style='overflow-x: auto;'>
-        <div style='margin: 0px 2px 0px 2px;'>
-          <table -='' border='1' width='100%'>
-            <tr>
-              <th>
+      <div style="overflow-x: auto;">
+        <div style="margin: 0px 2px 0px 2px;">
+          <table border="1" width="100%">
+<tr>
+<th>
                 Field Name
               </th>
               <th>
@@ -893,8 +891,8 @@
                 Description
               </th>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 <b>
                   implementation_version
                 </b>
@@ -909,8 +907,8 @@
                 Implementation version identifier for this service instance.
               </td>
             </tr>
-            <tr>
-              <td>
+<tr>
+<td>
                 <b>
                   specification_version
                 </b>
@@ -925,150 +923,167 @@
                 Comma-delimited list of the specification version(s) supported by this service instance.
               </td>
             </tr>
-          </table>
-        </div>
+</table>
+</div>
       </div>
       <p>
-        Copyright &copy; Sun Microsystems, 2009.  This work is licensed under
-        <a class='external' href='http://creativecommons.org/licenses/by/3.0/'>
+        Copyright © Sun Microsystems, 2009.  This work is licensed under
+        <a class="external" href="http://creativecommons.org/licenses/by/3.0/">
           Creative Commons Attribution 3.0 Unported License
         </a>
       </p>
-      <div class='clear'></div>
+      <div class="clear"></div>
       <!--
       -->
     </div>
-    <div id='sidebar'>
+    <div id="sidebar">
       <ul>
-        <li>
-          <a href='/'>
+<li>
+          <a href="../">
             <strong>Scar Home</strong>
           </a>
         </li>
       </ul>
-      <h2>
+<h2>
         Specifications
       </h2>
       <ul>
-        <li>
-          <a href='/spec_home/'>
+<li>
+          <a href="../spec_home/">
             Spec Home
           </a>
         </li>
         <li>
-          <a href='/spec_common/'>
+          <a href="./">
             Common Behavior
           </a>
         </li>
         <li>
-          <a href='/spec_resources/'>
+          <a href="../spec_resources/">
             Resources
           </a>
         </li>
         <li>
+          <a href="../spec_command_line_client/">
+            Command Line Client
+          </a>
+        </li>
+        <li>
           <strong>Requests to ...</strong>
-          <li>
-            <a href='/'>
+          </li>
+<li>
+            <a href="../spec_resource_backup/">
               <strong>Backup</strong>
             </a>
           </li>
           <li>
-            <a href='/'>
+            <a href="../spec_resource_cloud/">
               <strong>Cloud</strong>
             </a>
           </li>
           <li>
-            <a href='/'>
+            <a href="../spec_resource_cluster/">
               <strong>Cluster</strong>
             </a>
           </li>
           <li>
-            <a href='/'>
+            <a href="../spec_resource_interface/">
               <strong>Interface</strong>
             </a>
           </li>
           <li>
-            <a href='/'>
+            <a href="../spec_resource_location/">
               <strong>Location</strong>
             </a>
           </li>
           <li>
-            <a href='/'>
+            <a href="../spec_resource_public_address/">
               <strong>Public Address</strong>
             </a>
           </li>
           <li>
-            <a href='/'>
+            <a href="../spec_resource_request_status/">
               <strong>Request Status</strong>
             </a>
           </li>
           <li>
-            <a href='/'>
+            <a href="../spec_resource_snapshot/">
               <strong>Snapshot</strong>
             </a>
           </li>
           <li>
-            <a href='/'>
+            <a href="../spec_resource_virtual_data_center/">
               <strong>Virtual Data Center</strong>
             </a>
           </li>
           <li>
-            <a href='/'>
+            <a href="../spec_resource_virtual_machine/">
               <strong>Virtual Machine</strong>
             </a>
           </li>
           <li>
-            <a href='/'>
+            <a href="../spec_resource_virtual_machine_template/">
               <strong>Virtual Machine Template</strong>
             </a>
           </li>
           <li>
-            <a href='/'>
+            <a href="../spec_resource_virtual_network/">
               <strong>Virtual Network</strong>
             </a>
           </li>
           <li>
-            <a href='/'>
+            <a href="../spec_resource_volume/">
               <strong>Volume</strong>
             </a>
           </li>
+        
+      </ul>
+<h2>
+        Implmentations
+      </h2>
+      <ul>
+<li>
+          <a href="http://wiki.github.com/hedgehog/scar/">
+            TBA
+          </a>
         </li>
       </ul>
-      <h2>
+<h2>
         Community
       </h2>
       <ul>
-        <li>
-          <a href='http://wiki.github.com/hedgehog/scar/'>
+<li>
+          <a href="http://wiki.github.com/hedgehog/scar/">
             Scar wiki
           </a>
         </li>
         <li>
-          <a href='http://github.com/hedgehog/scar/network'>
+          <a href="http://github.com/hedgehog/scar/network">
             Scar network
           </a>
         </li>
         <li>
-          <a href='http://github.com/hedgehog/scar/issues'>
+          <a href="http://github.com/hedgehog/scar/issues">
             Scar issues
           </a>
         </li>
         <li>
-          <a href='http://kenai.com/projects/suncloudapis/pages/Home'>
+          <a href="http://kenai.com/projects/suncloudapis/pages/Home">
             Kenai wiki
           </a>
         </li>
         <li>
-          <a href='http://kenai.com/projects/suncloudapis/forums/forum'>
+          <a href="http://kenai.com/projects/suncloudapis/forums/forum">
             Kenai forum
           </a>
         </li>
         <li>
-          <a href='http://kenai.com/projects/suncloudapis/lists/extended-discussion/archive'>
+          <a href="http://kenai.com/projects/suncloudapis/lists/extended-discussion/archive">
             Kenai maillist archive
           </a>
         </li>
       </ul>
-    </div>
-  </body>
+</div>
+  
+</body>
 </html>

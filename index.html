@@ -1,15 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
-  <head>
-    <title>Scar (Sun's cloud API reference) Project</title>
-    
-    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
-      <link href='/stylesheet.css' media='screen' rel='stylesheet' type='text/css' />
-      <link href='/coderay.css' media='screen' rel='stylesheet' type='text/css' />
-    </meta>
-  </head>
-  <body>
-    <div id='main'>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Scar (Sun's cloud API reference) Project</title>
+<link href="stylesheet.css" media="screen" rel="stylesheet" type="text/css">
+<link href="coderay.css" media="screen" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div id="main">
       <h1>
         Scar Project
       </h1>
@@ -19,8 +17,9 @@
       <p>
         This website is generated (nanoc3) from content in the Scar repository.
         The aim of the Scar project is to facilitate participation by increasing
-        <ul>
-          <li>
+        </p>
+<ul>
+<li>
             <p>
               Agility
             </p>
@@ -48,20 +47,19 @@
               Provide snapshots of Sun's Cloud API.
               <em>Example</em>
               To grab version 0.n
-              <blockquote>
-                git clone git://github.com/hedgehog/scar.git
-                git checkout -b your_branch v0.n
-              </blockquote>
+              </p>
+<pre><code class="language-ruby">git clone git<span class="sy">:/</span>/github.com/hedgehog/scar.git
+              git checkout -b your_branch v0.n</code></pre>
               If you don't want the whole repo, github is not configured to respond to
               git archive ... Instead, use
-              curl -O -L http://github.com/hedgehog/scar/downloads/...
-            </p>
+              <pre><code class="language-ruby">curl -<span class="co">O</span> -<span class="co">L</span> http<span class="sy">:/</span>/github.com/hedgehog/scar/downloads/...</code></pre>
+            
           </li>
           <li>
             <p>
               Make transparent, and accessible, any ideas others explore or errors they
               correct.  See
-              <a class='external' href='http://github.com/hedgehog/scar/network'>
+              <a class="external" href="http://github.com/hedgehog/scar/network">
                 here.
               </a>
             </p>
@@ -78,9 +76,8 @@
             </p>
           </li>
         </ul>
-      </p>
-      <ul>
-        <li>
+<ul>
+<li>
           <p>
             <strong>
               Change this page’s content
@@ -97,141 +94,157 @@
           </p>
         </li>
       </ul>
-      <p>
+<p>
         If you need any help with customizing your nanoc web site, be sure to check out the documentation (see sidebar), and be sure to subscribe to the discussion group (also see sidebar). Enjoy!
       </p>
     </div>
-    <div id='sidebar'>
+    <div id="sidebar">
       <ul>
-        <li>
-          <a href='/'>
+<li>
+          <a href="./">
             <strong>Scar Home</strong>
           </a>
         </li>
       </ul>
-      <h2>
+<h2>
         Specifications
       </h2>
       <ul>
-        <li>
-          <a href='/spec_home/'>
+<li>
+          <a href="spec_home/">
             Spec Home
           </a>
         </li>
         <li>
-          <a href='/spec_common/'>
+          <a href="spec_common/">
             Common Behavior
           </a>
         </li>
         <li>
-          <a href='/spec_resources/'>
+          <a href="spec_resources/">
             Resources
           </a>
         </li>
         <li>
+          <a href="spec_command_line_client/">
+            Command Line Client
+          </a>
+        </li>
+        <li>
           <strong>Requests to ...</strong>
-          <li>
-            <a href='/'>
+          </li>
+<li>
+            <a href="spec_resource_backup/">
               <strong>Backup</strong>
             </a>
           </li>
           <li>
-            <a href='/'>
+            <a href="spec_resource_cloud/">
               <strong>Cloud</strong>
             </a>
           </li>
           <li>
-            <a href='/'>
+            <a href="spec_resource_cluster/">
               <strong>Cluster</strong>
             </a>
           </li>
           <li>
-            <a href='/'>
+            <a href="spec_resource_interface/">
               <strong>Interface</strong>
             </a>
           </li>
           <li>
-            <a href='/'>
+            <a href="spec_resource_location/">
               <strong>Location</strong>
             </a>
           </li>
           <li>
-            <a href='/'>
+            <a href="spec_resource_public_address/">
               <strong>Public Address</strong>
             </a>
           </li>
           <li>
-            <a href='/'>
+            <a href="spec_resource_request_status/">
               <strong>Request Status</strong>
             </a>
           </li>
           <li>
-            <a href='/'>
+            <a href="spec_resource_snapshot/">
               <strong>Snapshot</strong>
             </a>
           </li>
           <li>
-            <a href='/'>
+            <a href="spec_resource_virtual_data_center/">
               <strong>Virtual Data Center</strong>
             </a>
           </li>
           <li>
-            <a href='/'>
+            <a href="spec_resource_virtual_machine/">
               <strong>Virtual Machine</strong>
             </a>
           </li>
           <li>
-            <a href='/'>
+            <a href="spec_resource_virtual_machine_template/">
               <strong>Virtual Machine Template</strong>
             </a>
           </li>
           <li>
-            <a href='/'>
+            <a href="spec_resource_virtual_network/">
               <strong>Virtual Network</strong>
             </a>
           </li>
           <li>
-            <a href='/'>
+            <a href="spec_resource_volume/">
               <strong>Volume</strong>
             </a>
           </li>
+        
+      </ul>
+<h2>
+        Implmentations
+      </h2>
+      <ul>
+<li>
+          <a href="http://wiki.github.com/hedgehog/scar/">
+            TBA
+          </a>
         </li>
       </ul>
-      <h2>
+<h2>
         Community
       </h2>
       <ul>
-        <li>
-          <a href='http://wiki.github.com/hedgehog/scar/'>
+<li>
+          <a href="http://wiki.github.com/hedgehog/scar/">
             Scar wiki
           </a>
         </li>
         <li>
-          <a href='http://github.com/hedgehog/scar/network'>
+          <a href="http://github.com/hedgehog/scar/network">
             Scar network
           </a>
         </li>
         <li>
-          <a href='http://github.com/hedgehog/scar/issues'>
+          <a href="http://github.com/hedgehog/scar/issues">
             Scar issues
           </a>
         </li>
         <li>
-          <a href='http://kenai.com/projects/suncloudapis/pages/Home'>
+          <a href="http://kenai.com/projects/suncloudapis/pages/Home">
             Kenai wiki
           </a>
         </li>
         <li>
-          <a href='http://kenai.com/projects/suncloudapis/forums/forum'>
+          <a href="http://kenai.com/projects/suncloudapis/forums/forum">
             Kenai forum
           </a>
         </li>
         <li>
-          <a href='http://kenai.com/projects/suncloudapis/lists/extended-discussion/archive'>
+          <a href="http://kenai.com/projects/suncloudapis/lists/extended-discussion/archive">
             Kenai maillist archive
           </a>
         </li>
       </ul>
-    </div>
+</div>
   </body>
 </html>

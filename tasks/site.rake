@@ -223,19 +223,28 @@ h3. Usage
       puts "Working in #{current_branch} branch of #{repo}:"
       gitstatus=Kernel.send(:`,'git status')
       clean = gitstatus =~ /nothing to commit \(working directory clean\)/i
+      puts "Git status:"
+      puts gitstatus
+      puts "Git status is clean?: #{clean.to_s}"
       stashed=false
-      unless clean
+      if clean.nil?
+        puts "Saving a Git stash"
         gstash = "git stash save 'Uncommited changes stashed pre gh-pages migration: #{tmpid}'"
         stashed=true
         Kernel.send(:`,gstash)
+        stashlist=Kernel.send(:`,'git stash list')
+        puts stashlist
+        stashshow=Kernel.send(:`,'git stash show')
+        puts stashshow
         gitstatus=Kernel.send(:`,'git status')
+        puts "Git status:\n#{gitstatus}"
         clean = gitstatus =~ /nothing to commit \(working directory clean\)/i
       end
-      raise RuntimeError.new("The git working directory is still not clean.") unless clean
+      raise RuntimeError.new("The git working directory is still not clean.") if clean.nil?
       commands = <<-CMD.gsub(/^ /, '')
       git tag #{pre_tag}
       pushd ./#{website_folder}
-      nanoc3 co
+      nanoc3 co --force
       popd
       pushd ./gh-pages
       cp -afr #{website_contents} .
@@ -248,9 +257,8 @@ h3. Usage
       CMD
       commands.split(/\n/).each do |cmd|
         puts "Executing: #{cmd}"
-        # Kernel.send(:`,cmd)
-        puts "Response:"
-        puts "Code: #{$?}"
+        # response=Kernel.send(:`,cmd)
+        #puts "Code: #{$?} Response:\n#{response}"
 #        unless $? == 0
 #          puts "To reset: 1) Look for the branch crazyexperiment"
 #          puts "git branch -a"
@@ -263,9 +271,12 @@ h3. Usage
 #          raise RuntimeError.new("Somthing went wrong.")
 #        end
       end
-      Kernel.send(:`, 'git stash apply stash@{0}') if stashed
+      if stashed
+        puts "Apply the Git stash created before migrating the website."
+        Kernel.send(:`, 'git stash pop stash@{0}')
+      end
       gitstatus=Kernel.send(:`,'git status')
-      puts gitstatus
+      puts "Git status:\n#{gitstatus}"
     end
   end
 

@@ -1,19 +1,21 @@
 #!/usr/bin/env ruby
 
 compile '/stylesheet/*' do
-  filter :sass
-  filter :relativize_paths, :type => :css
+  rep.filter :sass
+  rep.filter :relativize_paths, :type => :css
 end
 compile '/coderay/*' do
-  filter :sass
-  filter :relativize_paths, :type => :css
+  rep.filter :sass
+  rep.filter :relativize_paths, :type => :css
 end
 
 compile '/*' do
   filter :haml
+  layout 'default'
   filter :syntax_colorize
   filter :relativize_paths, :type => :html
-  layout 'default'
+  # rep.filter :relativize_paths, :type => :html
+  # puts "Now we relativize"
 end
 #compile '/*' do
 #  filter :haml
@@ -30,6 +32,6 @@ route '*' do
   item.identifier + 'index.html'
 end
 
-layout '/default/', :haml, :format => :html5
+layout '/default/', :haml, :format => :xhtml
 
-layout '*', :haml
+layout '*', :haml,:format => :xhtml

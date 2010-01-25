@@ -256,8 +256,9 @@ h3. Usage
       git commit -a -m 'commit gh-pages content to parent repo'
       CMD
       commands.split(/\n/).each do |cmd|
+        strcmd=cmd.strip
         puts "Executing: #{cmd}"
-        response=Kernel.send(:`,cmd)
+        response=Kernel.send(:`, strcmd)
         puts "Code: #{$?}\nResponse:\n#{response}"
 #        unless $? == 0
 #          puts "To reset: 1) Look for the branch crazyexperiment"

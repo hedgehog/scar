@@ -247,10 +247,14 @@ h3. Usage
         puts Kernel.send(:`, "nanoc3 co --force")
       end
       FileUtils.chdir "./gh-pages" do
-        puts Kernel.send(:`, "cp -afr #{website_contents} .")
-        puts Kernel.send(:`, "git add .")
-        puts Kernel.send(:`, "git commit -a -m 'Migrate nanoc3 co output to gh-pages #{tmpid}'")
-        puts Kernel.send(:`, "git push --force #{repo} gh-pages")
+        res=Kernel.send(:`, "cp -afr #{website_contents} .")
+        puts res
+        res=Kernel.send(:`, "git add .")
+        puts res
+        res=Kernel.send(:`, "git commit -a -m 'Migrate nanoc3 co output to gh-pages #{tmpid}'")
+        puts res
+        res=Kernel.send(:`, "git push --force #{repo} gh-pages")
+        puts res
       end
       puts Kernel.send(:`, "git add .")
       puts Kernel.send(:`, "git commit -a -m 'commit gh-pages content to parent repo #{tmpid}'")

@@ -255,8 +255,8 @@ h3. Usage
         FileUtils.chdir "./gh-pages" do
           puts `pwd`
           puts cmdi
-          # res=Kernel.send(:`, cmdi)
-          # puts res
+          res=Kernel.send(:`, cmdi)
+          puts res
         end
       end
       puts Kernel.send(:`, "git add .")

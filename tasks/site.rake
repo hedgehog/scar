@@ -262,7 +262,7 @@ h3. Usage
       
       cmd=["git add .",
         "git commit -a -m \'Migrate nanoc3 co output to gh-pages #{tmpid}\'",
-        "git push --force #{repo} gh-pages:gh-pages"
+        "git push --force origin gh-pages:gh-pages"
       ]
     FileUtils.chdir @gh_pages_repo_path.to_s do
       puts `pwd`

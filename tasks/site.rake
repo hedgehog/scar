@@ -253,6 +253,7 @@ h3. Usage
       ]
       cmd.each do |cmdi|
         FileUtils.chdir "./gh-pages" do
+          puts `pwd`
           puts cmdi
           # res=Kernel.send(:`, cmdi)
           # puts res

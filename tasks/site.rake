@@ -3,15 +3,20 @@ require 'extlib'
 require 'pathname'
 require 'fileutils'
 require 'nanoc3'
+require 'grit'
+
 dir = File.expand_path(File.dirname(__FILE__))
 require dir / '../lib/scar/site_utils.rb'
 
 include SiteUtils
+include Grit
 
 namespace :site do
 
   task :set_pwd do
-     @website_path = Pathname.new(Dir.pwd) / 'website' 
+     @gh_scar_repo_path = Pathname.new(Dir.pwd)
+     @gh_pages_repo_path = @gh_scar_repo_path / 'gh-pages'
+     @website_path = @gh_repo_path / ENV['WEBSITE_PATH'] || 'website'
   end
 
 	task :clean => [:set_pwd] do
@@ -212,22 +217,25 @@ h3. Usage
     desc "Migrates an existing website folder into a gh-pages branch, and links back as submodule"
     task :migrate do
       tmpid = Time.now.gmtime.to_s.gsub(/ |:/,'')
-      current_branch = Kernel.`('git branch | grep "^*" | sed -e "s/* //"').strip
       pre_branch="pre-gh-pages-migration-branch-#{tmpid}"
       pre_tag="pre-gh-pages-migration-tag-#{tmpid}"
+      current_branch = Kernel.`('git branch | grep "^*" | sed -e "s/* //"').strip
       repo = Kernel.`('git config --list | grep "^remote.origin.url" | sed -e "s/remote.origin.url=//"').strip
-      website_folder = ENV['WEBSITE_PATH'] || 'website'
-      website_contents="./../#{website_folder}/output/*"
+      website_contents= "./../#{@website_path}/output/*"
       tmp_folder = "/tmp/gh-pages-website-#{tmpid}"
-      puts "Moving #{website_folder} folder to branch gh-pages."
-      puts "Working in #{current_branch} branch of #{repo}:"
-      gitstatus=Kernel.send(:`,'git status')
-      clean = gitstatus =~ /nothing to commit \(working directory clean\)/i
-      puts "Git status:"
-      puts gitstatus
+
+      git_scar = Repo.new(@gh_scar_repo_path)
+      git_scar_gh_pages =Repo.new(@gh_pages_repo_path)
+
+      gitstatus=git_scar.status
+      clean = gitstatus.changed.empty?
       puts "Git status is clean?: #{clean.to_s}"
+
+      puts "Moving #{@website_path} folder to branch gh-pages."
+      puts "Working in #{current_branch} branch of #{repo}:"
+
       stashed=false
-      if clean.nil?
+      if clean
         puts "Saving a Git stash"
         gstash = "git stash save 'Uncommited changes stashed pre gh-pages migration: #{tmpid}'"
         stashed=true
@@ -243,7 +251,7 @@ h3. Usage
       raise RuntimeError.new("The git working directory is still not clean.") if clean.nil?
 
       Kernel.send(:`, "git tag #{pre_tag}")
-      FileUtils.chdir "./#{website_folder}" do
+      FileUtils.chdir "./#{@website_path}" do
         puts Kernel.send(:`, "nanoc3 co --force")
       end
       cmd=["cp -afr --verbose #{website_contents} .",

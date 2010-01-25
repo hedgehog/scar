@@ -244,7 +244,7 @@ h3. Usage
 
       Kernel.send(:`, "git tag #{pre_tag}")
       FileUtils.chdir "./#{website_folder}" do
-        nanoc3 co --force
+        puts Kernel.send(:`, "nanoc3 co --force")
       end
       FileUtils.chdir "./gh-pages" do
         puts Kernel.send(:`, "cp -afr #{website_contents} .")

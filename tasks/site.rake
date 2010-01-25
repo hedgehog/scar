@@ -246,15 +246,17 @@ h3. Usage
       FileUtils.chdir "./#{website_folder}" do
         puts Kernel.send(:`, "nanoc3 co --force")
       end
-      FileUtils.chdir "./gh-pages" do
-        res=Kernel.send(:`, "cp -afr #{website_contents} .")
-        puts res
-        res=Kernel.send(:`, "git add .")
-        puts res
-        res=Kernel.send(:`, "git commit -a -m 'Migrate nanoc3 co output to gh-pages #{tmpid}'")
-        puts res
-        res=Kernel.send(:`, "git push --force #{repo} gh-pages")
-        puts res
+      cmd=["cp -afr --verbose #{website_contents} .",
+        "git add .",
+        "git commit -a -m 'Migrate nanoc3 co output to gh-pages #{tmpid}'",
+        "git push --force #{repo} gh-pages"
+      ]
+      cmd.each do |cmdi|
+        FileUtils.chdir "./gh-pages" do
+          puts cmdi
+          res=Kernel.send(:`, cmdi)
+          puts res
+        end
       end
       puts Kernel.send(:`, "git add .")
       puts Kernel.send(:`, "git commit -a -m 'commit gh-pages content to parent repo #{tmpid}'")

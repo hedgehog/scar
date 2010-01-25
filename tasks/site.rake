@@ -215,7 +215,7 @@ h3. Usage
   end
   namespace 'github' do
     desc "Migrates an existing website folder into a gh-pages branch, and links back as submodule"
-    task :migrate do
+    task :migrate => [:set_pwd] do
       tmpid = Time.now.gmtime.to_s.gsub(/ |:/,'')
       pre_branch="pre-gh-pages-migration-branch-#{tmpid}"
       pre_tag="pre-gh-pages-migration-tag-#{tmpid}"

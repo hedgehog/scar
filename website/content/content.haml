@@ -1,65 +1,136 @@
 %h1
   Scar Project
 %p
-  Scar: Sun cloud API reference.
+  %strong Scar:
+  Sun cloud API resource/repository/reference.
 %p
-  This website is generated (nanoc3) from content in the Scar repository.
-  The aim of the Scar project is to facilitate participation by increasing
-  %ul
-    %li
-      %p
-        Agility
-    %li
-      %p
-        Transparency
-    %li
-      %p
-        Productivity
-    %li
-      %p
-        Generate documentation from the API specification (Ruby).  Projects
-        implmenting Sun's Cloud API can share a common documentation source
-        and generate (possibly filtered) documentation that is extracted from the
-        specification, and evolves as the specification is corrected or extended.
-    %li
-      %p
-        Provide snapshots of Sun's Cloud API.
-        %em Example
-        To grab version 0.n
-        %pre
-          %code.language-ruby
-            :preserve
-            git clone git://github.com/hedgehog/scar.git
-            git checkout -b your_branch v0.n
-        If you don't want the whole repo, github is not configured to respond to
-        git archive ... Instead, use
-        %pre
-          %code.language-ruby
-            :preserve
-            curl -O -L http://github.com/hedgehog/scar/downloads/...
-    %li
-      %p
-        Make transparent, and accessible, any ideas others explore or errors they
-        correct.  See
-        %a.external{ :href => "http://github.com/hedgehog/scar/network" }
-          here.
-    %li
-      %p
-        Provide a web queryable (JSON? YAML?) representation of the API. (TODO)
-    %li
-      %p
-        Provide a local copy of the Sun cloud API specification that can be
-        browsed (exactly these pages), and customized.  See (TODO).
+  %strong Reference point.
+  The Sun Cloud API wiki contents as at: Jan 22, 2010
+%p
+  %strong Scar
+  %a{ :href => "#Version_" }
+    version.
+  TBA
+%p
+  This project is not endorsed or supported by Sun Microsystems.
+  Sun Microsystems has not adopted, and does not employ this project's contents.
+  This project has copied, distributed and adapted Sun Microsystem's
+  "The Sun Cloud API", under their license.
+  Sun Microsystem's "The Sun Cloud API" (copyright &copy; Sun Microsystems, 2009)
+  is licensed under
+  %a.external{ :href => "http://creativecommons.org/licenses/by/3.0/" }
+    Creative Commons Attribution 3.0 Unported License
+%p
+  This website is generated (nanoc3) from content in the Scar project's Github
+  repository.  The aim of the Scar project is to facilitate 
+  developing and employing "The Sun Cloud API" by increasing
 %ul
   %li
     %p
-      %strong
-        Change this page’s content
-      by editing “content.html” file in the “content” directory. This is the actual page content, and therefore doesn’t include the header, sidebar or style information (those are part of the layout).
+      %a{ :href => "#Agility_" }
+        %strong Agility:
   %li
     %p
-      %strong
-        Change the layout
-      , which is the “default.txt” file in the “layouts/default” directory, and create something unique (and hopefully less bland).
+      %a{ :href => "#Transperency_" }
+        %strong Transparency:
+  %li
+    %p
+      %a{ :href => "#Productivity_" }
+        %strong Productivity:
+%h3
+  %strong Getting Started
 %p
-  If you need any help with customizing your nanoc web site, be sure to check out the documentation (see sidebar), and be sure to subscribe to the discussion group (also see sidebar). Enjoy!
+  To contribute:
+  %ol
+    %li
+      Fork the scar project using your github account.
+    %li
+      Clone your git fork, e.g. to get the API version tagged vm.n.x.y
+      %pre
+        %code.language-ruby
+          :preserve
+            git clone git://github.com/<gh-user>/scar.git /usr/src/scar
+            git checkout -b your_branch vm.n.x.y
+    %li
+      To make changes: edit/create features and specs
+      commit, pull, push etc. to your local then github repository.  Send pull
+      requests, ideally pulling from a topic branch that results in a fast
+      forward merge.
+      %ol
+        %li
+          Ensure changes pass all the features and specs:
+          %pre
+            %code.language-ruby
+              :preserve
+                pushd &lt;repo-root&gt;
+                cucumber ./features/scar.feature
+                etc.
+    %li
+      Publish the web page presentation of your fork's contents.
+      %strong Please read the rake task contents before executing.
+      %ol
+        %li
+          Activate gh-pages for your fork of the scar project.  See
+          %a.external{ :href => "http://pages.github.com/" }
+            details here.
+        %li
+          To setup the local gh-pages repository
+          %pre
+            %code.language-ruby
+              :preserve
+                pushd &lt;repo-root&gt;
+                rake site:github:setup
+                popd
+        %li
+          To migrate the local copy of the nanoc3 compiled web pages to your github project pages:
+          %pre
+            %code.language-ruby
+              :preserve
+                pushd &lt;repo-root&gt;
+                rake site:github:migrate
+                popd
+%h3
+  %strong Scar Project Objectives
+%p
+  %a{ :name => "Agility_" }
+    %strong Agility:
+  Provide snapshots of Sun's Cloud API.
+  %em Example
+  To grab version 0.n
+  %pre
+    %code.language-ruby
+      :preserve
+        git clone git://github.com/hedgehog/scar.git
+        git checkout -b your_branch v0.n
+  If you don't want the whole repo, github is not configured to respond to
+  git archive ... Instead, use
+  %pre
+    %code.language-ruby
+      :preserve
+        curl -O -L http://github.com/hedgehog/scar/downloads/...
+%p
+  %a{ :name => "Transparency_" }
+    %strong Transparency:
+  Make transparent, and accessible, any ideas others explore or errors they
+  correct.  See
+  %a.external{ :href => "http://github.com/hedgehog/scar/network" }
+    here.
+%p
+  %a{ :name => "Productivity_" }
+    %strong Productivity:
+  Generate documentation from the API specification.  Projects
+  implementing Sun's Cloud API can share a common documentation source
+  and generate (possibly filtered) documentation that is extracted from the
+  specification, and automatically evolves as the specification is corrected or
+  extended.
+%p
+  %a{ :name => "Version_" }
+    %strong Version numbering:
+  The Scar project's version number is made up of four parts: m.n.x.y.
+  The first two numbers, m and n track Sun's API version numbers.
+  The second two, x and y, are specific to Scar's development.
+  Increments in x will indicate when changes in 'The Sun API'
+  specification (currently wiki pages) have been incorporated into the Scar
+  project.  Increments in y will indicate Scar specific revisions, which can be
+  minor changes, e.g. typographical errors, or major, e.g. refactoring.  The
+  release notes should give some details of the changes.

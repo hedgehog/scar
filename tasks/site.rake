@@ -14,9 +14,10 @@ include Grit
 namespace :site do
 
   task :set_pwd do
-     @gh_scar_repo_path = Pathname.new(Dir.pwd)
-     @gh_pages_repo_path = @gh_scar_repo_path / 'gh-pages'
-     @website_path = @gh_scar_repo_path / ENV['WEBSITE_PATH'] || 'website'
+    ws = ENV['WEBSITE_PATH'] || 'website'
+    @gh_scar_repo_path = Pathname.new(Dir.pwd)
+    @gh_pages_repo_path = @gh_scar_repo_path / 'gh-pages'
+    @website_path = @gh_scar_repo_path / ws
   end
 
 	task :clean => [:set_pwd] do

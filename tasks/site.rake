@@ -233,7 +233,6 @@ h3. Usage
       clean = gitstatus.changed.empty? && gitstatus.added.empty? && gitstatus.deleted.empty?
       puts "Git status is clean?: #{clean.to_s}"
 
-      puts "Moving #{@website_path} folder to branch gh-pages."
       puts "Working in #{current_branch_name} branch of #{repo}:"
 
       stashed=false
@@ -257,6 +256,7 @@ h3. Usage
         Kernel.send(:`, "nanoc3 co --force")
       end
       FileUtils.rm_r(Dir.glob(@gh_pages_repo_path / '**' / '*'), :force => true, :verbose => true)
+      puts "Moving #{@website_path}/output folder contents to branch gh-pages."
       FileUtils.cp_r(Dir.glob(@website_path / 'output' / '**' / '*'), @gh_pages_repo_path, :verbose => true, :remove_destination => true)
       
       cmd=["git add .",
@@ -267,44 +267,25 @@ h3. Usage
       puts `pwd`
       cmd.each do |cmdi|
           puts cmdi
-          #res=Kernel.send(:`, cmdi)
-          #puts res
+          res=Kernel.send(:`, cmdi)
+          puts res
         end
       end
       puts Kernel.send(:`, "git add .")
       puts Kernel.send(:`, "git commit -a -m 'commit gh-pages content to parent repo #{tmpid}'")
 
-#      commands = <<-CMD.gsub(/^ /, '')
-#      git tag #{pre_tag}
-#      pushd ./#{website_folder}
-#      nanoc3 co --force
-#      popd
-#      pushd ./gh-pages
-#      cp -afr #{website_contents} .
-#      git add .
-#      git commit -a -m 'Migrate nanoc3 co output to gh-pages'
-#      git push --force #{repo} gh-pages
-#      popd ..
-#      git add .
-#      git commit -a -m 'commit gh-pages content to parent repo'
-#      CMD
-#      commands.split(/\n/).each do |cmd|
-#        strcmd=cmd.strip
-#        puts "Executing: #{strcmd}"
-#        response=Kernel.send(:`, strcmd)
-#        puts "Code: #{$?}\nResponse:\n#{response}"
-##        unless $? == 0
-##          puts "To reset: 1) Look for the branch crazyexperiment"
-##          puts "git branch -a"
-##          puts "To reset: 2) if there is a branch crazyexperiment"
-##          puts "git checkout crazyexperiment"
-##          puts "To reset: 3) if there is no master branch"
-##          puts "git checkout -b master"
-##          puts "To reset: 4) Once satisfied everything is as you started"
-##          puts "git branch -D crazyexperiment"
-##          raise RuntimeError.new("Somthing went wrong.")
-##        end
-#      end
+      #unless $? == 0
+      #  puts "To reset: 1) Look for the branch crazyexperiment"
+      #  puts "git branch -a"
+      #  puts "To reset: 2) if there is a branch crazyexperiment"
+      #  puts "git checkout crazyexperiment"
+      #  puts "To reset: 3) if there is no master branch"
+      #  puts "git checkout -b master"
+      #  puts "To reset: 4) Once satisfied everything is as you started"
+      #  puts "git branch -D crazyexperiment"
+      #  raise RuntimeError.new("Somthing went wrong.")
+      #end
+      
       if stashed
         puts "Apply (pop) the Git stash created before migrating the website."
         Kernel.send(:`, 'git stash pop stash@{0}')

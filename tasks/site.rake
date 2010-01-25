@@ -262,13 +262,13 @@ h3. Usage
       
       cmd=["git add .",
         "git commit -a -m \'Migrate nanoc3 co output to gh-pages #{tmpid}\'",
-        "git push --force #{repo} gh-pages"
+        "git push --force #{repo} gh-pages:gh-pages"
       ]
     FileUtils.chdir @gh_pages_repo_path.to_s do
       puts `pwd`
       cmd.each do |cmdi|
           puts cmdi
-          res=Kernel.send(:`, cmdi)
+          res=Kernel.send(:`, "echo `pwd`; #{cmdi}")
           puts res
         end
       end

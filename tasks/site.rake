@@ -16,7 +16,7 @@ namespace :site do
   task :set_pwd do
      @gh_scar_repo_path = Pathname.new(Dir.pwd)
      @gh_pages_repo_path = @gh_scar_repo_path / 'gh-pages'
-     @website_path = @gh_repo_path / ENV['WEBSITE_PATH'] || 'website'
+     @website_path = @gh_scar_repo_path / ENV['WEBSITE_PATH'] || 'website'
   end
 
 	task :clean => [:set_pwd] do
@@ -183,12 +183,12 @@ h3. Usage
     task :setup do
       tmpid = Time.now.gmtime.to_s.gsub(/ |:/,'')
       pre_tag="pre-gh-pages-migration-tag-#{tmpid}"
-      current_branch = Kernel.`('git branch | grep "^*" | sed -e "s/* //"').strip
+      current_branch_name = Kernel.`('git branch | grep "^*" | sed -e "s/* //"').strip
       repo = Kernel.`('git config --list | grep "^remote.origin.url" | sed -e "s/remote.origin.url=//"').strip
       website_contents='./../website/output/*'
       puts "Assume you have created the branch gh-pages via github's web pages"
       puts "Append text 'My GitHub Page' to index.html"
-      puts "Working in #{current_branch} branch of #{repo}:"
+      puts "Working in #{current_branch_name} branch of #{repo}:"
       commands = <<-CMD.gsub(/^ /, '')
       git tag #{pre_tag}
       mkdir gh-pages
@@ -203,7 +203,7 @@ h3. Usage
       git commit -a -m 'First gh-pages commit of nanoc3 output'
       git push --force #{repo} gh-pages
       cd ..
-      git checkout #{current_branch}
+      git checkout #{current_branch_name}
       git submodule add --branch gh-pages #{repo} ./gh-pages
       git submodule init
       git submodule update
@@ -219,52 +219,56 @@ h3. Usage
       tmpid = Time.now.gmtime.to_s.gsub(/ |:/,'')
       pre_branch="pre-gh-pages-migration-branch-#{tmpid}"
       pre_tag="pre-gh-pages-migration-tag-#{tmpid}"
-      current_branch = Kernel.`('git branch | grep "^*" | sed -e "s/* //"').strip
-      repo = Kernel.`('git config --list | grep "^remote.origin.url" | sed -e "s/remote.origin.url=//"').strip
+      repo = Kernel.send(:`,'git config --list | grep "^remote.origin.url" | sed -e "s/remote.origin.url=//"').strip
       website_contents= "./../#{@website_path}/output/*"
       tmp_folder = "/tmp/gh-pages-website-#{tmpid}"
 
-      git_scar = Repo.new(@gh_scar_repo_path)
-      git_scar_gh_pages =Repo.new(@gh_pages_repo_path)
+      git_scar = ::Grit::Repo.new(@gh_scar_repo_path)
+      git_scar_gh_pages_repo = ::Grit::Repo.new(@gh_pages_repo_path)
+      git_scar_gh_pages = ::Grit::Git.new(@gh_pages_repo_path.to_s)
 
-      gitstatus=git_scar.status
-      clean = gitstatus.changed.empty?
+      current_branch_name = git_scar.heads.first.name
+
+      gitstatus = git_scar.status
+      clean = gitstatus.changed.empty? && gitstatus.added.empty? && gitstatus.deleted.empty?
       puts "Git status is clean?: #{clean.to_s}"
 
       puts "Moving #{@website_path} folder to branch gh-pages."
-      puts "Working in #{current_branch} branch of #{repo}:"
+      puts "Working in #{current_branch_name} branch of #{repo}:"
 
       stashed=false
-      if clean
+      unless clean
         puts "Saving a Git stash"
         gstash = "git stash save 'Uncommited changes stashed pre gh-pages migration: #{tmpid}'"
         stashed=true
         Kernel.send(:`,gstash)
-        stashlist=Kernel.send(:`,'git stash list')
+        stashlist = Kernel.send(:`,'git stash list')
         puts stashlist
-        stashshow=Kernel.send(:`,'git stash show')
+        stashshow = Kernel.send(:`,'git stash show')
         puts stashshow
-        gitstatus=Kernel.send(:`,'git status')
+        gitstatus = git_scar.status
         puts "Git status:\n#{gitstatus}"
-        clean = gitstatus =~ /nothing to commit \(working directory clean\)/i
+        clean = gitstatus.changed.empty? && gitstatus.added.empty? && gitstatus.deleted.empty?
       end
-      raise RuntimeError.new("The git working directory is still not clean.") if clean.nil?
+      raise RuntimeError.new("The git working directory is still not clean.") unless clean
 
       Kernel.send(:`, "git tag #{pre_tag}")
       FileUtils.chdir "./#{@website_path}" do
-        puts Kernel.send(:`, "nanoc3 co --force")
+        Kernel.send(:`, "nanoc3 co --force")
       end
-      cmd=["cp -afr --verbose #{website_contents} .",
-        "git add .",
-        "git commit -a -m 'Migrate nanoc3 co output to gh-pages #{tmpid}'",
+      FileUtils.rm_r(Dir.glob(@gh_pages_repo_path / '**' / '*'), :force => true, :verbose => true)
+      FileUtils.cp_r(Dir.glob(@website_path / 'output' / '**' / '*'), @gh_pages_repo_path, :verbose => true, :remove_destination => true)
+      
+      cmd=["git add .",
+        "git commit -a -m \'Migrate nanoc3 co output to gh-pages #{tmpid}\'",
         "git push --force #{repo} gh-pages"
       ]
+    FileUtils.chdir @gh_pages_repo_path.to_s do
+      puts `pwd`
       cmd.each do |cmdi|
-        FileUtils.chdir "./gh-pages" do
-          puts `pwd`
           puts cmdi
-          res=Kernel.send(:`, cmdi)
-          puts res
+          #res=Kernel.send(:`, cmdi)
+          #puts res
         end
       end
       puts Kernel.send(:`, "git add .")

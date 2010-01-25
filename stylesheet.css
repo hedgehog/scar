@@ -29,10 +29,17 @@ a {
     line-height: 20px; }
   #main ul {
     margin: 20px; }
-  #main li {
-    list-style-type: square;
-    font-size: 15px;
-    line-height: 20px; }
+    #main ul li {
+      list-style-type: square;
+      font-size: 15px;
+      line-height: 20px; }
+  #main ol {
+    list-style-type: decimal;
+    margin: 20px; }
+    #main ol li {
+      list-style-type: decimal; }
+      #main ol li li {
+        list-style-type: lower-alpha; }
 
 #sidebar {
   position: absolute;
@@ -51,6 +58,10 @@ a {
   #sidebar ul {
     list-style-type: none;
     margin: 20px 0; }
+  #sidebar ol.left-align {
+    list-style-type: decimal;
+    margin-left: -.5em;
+    padding-left: .5em; }
   #sidebar li {
     font-size: 14px;
     line-height: 20px; }

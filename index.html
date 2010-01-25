@@ -12,91 +12,193 @@
         Scar Project
       </h1>
       <p>
-        Scar: Sun cloud API reference.
+        <strong>Scar:</strong>
+        Sun cloud API resource/repository/reference.
       </p>
       <p>
-        This website is generated (nanoc3) from content in the Scar repository.
-        The aim of the Scar project is to facilitate participation by increasing
-        </p>
-<ul>
-<li>
-            <p>
-              Agility
-            </p>
-          </li>
-          <li>
-            <p>
-              Transparency
-            </p>
-          </li>
-          <li>
-            <p>
-              Productivity
-            </p>
-          </li>
-          <li>
-            <p>
-              Generate documentation from the API specification (Ruby).  Projects
-              implmenting Sun's Cloud API can share a common documentation source
-              and generate (possibly filtered) documentation that is extracted from the
-              specification, and evolves as the specification is corrected or extended.
-            </p>
-          </li>
-          <li>
-            <p>
-              Provide snapshots of Sun's Cloud API.
-              <em>Example</em>
-              To grab version 0.n
-              </p>
-<pre><code class="language-ruby">git clone git<span class="sy">:/</span>/github.com/hedgehog/scar.git
-              git checkout -b your_branch v0.n</code></pre>
-              If you don't want the whole repo, github is not configured to respond to
-              git archive ... Instead, use
-              <pre><code class="language-ruby">curl -<span class="co">O</span> -<span class="co">L</span> http<span class="sy">:/</span>/github.com/hedgehog/scar/downloads/...</code></pre>
-            
-          </li>
-          <li>
-            <p>
-              Make transparent, and accessible, any ideas others explore or errors they
-              correct.  See
-              <a class="external" href="http://github.com/hedgehog/scar/network">
-                here.
-              </a>
-            </p>
-          </li>
-          <li>
-            <p>
-              Provide a web queryable (JSON? YAML?) representation of the API. (TODO)
-            </p>
-          </li>
-          <li>
-            <p>
-              Provide a local copy of the Sun cloud API specification that can be
-              browsed (exactly these pages), and customized.  See (TODO).
-            </p>
-          </li>
-        </ul>
-<ul>
+        <strong>Reference point.</strong>
+        The Sun Cloud API wiki contents as at: Jan 22, 2010
+      </p>
+      <p>
+        <strong>Scar</strong>
+        <a href="#Version_">
+          version.
+        </a>
+        TBA
+      </p>
+      <p>
+        This project is not endorsed or supported by Sun Microsystems.
+        Sun Microsystems has not adopted, and does not employ this project's contents.
+        This project has copied, distributed and adapted Sun Microsystem's
+        "The Sun Cloud API", under their license.
+        Sun Microsystem's "The Sun Cloud API" (copyright © Sun Microsystems, 2009)
+        is licensed under
+        <a class="external" href="http://creativecommons.org/licenses/by/3.0/">
+          Creative Commons Attribution 3.0 Unported License
+        </a>
+      </p>
+      <p>
+        This website is generated (
+        <a class="external" href="http://nanoc.stoneship.org/">
+          nanoc3
+        </a>
+        ) from content in the Scar project's Github
+        <a class="external" href="http://github.com/hedgehog/scar">
+          repository.
+        </a>
+        The aim of the Scar project is to extract the Sun Cloud API specification
+        details and description from the HTML code of the Kenai wiki pages.
+        How these details and descriptions are to be stored and rendered is being
+        determined.
+        In doing so the Scar Project should facilitate developing and employing
+        "The Sun Cloud API" by increasing
+      </p>
+      <ul>
 <li>
           <p>
-            <strong>
-              Change this page’s content
-            </strong>
-            by editing “content.html” file in the “content” directory. This is the actual page content, and therefore doesn’t include the header, sidebar or style information (those are part of the layout).
+            <a href="#Agility_">
+              <strong>Agility:</strong>
+            </a>
           </p>
         </li>
         <li>
           <p>
-            <strong>
-              Change the layout
-            </strong>
-            , which is the “default.txt” file in the “layouts/default” directory, and create something unique (and hopefully less bland).
+            <a href="#Transperency_">
+              <strong>Transparency:</strong>
+            </a>
+          </p>
+        </li>
+        <li>
+          <p>
+            <a href="#Productivity_">
+              <strong>Productivity:</strong>
+            </a>
           </p>
         </li>
       </ul>
-<p>
-        If you need any help with customizing your nanoc web site, be sure to check out the documentation (see sidebar), and be sure to subscribe to the discussion group (also see sidebar). Enjoy!
+<h3>
+        <strong>Getting Started</strong>
+      </h3>
+      <p>
+        To contribute:
+        </p>
+<ol>
+<li>
+            <a class="external" href="http://help.github.com/forking/">
+              Fork
+            </a>
+            the scar project using your github account.
+          </li>
+          <li>
+            Clone your git fork, e.g. to get the API version tagged vm.n.x.y
+            <pre><code class="language-ruby">git clone git<span class="iv">@github</span>.com<span class="sy">:&lt;</span>gh-user&gt;<span class="rx"><span class="dl">/</span><span class="k">scar.git </span><span class="dl">/</span><span class="mod">us</span></span>r/src/scar
+pushd <span class="rx"><span class="dl">/</span><span class="k">usr</span><span class="dl">/</span><span class="mod">s</span></span>rc/scar
+git remote add upstream git<span class="sy">:/</span>/github.com/hedgehog/scar.git
+git fetch upstream
+git checkout -b your_branch vm.n.x.y</code></pre>
+          </li>
+          <li>
+            To make changes: edit/create features and specs
+            commit, pull, push etc. to your local then github repository. See
+            <a class="external" href="http://help.github.com/forking/">
+              here
+            </a>
+            for details on how to pull from upstream.
+            Send pull requests, ideally pulling from a topic branch that results in a
+            fast forward merge with upstream.
+            <ol>
+<li>
+                Ensure changes pass all the features and specs:
+                <pre><code class="language-ruby">pushd &lt;repo-root&gt;
+cucumber ./features/scar.feature
+etc.</code></pre>
+              </li>
+            </ol>
+</li>
+          <li>
+            Publish the web page presentation of your fork's contents.
+            <strong>Please read the rake task contents before executing.</strong>
+            <ol>
+<li>
+                Activate gh-pages for your fork of the scar project.  See
+                <a class="external" href="http://pages.github.com/">
+                  details here.
+                </a>
+              </li>
+              <li>
+                To setup the local gh-pages repository
+                <pre><code class="language-ruby">pushd &lt;repo-root&gt;
+rake site<span class="sy">:github</span><span class="sy">:setup</span>
+popd</code></pre>
+              </li>
+              <li>
+                To migrate the local copy of the nanoc3 compiled web pages to your github project pages:
+                <pre><code class="language-ruby">pushd &lt;repo-root&gt;
+rake site<span class="sy">:github</span><span class="sy">:migrate</span>
+popd</code></pre>
+              </li>
+            </ol>
+</li>
+        </ol>
+<h3>
+        <strong>Scar Project Objectives</strong>
+      </h3>
+      <p>
+        <a name="Agility_">
+          <strong>Agility:</strong>
+        </a>
+        Provide snapshots of Sun's Cloud API.
+        <em>Example</em>
+        To grab version 0.n
+        </p>
+<pre><code class="language-ruby">git clone git<span class="sy">:/</span>/github.com/hedgehog/scar.git
+git checkout -b your_branch v0.n</code></pre>
+        Github is not configured to respond to
+        git archive.... Consequently, if you don't want the whole repo, use
+        <pre><code class="language-ruby">curl -<span class="co">O</span> -<span class="co">L</span> http<span class="sy">:/</span>/github.com/hedgehog/scar/downloads/...</code></pre>
+      
+      <p>
+        <a name="Transparency_">
+          <strong>Transparency:</strong>
+        </a>
+        Make transparent, and accessible, any ideas others explore or errors they
+        correct.  See
+        <a class="external" href="http://github.com/hedgehog/scar/network">
+          here.
+        </a>
       </p>
+      <p>
+        <a name="Productivity_">
+          <strong>Productivity:</strong>
+        </a>
+        Generate documentation from the API specification.  Projects
+        implementing Sun's Cloud API can share a common documentation source
+        and generate (possibly filtered) documentation that is extracted from the
+        specification, and automatically evolves as the specification is corrected or
+        extended.
+      </p>
+      <p>
+        <a name="Version_">
+          <strong>Version numbering:</strong>
+        </a>
+        The Scar project's version number is made up of four parts: m.n.x.y.
+        The first two numbers, m and n track Sun's API version numbers.
+        The second two, x and y, are specific to Scar's development.
+        Increments in x will indicate when changes in 'The Sun API'
+        specification (currently wiki pages) have been incorporated into the Scar
+        project.  Increments in y will indicate Scar specific revisions, which can be
+        minor changes, e.g. typographical errors, or major, e.g. refactoring.  The
+        release notes should give some details of the changes.
+      </p>
+      <p>
+        The Scar project is licensed under
+        <a class="external" href="http://creativecommons.org/licenses/by/3.0/">
+          Creative Commons Attribution 3.0 Unported License
+        </a>
+      </p>
+      <div class="clear"></div>
+      <!--
+      -->
     </div>
     <div id="sidebar">
       <ul>
@@ -201,14 +303,18 @@
         
       </ul>
 <h2>
-        Implmentations
+        Implementations
       </h2>
       <ul>
 <li>
-          <a href="http://wiki.github.com/hedgehog/scar/">
-            TBA
-          </a>
-        </li>
+          <strong>Command line clients...</strong>
+          </li>
+<li>
+            <a href="implementation/command_line_client/sun/">
+              Sun's CLI
+            </a>
+          </li>
+        
       </ul>
 <h2>
         Community

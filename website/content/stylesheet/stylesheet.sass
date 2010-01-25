@@ -37,12 +37,18 @@ a
 
   ul
     margin: 20px
+    li
+      list-style-type: square
+      font-size: 15px
+      line-height: 20px
 
-  li
-    list-style-type: square
-    font-size: 15px
-    line-height: 20px
-
+  ol
+    list-style-type: decimal
+    margin: 20px
+    li
+      list-style-type: decimal
+      li
+        list-style-type: lower-alpha
 
 #sidebar
   position: absolute
@@ -63,6 +69,11 @@ a
   ul
     list-style-type: none
     margin: 20px 0
+
+  ol.left-align
+    list-style-type: decimal
+    margin-left: -.5em
+    padding-left: .5em
 
   li
     font-size: 14px

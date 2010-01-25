@@ -187,7 +187,7 @@ h3. Usage
       commands = <<-CMD.gsub(/^ /, '')
       git tag #{pre_tag}
       mkdir gh-pages
-      pushd gh-pages
+      cd ./gh-pages
       git init
       git remote add origin #{repo}
       git fetch origin gh-pages:gh-pages
@@ -197,7 +197,7 @@ h3. Usage
       git add .
       git commit -a -m 'First gh-pages commit of nanoc3 output'
       git push --force #{repo} gh-pages
-      popd
+      cd ..
       git checkout #{current_branch}
       git submodule add --branch gh-pages #{repo} ./gh-pages
       git submodule init
@@ -243,15 +243,15 @@ h3. Usage
       raise RuntimeError.new("The git working directory is still not clean.") if clean.nil?
       commands = <<-CMD.gsub(/^ /, '')
       git tag #{pre_tag}
-      pushd ./#{website_folder}
+      cd ./#{website_folder}
       nanoc3 co --force
-      popd
-      pushd ./gh-pages
+      cd ..
+      cd ./gh-pages
       cp -afr #{website_contents} .
       git add .
       git commit -a -m 'Migrate nanoc3 co output to gh-pages'
       git push --force #{repo} gh-pages     
-      popd
+      cd ..
       git add .
       git commit -a -m 'commit gh-pages content to parent repo'
       CMD

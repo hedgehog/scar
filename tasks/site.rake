@@ -253,7 +253,7 @@ h3. Usage
       raise RuntimeError.new("The git working directory is still not clean.") unless clean
 
       Kernel.send(:`, "git tag #{pre_tag}")
-      FileUtils.chdir "./#{@website_path}" do
+      FileUtils.chdir @website_path do
         Kernel.send(:`, "nanoc3 co --force")
       end
       FileUtils.rm_r(Dir.glob(@gh_pages_repo_path / '**' / '*'), :force => true, :verbose => true)

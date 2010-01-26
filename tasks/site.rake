@@ -228,7 +228,7 @@ h3. Usage
       git_scar_gh_pages_repo = ::Grit::Repo.new(@gh_pages_repo_path)
       git_scar_gh_pages = ::Grit::Git.new(@gh_pages_repo_path.to_s)
 
-      current_branch_name = git_scar.heads.first.name
+      current_branch_name = git_scar.head.name
 
       gitstatus = git_scar.status
       clean = gitstatus.changed.empty? && gitstatus.added.empty? && gitstatus.deleted.empty?
@@ -257,28 +257,34 @@ h3. Usage
         res = Kernel.send(:`, "nanoc3 co --force")
         puts res
       end
-      FileUtils.rm_r(Dir.glob(@gh_pages_repo_path / '**' / '*'), :force => true, :verbose => true)
-      puts "Moving #{@website_path}/output folder contents to branch gh-pages."
-      FileUtils.cp_r(Dir.glob(@website_path / 'output' / '**' / '*'), @gh_pages_repo_path, :verbose => true, :remove_destination => true)
-      
-      cmd=["git add .",
-        "git commit -a -m \'Migrate nanoc3 co output to gh-pages #{tmpid}\'",
-        "git push --force origin gh-pages:gh-pages"
-      ]
+#      FileUtils.rm_r(Dir.glob(@gh_pages_repo_path / '**' / '*'), :force => true, :verbose => true)
+#      puts "Moving #{@website_path}/output folder contents to branch gh-pages."
+#      FileUtils.cp_r(Dir.glob(@website_path / 'output' / '**' / '*'), @gh_pages_repo_path, :verbose => true, :remove_destination => true)
+#
+#      cmd=["git add .",
+#        "git commit -a -m \'Migrate nanoc3 co output to gh-pages #{tmpid}\'",
+#        "git push --force origin gh-pages:gh-pages"
+#      ]
 #      cmd = <<-EOT
 ##!/usr/bin/env bash
+#pushd ./gh-pages
+#rm -rf *
+#cp --recursive ./../website/output/* .
 #git add .
-#git commit -a -m \'Migrate nanoc3 co output to gh-pages #{tmpid}\'
-#git push --force #{repo} gh-pages
+#git commit -a -m "Migrate nanoc3 co output to gh-pages $1"
+#git push --force origin gh-pages
+#popd
 #EOT
-    FileUtils.chdir @gh_pages_repo_path.to_s do
-      puts `pwd`
-      cmd.each do |cmdi|
-          puts "bash --login -c '#{cmdi}'"
-          res=Kernel.send(:`, "bash --login -c '#{cmdi}'")
-          puts res
-        end
-      end
+#    FileUtils.chdir @gh_pages_repo_path.to_s do
+#      puts `pwd`
+#      cmd.each do |cmdi|
+#          puts "bash --login -c '#{cmdi}'"
+#          res=Kernel.send(:`, "bash --login -c '#{cmdi}'")
+#          puts res
+#        end
+#      end
+      res = Kernel.send(:`, "gh-pages.sh #{tmpid}")
+      puts res
       puts Kernel.send(:`, "git add .")
       puts Kernel.send(:`, "git commit -a -m 'commit gh-pages content to parent repo #{tmpid}'")
 

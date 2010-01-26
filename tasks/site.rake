@@ -272,11 +272,11 @@ h3. Usage
 #EOT
     FileUtils.chdir @gh_pages_repo_path.to_s do
       puts `pwd`
-      puts "bash -c '#{cmd}'"
+      puts "bash --login -c '#{cmd}'"
       # res=Kernel.send(:`, "bash -c '#{cmd}'")
       cmd.each do |cmdi|
-          puts "bash -c '#{cmdi}'"
-          res=Kernel.send(:`, "bash -c '#{cmdi}'")
+          puts "bash --login -c '#{cmdi}'"
+          res=Kernel.send(:`, "bash --login -c '#{cmdi}'")
           puts res
         end
       end

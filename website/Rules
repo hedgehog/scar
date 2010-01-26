@@ -13,7 +13,7 @@ compile '/*' do
   filter :haml
   layout 'default'
   filter :syntax_colorize
-  filter :relativize_paths, :type => :html
+  rep.filter :relativize_paths, :type => :html
   # rep.filter :relativize_paths, :type => :html
   # puts "Now we relativize"
 end

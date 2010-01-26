@@ -283,7 +283,7 @@ h3. Usage
 #          puts res
 #        end
 #      end
-      res = Kernel.send(:`, "gh-pages-migrate.sh #{tmpid}")
+      res = Kernel.send(:`, "./gh-pages-migrate.sh #{tmpid}")
       puts res
       puts Kernel.send(:`, "git add .")
       puts Kernel.send(:`, "git commit -a -m 'commit gh-pages content to parent repo #{tmpid}'")

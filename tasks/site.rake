@@ -272,8 +272,8 @@ git push --force #{repo} gh-pages
 EOT
     FileUtils.chdir @gh_pages_repo_path.to_s do
       puts `pwd`
-      puts cmd
-      res=Kernel.send(:`, cmd)
+      puts "bash -c #{cmd}"
+      res=Kernel.send(:`, "bash -c #{cmd}")
 #      cmd.each do |cmdi|
 #          puts cmdi
 #          res=Kernel.send(:`, "echo `pwd`; #{cmdi}")

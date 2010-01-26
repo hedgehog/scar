@@ -254,7 +254,8 @@ h3. Usage
 
       Kernel.send(:`, "git tag #{pre_tag}")
       FileUtils.chdir @website_path do
-        Kernel.send(:`, "nanoc3 co --force")
+        res = Kernel.send(:`, "nanoc3 co --force")
+        puts res
       end
       FileUtils.rm_r(Dir.glob(@gh_pages_repo_path / '**' / '*'), :force => true, :verbose => true)
       puts "Moving #{@website_path}/output folder contents to branch gh-pages."

@@ -264,13 +264,21 @@ h3. Usage
         "git commit -a -m \'Migrate nanoc3 co output to gh-pages #{tmpid}\'",
         "git push --force origin gh-pages:gh-pages"
       ]
+      cmd = <<-EOT
+#!/usr/bin/env bash
+git add .
+git commit -a -m \'Migrate nanoc3 co output to gh-pages #{tmpid}\'
+git push --force #{repo} gh-pages
+EOT
     FileUtils.chdir @gh_pages_repo_path.to_s do
       puts `pwd`
-      cmd.each do |cmdi|
-          puts cmdi
-          res=Kernel.send(:`, "echo `pwd`; #{cmdi}")
-          puts res
-        end
+      puts cmd
+      res=Kernel.send(:`, cmd)
+#      cmd.each do |cmdi|
+#          puts cmdi
+#          res=Kernel.send(:`, "echo `pwd`; #{cmdi}")
+#          puts res
+#        end
       end
       puts Kernel.send(:`, "git add .")
       puts Kernel.send(:`, "git commit -a -m 'commit gh-pages content to parent repo #{tmpid}'")

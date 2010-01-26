@@ -2,7 +2,10 @@
 pushd ./gh-pages
 rm -rf *
 cp --recursive ./../website/output/* .
+git checkout gh-pages
 git add .
 git commit -a -m "Migrate nanoc3 co output to gh-pages $1"
-git push --force origin gh-pages
+git branch -a
+git remote -v
+# git push --force origin gh-pages
 popd

@@ -260,8 +260,7 @@ h3. Usage
       puts "Moving #{@website_path}/output folder contents to branch gh-pages."
       FileUtils.cp_r(Dir.glob(@website_path / 'output' / '**' / '*'), @gh_pages_repo_path, :verbose => true, :remove_destination => true)
       
-      cmd=["git checkout -f gh-pages",
-        "git add .",
+      cmd=["git add .",
         "git commit -a -m \'Migrate nanoc3 co output to gh-pages #{tmpid}\'",
         "git push --force origin gh-pages:gh-pages"
       ]

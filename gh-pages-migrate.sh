@@ -7,5 +7,5 @@ git remote -v
 git checkout --track -b gh-pages origin/gh-pages
 git add .
 git commit -a -m "Migrate nanoc3 co output to gh-pages $1"
-# git push --force origin gh-pages
+git push --force origin gh-pages
 popd

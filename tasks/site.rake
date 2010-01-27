@@ -196,8 +196,8 @@ h3. Usage
       cd ./gh-pages
       git init
       git remote add origin #{repo}
+      git checkout --track -b gh-pages origin/gh-pages
       git fetch origin gh-pages:gh-pages
-      git checkout -f gh-pages
       echo "My GitHub Page" >> index.html
       cp -afr #{website_contents} .
       git add .

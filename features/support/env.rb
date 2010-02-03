@@ -72,11 +72,11 @@ class MechanizeWorld < Webrat::MechanizeAdapter
   include Webrat::Matchers
   include Webrat::Methods
   include Spec::Matchers
-#  session = Webrat::MechanizeSession.new
+#  session = Webrat::Session.new
 #  session.extend(Webrat::Matchers)
 #  session.extend(Webrat::HaveTagMatcher)
-  # no idea why we need this but without it response_code is not always recognized
-  #Webrat::Methods.delegate_to_session :response_code, :response_body
+#  # no idea why we need this but without it response_code is not always recognized
+  Webrat::Methods.delegate_to_session :response_code, :response_body
 #  session
 end
 

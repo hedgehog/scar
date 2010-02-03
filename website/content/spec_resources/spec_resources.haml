@@ -5,11 +5,16 @@
     %span
       Contents
   #toccontents.toc-contents
+    %ol
+      %li
+        %a{ :href => "/../models/cloud/", :title => "Cloud Resource Model",
+          :target => "_resource_iframe" }
+          Cloud 
     %ul
       %li
         1
-        %a{ :href => "#Cloud_[application/vnd.com.sun.cloud.Cloud+json]" }
-          Cloud [application/vnd.com.sun.cloud.Cloud+json]
+        %a{ :href => "#Cloud2_[application/vnd.com.sun.cloud.Cloud+json]" }
+          Cloud2 [application/vnd.com.sun.cloud.Cloud+json]
       %li
         2
         %a{ :href => "#Location_[application/vnd.com.sun.cloud.Location+json]" }
@@ -94,6 +99,11 @@
   %b
     SHOULD NOT
   be included in the request body of PUT and POST requests, and will be ignored by the server if they are included.
+%iframe{ :src=>"/../models/cloud/", :width => "100%", :height => "100%",
+  :scrolling => "auto", :frameborder => "yes", :name=> "_resource_iframe",
+  :style => "width:100%; height:100%;" }
+  Your browser does not support inline frames or is currently configured not to display inline frames.
+
 %h1
   %a{ :name => "Cloud_[application/vnd.com.sun.cloud.Cloud+json]" }
   Cloud [application/vnd.com.sun.cloud.Cloud+json]

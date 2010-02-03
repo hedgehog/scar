@@ -9,7 +9,7 @@ compile '/coderay/*' do
   rep.filter :relativize_paths, :type => :css
 end
 
-compile '/*' do
+compile '/' do
   filter :haml
   layout 'default'
   filter :syntax_colorize
@@ -17,6 +17,30 @@ compile '/*' do
   # rep.filter :relativize_paths, :type => :html
   # puts "Now we relativize"
 end
+compile '/spec_*' do
+  filter :haml
+  layout 'default'
+  filter :syntax_colorize
+  rep.filter :relativize_paths, :type => :html
+  # rep.filter :relativize_paths, :type => :html
+  # puts "Now we relativize"
+end
+compile '/implementation/**/*' do
+  filter :haml
+  layout 'default'
+  filter :syntax_colorize
+  rep.filter :relativize_paths, :type => :html
+  # rep.filter :relativize_paths, :type => :html
+  # puts "Now we relativize"
+end
+
+compile '/models/**/*' do
+  rep.filter :haml
+  rep.layout 'model'
+  rep.filter :syntax_colorize
+  rep.filter :relativize_paths, :type => :html
+end
+
 #compile '/*' do
 #  filter :haml
 #  layout 'default'
@@ -32,6 +56,7 @@ route '*' do
   item.identifier + 'index.html'
 end
 
+layout '/model/', :haml, :format => :xhtml
 layout '/default/', :haml, :format => :xhtml
 
 layout '*', :haml,:format => :xhtml

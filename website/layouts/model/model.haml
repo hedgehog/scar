@@ -1,0 +1,11 @@
+!!!
+%html{ :height => "100%", :width => "100%" }
+  %head{ :height => "100%", :width => "100%" }
+    %title Scar (Sun's cloud API reference) Project
+    = @item[:title]
+    %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
+      %link{ :href => "/stylesheet.css", :rel => "stylesheet", :type => "text/css", :media => "screen" }
+      %link{ :href => "/coderay.css", :rel => "stylesheet", :type => "text/css", :media => "screen" }
+    %base{ :target => "***" }
+  %body{ :height => "100%", :width => "100%" }
+    = yield

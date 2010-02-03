@@ -24,6 +24,7 @@ begin
     gem.add_development_dependency 'webrat',  '~> 0.6.0'
     gem.add_development_dependency 'mechanize', '~> 0.9.3'
     gem.add_development_dependency 'nokogiri', '~> 1.4.1'
+    gem.add_development_dependency 'pickle', '~> 0.2.1'
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new

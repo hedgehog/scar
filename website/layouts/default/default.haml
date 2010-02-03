@@ -1,14 +1,19 @@
 !!! Strict
-%html
-  %head
+%html{ :height => "100%", :width => "100%" }
+  %head{ :height => "100%", :width => "100%" }
     %title Scar (Sun's cloud API reference) Project
     = @item[:title]
     %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
       %link{ :href => "/stylesheet.css", :rel => "stylesheet", :type => "text/css", :media => "screen" }
       %link{ :href => "/coderay.css", :rel => "stylesheet", :type => "text/css", :media => "screen" }
-  %body
-    #main
-      = yield 
+    %base{ :target => "***" }
+  %body{ :style => "width:100%; height:100%;", :height => "100%", :width => "100%" }
+    %a{ :href => "http://github.com/hedgehog/scar"}
+      %img{ :alt => "Fork me on GitHub",
+            :src => "http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png",
+            :style => "border: 0pt none ; position: absolute; top: 0pt; right: 0pt;"}
+    #main{ :height => "100%", :width => "100%" }
+      = yield
       %p
         The Scar project is licensed under
         %a.external{ :href => "http://creativecommons.org/licenses/by/3.0/" }
@@ -18,60 +23,60 @@
     #sidebar
       %ul
         %li
-          %a{ :href => "/" }
+          %a{ :title => "Scar Home", :href => "/" }
             %strong Scar Home
       %h2
         Specifications
       %ul
         %li
-          %a{ :href => "/spec_home/" }
+          %a{:title => "Spec Frontpage", :href => "/spec_home/" }
             Spec Frontpage
         %li
-          %a{ :href => "/spec_common/" }
+          %a{:title => "Common Behavior", :href => "/spec_common/" }
             Common Behavior
         %li
-          %a{ :href => "/spec_resources/" }
+          %a{:title => "Resources", :href => "/spec_resources/" }
             Resources
         %li
           %strong Requests to ...
           %li
-            %a{ :href => "/spec_resource_backup/" }
+            %a{:title => "Backup", :href => "/spec_resource_backup/" }
               %strong Backup
           %li
-            %a{ :href => "/spec_resource_cloud/" }
+            %a{:title => "Cloud", :href => "/spec_resource_cloud/" }
               %strong Cloud
           %li
-            %a{ :href => "/spec_resource_cluster/" }
+            %a{:title => "Cluster", :href => "/spec_resource_cluster/" }
               %strong Cluster
           %li
-            %a{ :href => "/spec_resource_interface/" }
+            %a{:title => "Interface", :href => "/spec_resource_interface/" }
               %strong Interface
           %li
-            %a{ :href => "/spec_resource_location/" }
+            %a{:title => "Location", :href => "/spec_resource_location/" }
               %strong Location
           %li
-            %a{ :href => "/spec_resource_public_address/" }
+            %a{:title => "Public Address", :href => "/spec_resource_public_address/" }
               %strong Public Address
           %li
-            %a{ :href => "/spec_resource_request_status/" }
+            %a{:title => "", :href => "/spec_resource_request_status/" }
               %strong Request Status
           %li
-            %a{ :href => "/spec_resource_snapshot/" }
+            %a{:title => "Snapshot", :href => "/spec_resource_snapshot/" }
               %strong Snapshot
           %li
-            %a{ :href => "/spec_resource_virtual_data_center/" }
+            %a{:title => "Virtual Data Center", :href => "/spec_resource_virtual_data_center/" }
               %strong Virtual Data Center
           %li
-            %a{ :href => "/spec_resource_virtual_machine/" }
+            %a{:title => "Virtual Machine", :href => "/spec_resource_virtual_machine/" }
               %strong Virtual Machine
           %li
-            %a{ :href => "/spec_resource_virtual_machine_template/" }
+            %a{:title => "Virtual Machine Template", :href => "/spec_resource_virtual_machine_template/" }
               %strong Virtual Machine Template
           %li
-            %a{ :href => "/spec_resource_virtual_network/" }
+            %a{:title => "Virtual Network", :href => "/spec_resource_virtual_network/" }
               %strong Virtual Network
           %li
-            %a{ :href => "/spec_resource_volume/" }
+            %a{:title => "Volume", :href => "/spec_resource_volume/" }
               %strong Volume
       %h2
         Implementations
@@ -79,29 +84,29 @@
         %li
           %strong Command line clients...
           %li
-            %a{ :href => "/implementation/command_line_client/sun/" }
+            %a{:title => "Sun's CLI", :href => "/implementation/command_line_client/sun/" }
               Sun's CLI
       %h2
         Community
       %ul
         %li
-          %a{ :href => "http://github.com/hedgehog/scar" }
+          %a{:title => "Scar source", :href => "http://github.com/hedgehog/scar" }
             Scar source
         %li
-          %a{ :href => "http://wiki.github.com/hedgehog/scar/" }
+          %a{:title => "Scar wiki", :href => "http://wiki.github.com/hedgehog/scar/" }
             Scar wiki
         %li
-          %a{ :href => "http://github.com/hedgehog/scar/network" }
+          %a{:title => "Scar network", :href => "http://github.com/hedgehog/scar/network" }
             Scar network
         %li
-          %a{ :href => "http://github.com/hedgehog/scar/issues" }
+          %a{:title => "Scar issues", :href => "http://github.com/hedgehog/scar/issues" }
             Scar issues
         %li
-          %a{ :href => "http://kenai.com/projects/suncloudapis/pages/Home" }
+          %a{:title => "Kenai wiki", :href => "http://kenai.com/projects/suncloudapis/pages/Home" }
             Kenai wiki
         %li
-          %a{ :href => "http://kenai.com/projects/suncloudapis/forums/forum" }
+          %a{:title => "Kenai forum", :href => "http://kenai.com/projects/suncloudapis/forums/forum" }
             Kenai forum
         %li
-          %a{ :href => "http://kenai.com/projects/suncloudapis/lists/extended-discussion/archive" }
-            Kenai maillist archive
+          %a{:title => "Kenai maillist", :href => "http://kenai.com/projects/suncloudapis/lists/extended-discussion/archive" }
+            Kenai maillist

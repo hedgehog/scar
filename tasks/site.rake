@@ -260,46 +260,10 @@ h3. Usage
 #      FileUtils.rm_r(Dir.glob(@gh_pages_repo_path / '**' / '*'), :force => true, :verbose => true)
 #      puts "Moving #{@website_path}/output folder contents to branch gh-pages."
 #      FileUtils.cp_r(Dir.glob(@website_path / 'output' / '**' / '*'), @gh_pages_repo_path, :verbose => true, :remove_destination => true)
-#
-#      cmd=["git add .",
-#        "git commit -a -m \'Migrate nanoc3 co output to gh-pages #{tmpid}\'",
-#        "git push --force origin gh-pages:gh-pages"
-#      ]
-#      cmd = <<-EOT
-##!/usr/bin/env bash
-#pushd ./gh-pages
-#rm -rf *
-#cp --recursive ./../website/output/* .
-#git add .
-#git commit -a -m "Migrate nanoc3 co output to gh-pages $1"
-#git push --force origin gh-pages
-#popd
-#EOT
-#    FileUtils.chdir @gh_pages_repo_path.to_s do
-#      puts `pwd`
-#      cmd.each do |cmdi|
-#          puts "bash --login -c '#{cmdi}'"
-#          res=Kernel.send(:`, "bash --login -c '#{cmdi}'")
-#          puts res
-#        end
-#      end
       res = Kernel.send(:`, "./gh-pages-migrate.sh #{tmpid}")
       puts res
       puts Kernel.send(:`, "git add .")
-      puts Kernel.send(:`, "git commit -a -m 'commit gh-pages content to parent repo #{tmpid}'")
-
-      #unless $? == 0
-      #  puts "To reset: 1) Look for the branch crazyexperiment"
-      #  puts "git branch -a"
-      #  puts "To reset: 2) if there is a branch crazyexperiment"
-      #  puts "git checkout crazyexperiment"
-      #  puts "To reset: 3) if there is no master branch"
-      #  puts "git checkout -b master"
-      #  puts "To reset: 4) Once satisfied everything is as you started"
-      #  puts "git branch -D crazyexperiment"
-      #  raise RuntimeError.new("Somthing went wrong.")
-      #end
-      
+      puts Kernel.send(:`, "git commit -a -m 'commit gh-pages content to parent repo #{tmpid}'")     
       if stashed
         puts "Apply (pop) the Git stash created before migrating the website."
         Kernel.send(:`, 'git stash pop stash@{0}')

@@ -1,5 +1,34 @@
+Given /^I start the debugger$/ do
+  require 'ruby-debug'
+  Debugger.start
+end
+
+Given /^I debug$/ do
+  breakpoint
+  0
+end
+
 Given /^this project is active project folder/ do
   @active_project_folder = File.expand_path(File.dirname(__FILE__) + "/../..")
+end
+
+Given /^the API pages are compiled$/ do
+  steps %Q{
+    Given this project is active project folder
+    Given "website" folder does exist
+    When I invoke task "rake site:rebuild"
+    Then task "rake site:rebuild" is executed successfully
+    }
+end
+
+Given /^the nanoc3 auto\-compiler web\-server is running$/ do
+  in_project_folder do
+    FileUtils.chdir('./website') do
+      cmd = 'nanoc3 aco --server=thin --port=3000 --host=localhost'
+      res = Kernel.system("#{cmd} &>/tmp/nanoc-aco.log &")
+      raise RuntimeError.new("Failed to start nanoc3 auto\-compiler web\-server (Thin)") unless res
+    end
+  end
 end
 
 Given /^env variable \$([\w_]+) set to "(.*)"/ do |env_var, value|

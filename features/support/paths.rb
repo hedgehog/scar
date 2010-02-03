@@ -15,11 +15,11 @@ module NavigationHelpers
       @url="#{@url_root}/Home"
     when /nanoc's localhost Home page/
       @url_root = "http://localhost:3000"
-      @url="#{@url_root}/index.html"
+      @url="#{@url_root}"  # add /index.html if feature steps fail, this breaks click_link
     when /\//
       @url="#{@url_root}/"
-    when /Spec Home/
-      @url="#{@url_root}/spec_home/"
+    when /Spec Frontpage/
+      @url="#{@url_root}/spec_home"
     when /Home/
       @url="#{@url_root}/Home"
     when /Sun's CLI/
@@ -36,8 +36,10 @@ module NavigationHelpers
       "#{@url_root}/spec_resource_backup"
     when /Requests to Backup Resources/
       "#{@url_root}/CloudAPIBackupRequests"
+    when /Cloud Resource Model/
+      @url="#{@url_root}/models/cloud/"
     when /Cloud/
-      "#{@url_root}/spec_resource_cloud"
+      @url="#{@url_root}/spec_resource_cloud/"
     when /Requests to Cloud Resources/
       "#{@url_root}/CloudAPIClusterRequests"
     when /Cluster/

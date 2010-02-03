@@ -1,0 +1,82 @@
+%body{ :height => "100%", :width => "100%" }
+  %h2
+    %a{ :name => "Cloud Resource Table" }
+    Cloud Resource
+  %p
+    %br
+  %p
+    %strong Media type: 
+    application/vnd.com.sun.cloud.Cloud+json
+  %p{ :height => "100%", :width => "100%" }
+    A
+    %i
+      Cloud
+    represents a user's view of all accessible resources in the cloud.
+  %p
+    A &quot;Cloud&quot; resource model contains the following fields:
+  %div{ :style => "overflow-x: auto;" }
+    %div{ :style => "margin: 0px 2px 0px 2px;" }
+      %table{ "-" => "", :border => "1", :width => "100%" }
+        %tr
+          %th
+            Field Name
+          %th
+            Type
+          %th
+            Occurs
+          %th
+            Description
+        %tr
+          %td
+            uri
+          %td
+            URI
+          %td
+            1
+          %td
+            A GET against this URI refreshes the client representation of the resources accessible to this user.
+        %tr
+          %td
+            locations
+          %td
+            Location[]
+          %td
+            0..1
+          %td
+            The set of locations for VDC deployment that are supported by this service provider.
+        %tr
+          %td
+            vdcs
+          %td
+            VDC[]
+          %td
+            0..1
+          %td
+            Virtual data center(s) accessible to this user.  Only the
+            %i
+              name
+            and
+            %i
+              uri
+            fields
+            %b
+              MUST
+            be populated by the server.
+        %tr
+          %td
+            specification_version
+          %td
+            String[]
+          %td
+            1
+          %td
+            Which version(s) of this specification this server implementation supports.
+        %tr
+          %td
+            implementation_version
+          %td
+            String
+          %td
+            1
+          %td
+            Version of the server implementation.

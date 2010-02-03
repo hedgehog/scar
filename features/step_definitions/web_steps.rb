@@ -26,7 +26,13 @@ When /^(?:|I )press "([^\"]*)"$/ do |button|
 end
 
 When /^(?:|I )follow "([^\"]*)"$/ do |link|
-  click_link(link)
+#  begin
+#    breakpoint
+    click_link(link, :javascript => false)
+#  rescue
+#    save_and_open_page
+#    raise
+#  end
 end
 
 When /^(?:|I )follow "([^\"]*)" within "([^\"]*)"$/ do |link, parent|
@@ -143,7 +149,8 @@ end
 
 Then /^(?:|I )should see "([^\"]*)"$/ do |text|
   if defined?(Spec::Matchers) || defined?(Spec::Rails::Matchers)
-    response.should contain(text)
+    response_body.should contain(text) if defined?(Spec::Matchers)
+    response.should contain(text) if defined?(Spec::Rails::Matchers)
   else
     assert_contain text
   end
